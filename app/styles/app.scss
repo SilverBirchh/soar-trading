@@ -1,1 +1,12 @@
 @import "bootstrap";
+body {
+  padding-top: 20px;
+}
+.error-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.error-actions {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
