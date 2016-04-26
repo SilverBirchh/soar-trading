@@ -10,8 +10,8 @@ Router.map(function() {
   this.route('about');
   this.route('features');
   this.route('members', function() {
-    this.route('login');
-    this.route('sign-up');
+    this.route('login', { path: "/login"});
+    this.route('sign-up', { path: "/sign-up"});
   });
 });
 
