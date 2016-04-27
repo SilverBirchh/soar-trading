@@ -52,12 +52,4 @@ describe('Acceptance: Navbar', function() {
       expect(currentPath()).to.equal('members.login');
     });
   });
-
-  it('can visit /members/sign-up', function() {
-    visit('/');
-    click('#sign-up');
-    andThen(function() {
-      expect(currentPath()).to.equal('members.sign-up');
-    });
-  });
 });

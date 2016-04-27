@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-login">
+				<div class="panel-heading">
+					<div class="row">
+						{{#each headers as |head|}}
+							<div class="col-xs-6">
+								{{#link-to head.dest tagName="p" }}<a href="#" id="{{head.id}}" class="{{if head.isActive 'active'}}" {{action "active" head}}>{{head.title}}</a>{{/link-to}}
+							</div>
+						{{/each}}
+					</div>
+					<hr>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-12">
+
+							{{yield}}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
