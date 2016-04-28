@@ -26,8 +26,9 @@ export default Ember.Component.extend({
 				api
 			} = this.getProperties('username', 'password', 'api');
 			return this.get('session').authenticate('authenticator:application', username, password, api)
-				.catch(() => {
+				.catch((err) => {
 					this.set('hasResponseMessage', "Invalid login. Please try again.");
+					console.log(err);
 				});
 		}
 	}

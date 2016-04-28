@@ -27,7 +27,7 @@ export default Ember.Service.extend({
 			"Accept": "application/json; charset=UTF-8",
 			"X-IG-API-KEY": authData.api,
 			"Version": "2"
-		}
+		};
 
 		if (isSilentAuth) {
 			if (authData.sso) {

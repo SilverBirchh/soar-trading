@@ -28,7 +28,8 @@ module.exports = function(environment) {
 		}
 	};
 	ENV['ember-simple-auth'] = {
-		authenticationRoute: 'members/login'
+		authenticationRoute: 'members/login',
+		routeAfterAuthentication: 'index'
 	};
 
 	if (environment === 'development') {
