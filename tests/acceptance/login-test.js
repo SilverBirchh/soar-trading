@@ -8,7 +8,7 @@ import {
 import { expect } from 'chai';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
-// import { currentSession, authenticateSession, invalidateSession } from 'soar-trading/tests/helpers/ember-simple-auth';
+import { currentSession, authenticateSession, invalidateSession } from 'soar-trading/tests/helpers/ember-simple-auth';
 
 describe('Acceptance: Login', function() {
   let application;
@@ -21,12 +21,9 @@ describe('Acceptance: Login', function() {
     destroyApp(application);
   });
 
-  it('can login and redirct to home page', function() {
+  it('can login and redirct to trade page', function() {
     visit('/members/login');
-    fillIn('#username', 'Password');
-    fillIn('#password', 'Password');
-    fillIn('#api', 'PasswordPassword');
-
+    
     andThen(function() {
       expect(currentPath()).to.equal('members.login');
     });

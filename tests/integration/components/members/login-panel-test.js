@@ -10,27 +10,7 @@ import {
 	beforeEach,
 } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
-import sinon from 'sinon';
-
-const sessionAuthenticator = Ember.Service.extend({
-	name: 'sessionAuthenticator',
-	authenticate(isSilentAuth, authData, resolve, reject) {
-		return true;
-	},
-	getRequestHeaders(authData, isSilentAuth) {
-
-	},
-	handleAuthRejection(reject) {
-
-	},
-	resetInvalidSessionState() {
-
-	},
-	handleAuthSuccess(authData, isSilentAuth, resolve, response, jqXHR) {
-
-	}
-});
-
+import Ember from 'ember';
 
 describeComponent(
 	'members/login-panel',
@@ -42,13 +22,6 @@ describeComponent(
 			this.set('password', 'password');
 			this.set('username', 'password');
 			this.set('api', 'passwordpassword');
-
-			this.register('service:session-authenticator', sessionAuthenticator);
-			// Calling inject puts the service instance in the test's context,
-			// making it accessible as "locationService" within each test
-			this.inject.service('session-authenticator', {
-				as: 'sessionAuthenticator'
-			});
 		});
 
 		it('renders with login disabled', function() {
@@ -89,13 +62,36 @@ describeComponent(
 		});
 
 		it('renders with login enabled can call authenticate', function() {
+			let wasCalled = false;
 			let session = Ember.Object.create({
-				authenticate: sinon.spy()
+				authenticate() {
+					wasCalled = true;
+					return {
+						catch () {}
+					};
+				}
 			});
 			this.set('session', session);
 			this.render(hbs `{{members/login-panel session=session password=password username=username api=api}}`);
 			this.$('#login-submit').click();
-			expect(session.get('session.authenticate').calledOnce).to.be.true;
+			expect(wasCalled).to.be.true;
+		});
+
+		it('authentication will fail with no credentials', function() {
+			let wasCalled = false;
+			let session = Ember.Object.create({
+				authenticate() {
+					return {
+						catch () {
+							wasCalled = true;
+						}
+					};
+				}
+			});
+			this.set('session', session);
+			this.render(hbs `{{members/login-panel session=session password=password username=username api=api}}`);
+			this.$('#login-submit').click();
+			expect(wasCalled).to.be.true;
 		});
 	}
 );

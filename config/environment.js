@@ -29,7 +29,7 @@ module.exports = function(environment) {
 	};
 	ENV['ember-simple-auth'] = {
 		authenticationRoute: 'index',
-	  routeAfterAuthentication: '/trade'
+		routeAfterAuthentication: '/trade'
 	};
 
 	if (environment === 'development') {
@@ -50,6 +50,9 @@ module.exports = function(environment) {
 		ENV.APP.LOG_VIEW_LOOKUPS = false;
 
 		ENV.APP.rootElement = '#ember-testing';
+		ENV['simple-auth'] = {
+			store: 'simple-auth-session-store:ephemeral'
+		}
 	}
 
 	if (environment === 'production') {
