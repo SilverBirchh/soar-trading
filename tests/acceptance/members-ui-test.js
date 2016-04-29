@@ -83,6 +83,24 @@ describe('Acceptance: MembersUi', function() {
 			expect(this.$('#login-submit').prop('disabled')).to.be.true;
 		});
 	});
+	it('renders login disabled when api is less than 15 char', function() {
+		visit('/members');
+		fillIn('#username', 'Password');
+		fillIn('#password', 'Password');
+		fillIn('#api', 'Password');
+		andThen(function() {
+			expect(this.$('#login-submit').prop('disabled')).to.be.true;
+		});
+	});
+	it('renders login disabled when password has special character', function() {
+		visit('/members');
+		fillIn('#username', 'Password');
+		fillIn('#password', 'Password--==');
+		fillIn('#api', 'PasswordPassword');
+		andThen(function() {
+			expect(this.$('#login-submit').prop('disabled')).to.be.true;
+		});
+	});
 	it('can visit /members and login becomes avaliable once all fields are filled in.', function() {
 		visit('/members');
 		fillIn('#username', 'Password');

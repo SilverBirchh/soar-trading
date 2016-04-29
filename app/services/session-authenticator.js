@@ -31,6 +31,7 @@ export default Ember.Service.extend({
 
 		if (isSilentAuth) {
 			if (authData.sso) {
+				console.log('hi');
 				requestHeaders.headers['X-SECURITY-TOKEN'] = authData.sso;
 			}
 			if (authData.cst) {

@@ -14,22 +14,10 @@ describeComponent(
 		integration: true
 	},
 	function() {
-		it('renders with active section class set', function() {
-			let headers = [{
-				id: "log",
-				title: "Login",
-				dest: "members.login",
-				isActive: true
-			}, {
-				id: "sign",
-				title: "Register",
-				dest: "members.sign-up",
-				isActive: false
-			}];
-			this.set('headers', headers);
-
-			this.render(hbs `{{members/signup-panel headers=headers}}`);
-			expect(this.$()).to.have.length(1);
+		it('renders with correct href', function() {
+			this.set('signUpLink', '#');
+			this.render(hbs `{{members/signup-panel signUpLink=signUpLink}}`);
+			expect(this.$('#signup-link').attr('href')).to.equal('#');
 		});
 	}
 );
