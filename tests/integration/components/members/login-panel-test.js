@@ -89,19 +89,13 @@ describeComponent(
 		});
 
 		it('renders with login enabled can call authenticate', function() {
-			let createMocks = function() {
-				let sessionService = Ember.Object.create({
-					authenticate: sinon.spy()
-				});
-				return {
-					sessionService,
-				};
-			};
-			service = new createMocks();
-			this.set('session', service.sessionService);
-			this.render(hbs `{{members/login-panel session=service.sessionService password=password username=username api=api}}`);
+			let session = Ember.Object.create({
+				authenticate: sinon.spy()
+			});
+			this.set('session', session);
+			this.render(hbs `{{members/login-panel session=session password=password username=username api=api}}`);
 			this.$('#login-submit').click();
-			expect(service.get('sessionService.authenticate').calledOnce).to.be.true;
+			expect(session.get('session.authenticate').calledOnce).to.be.true;
 		});
 	}
 );

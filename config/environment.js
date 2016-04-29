@@ -28,8 +28,8 @@ module.exports = function(environment) {
 		}
 	};
 	ENV['ember-simple-auth'] = {
-		authenticationRoute: 'members/login'
-	//	routeAfterAuthentication: 'index'
+		authenticationRoute: 'index',
+	  routeAfterAuthentication: '/trade'
 	};
 
 	if (environment === 'development') {
