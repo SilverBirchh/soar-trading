@@ -54,18 +54,6 @@ describe('Acceptance: Login - The different login flows', function() {
 		});
 	});
 
-	it('can login and then not access login page', function() {
-		visit('/members/login');
-		authenticateSession(application, {
-			userId: 1,
-			otherData: 'some-data'
-		});
-		visit('/members/sign-up');
-		andThen(function() {
-			expect(currentPath()).to.equal('index');
-		});
-	});
-
 	it('can not visit trade section when unauthorized', function() {
 		invalidateSession(application);
 		visit('/trade');

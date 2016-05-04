@@ -7,11 +7,8 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route("404", { path: "*path"});
-  this.route('about');
-  this.route('features');
   this.route('members', function() {
     this.route('login', { path: "/login"});
-    this.route('sign-up', { path: "/sign-up"});
   });
   this.route('trade');
 });

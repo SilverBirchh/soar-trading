@@ -3,12 +3,10 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="panel panel-login">
 				<div class="panel-heading">
-					<div class="row">
-						{{#each headers as |head|}}
-							<div class="col-xs-6">
-								{{#link-to head.dest tagName="a" }}<a href="#" id="{{head.id}}" class="{{if head.isActive 'active'}}" {{action "active" head}}>{{head.title}}</a>{{/link-to}}
-							</div>
-						{{/each}}
+					<div class="row text-center">
+						<div class="col-xs-12">
+							<a href="/members/login" id="log" class="active">Login</a>
+						</div>
 					</div>
 					<hr>
 				</div>
@@ -19,6 +17,10 @@
 							{{yield}}
 
 						</div>
+					</div>
+					<hr>
+					<div id="signup-message" class="alert alert-warning text-center" role="alert">
+						To sign up please create an account at&nbsp;<a id="signup-link" href= {{signUpLink}} class="alert-link">{{signUpLink}}</a>
 					</div>
 				</div>
 			</div>

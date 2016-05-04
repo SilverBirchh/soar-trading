@@ -34,28 +34,6 @@ describe('Acceptance: MembersUi', function() {
 			expect(this.$('#log').hasClass('active')).to.be.true;
 		});
 	});
-	it('can visit /members and change to register and show UI correctly', function() {
-		visit('/members');
-		click('#sign');
-		andThen(function() {
-			expect(this.$('#sign').hasClass('active')).to.be.true;
-		});
-	});
-	it('can visit /members and change to register see message', function() {
-		visit('/members');
-		click('#sign');
-		andThen(function() {
-			expect(this.$('#signup-message')).to.be.visible;
-		});
-	});
-	it('can visit /members and change to register and then login and show UI correctly', function() {
-		visit('/members');
-		click('#sign');
-		click('#log');
-		andThen(function() {
-			expect(this.$('#log').hasClass('active')).to.be.true;
-		});
-	});
 	it('renders with login disabled', function() {
 		visit('/members');
 		andThen(function() {
