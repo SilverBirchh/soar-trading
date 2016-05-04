@@ -1,3 +1,14 @@
-<ul class="nav navbar-nav navbar-right">
-	{{#link-to 'members.login' id="login" tagName="li"}}<button class="btn btn-success navbar-btn">Login / Register</button>{{/link-to}}
-</ul>
+{{#if session.isAuthenticated}}
+	<ul class="nav navbar-nav navbar-right">
+		{{#link-to 'members.login' id="trade" tagName="li" }}
+			<button class="btn btn-primary navbar-btn"><strong>Trade</strong></button>
+		{{/link-to}}
+		<button {{action 'invalidateSession'}} class="btn btn-secondary navbar-btn" id="logout">Logout</button>
+	</ul>
+{{else}}
+	<ul class="nav navbar-nav navbar-right">
+		{{#link-to 'members.login' id="login" tagName="li" }}
+			<button class="btn btn-success navbar-btn">Login / Register</button>
+		{{/link-to}}
+	</ul>
+{{/if}}

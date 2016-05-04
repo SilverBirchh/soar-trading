@@ -1,10 +1,10 @@
 {{#if hasResponseMessage}}
   <div class="alert alert-danger text-center">
-     Invalid login. Please try again.
+     {{hasResponseMessage}}
   </div>
 {{/if}}
 
-<form {{action 'login' on="submit"}}>
+<form {{action 'authenticate' on="submit"}}>
   <div class="form-group has-feedback {{if validUsername 'has-success'}}">
     {{input type="text" value=username id="username" class="form-control" placeholder="Username"}}
     {{#if validUsername}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}

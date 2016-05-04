@@ -13,6 +13,7 @@ Router.map(function() {
     this.route('login', { path: "/login"});
     this.route('sign-up', { path: "/sign-up"});
   });
+  this.route('trade');
 });
 
 export default Router;
