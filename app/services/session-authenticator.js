@@ -4,22 +4,22 @@ import config from '../config/environment';
 export default Ember.Service.extend({
 	name: 'sessionAuthenticator',
 	session: Ember.inject.service(),
-	authenticate(isSilentAuth, authData, resolve, reject) {
-		let requestHeaders = this.getRequestHeaders(authData, isSilentAuth);
+	authenticate(authData, resolve, reject) {
+		let requestHeaders = this.getRequestHeaders(authData);
 
 		this.resetInvalidSessionState();
 
 		Ember.$.ajax(requestHeaders).then((response, msg, jqXHR) => {
 			Ember.run(() => {
-				this.handleAuthSuccess(authData, isSilentAuth, resolve, response, jqXHR);
+				this.handleAuthSuccess(authData, resolve, response, jqXHR);
 			});
 		}, this.handleAuthRejection.bind(this, reject));
 	},
-	getRequestHeaders(authData, isSilentAuth) {
+	getRequestHeaders(authData) {
 		let apiHost = config.APP.api.apiHost;
 		let requestHeaders = {
 			dataType: 'json',
-			type: isSilentAuth ? 'GET' : 'POST',
+			type:  'POST',
 			url: `${apiHost}/session`,
 		};
 		requestHeaders.headers = {
@@ -29,20 +29,10 @@ export default Ember.Service.extend({
 			"Version": "2"
 		};
 
-		if (isSilentAuth) {
-			if (authData.sso) {
-				console.log('hi');
-				requestHeaders.headers['X-SECURITY-TOKEN'] = authData.sso;
-			}
-			if (authData.cst) {
-				requestHeaders.headers.CST = authData.cst;
-			}
-		} else {
-			requestHeaders.data = JSON.stringify({
-				identifier: authData.username,
-				password: authData.password
-			});
-		}
+		requestHeaders.data = JSON.stringify({
+			identifier: authData.username,
+			password: authData.password
+		});
 
 		return requestHeaders;
 	},
@@ -55,21 +45,21 @@ export default Ember.Service.extend({
 		let session = this.get('session');
 		session.set('authenticationFailed', null);
 	},
-	handleAuthSuccess(authData, isSilentAuth, resolve, response, jqXHR) {
-		let cst = isSilentAuth ? authData.cst : jqXHR.getResponseHeader('CST');
-		let sso = isSilentAuth ? authData.sso : jqXHR.getResponseHeader('X-SECURITY-TOKEN');
+	handleAuthSuccess(authData, resolve, response, jqXHR) {
+		let cst = jqXHR.getResponseHeader('CST');
+		let sso = jqXHR.getResponseHeader('X-SECURITY-TOKEN');
+		localStorage.setItem('api', authData.api);
 
 		let responseData = {
 			apiHost: config.APP.api.apiHost,
 			authenticator: 'authenticator:application',
 			clientId: response.clientId,
-			cstToken: cst,
 			currentAccountId: response.currentAccountId,
+			cstToken: cst,
 			ssoToken: sso,
+			api: authData.api
 		};
 
-		resolve(isSilentAuth ? {
-			authenticated: responseData
-		} : responseData);
+		resolve(responseData);
 	}
 });

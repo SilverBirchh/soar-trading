@@ -16,7 +16,7 @@ export default Base.extend({
 	},
 	authenticate(username, password, api) {
 		return new Ember.RSVP.Promise((resolve, reject) => {
-			this.get('sessionAuthenticator').authenticate(false, {
+			this.get('sessionAuthenticator').authenticate({
 				username: username,
 				password,
 				api
