@@ -3,10 +3,10 @@
 module.exports = function(environment) {
 	var ENV = {
 		contentSecurityPolicy: {
-			'default-src': "'none'",
-			'script-src': "'self' 'unsafe-eval'",
+			'default-src': "'self'",
+			'script-src': "'self' 'unsafe-eval' https://a.c-dn.net/b/0wNpa0.js",
 			'font-src': "'self'",
-			'connect-src': "'self' https://demo-api.ig.com/gateway/deal/session",
+		  'connect-src': "'self' ws://localhost:49155 https://demo-api.ig.com/gateway/deal/session https://demo-apd.marketdatasystems.com/lightstreamer/create_session.js wss://demo-apd.marketdatasystems.com/lightstreamer wss://apd219b.marketdatasystems.com/lightstreamer wss://apd219b.marketdatasystems.com/lightstreamer",
 			'img-src': "'self'",
 			'style-src': "'self'",
 			'media-src': "'self'"
@@ -29,7 +29,7 @@ module.exports = function(environment) {
 	};
 	ENV['ember-simple-auth'] = {
 		authenticationRoute: 'index',
-		routeAfterAuthentication: '/trade'
+		routeAfterAuthentication: '/account'
 	};
 
 	if (environment === 'development') {

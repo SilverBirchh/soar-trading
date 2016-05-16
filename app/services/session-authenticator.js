@@ -4,6 +4,7 @@ import config from '../config/environment';
 export default Ember.Service.extend({
 	name: 'sessionAuthenticator',
 	session: Ember.inject.service(),
+
 	authenticate(authData, resolve, reject) {
 		let requestHeaders = this.getRequestHeaders(authData);
 
@@ -55,6 +56,7 @@ export default Ember.Service.extend({
 			authenticator: 'authenticator:application',
 			clientId: response.clientId,
 			currentAccountId: response.currentAccountId,
+			lsEndPoint: response.lightstreamerEndpoint,
 			cstToken: cst,
 			ssoToken: sso,
 			api: authData.api

@@ -1,7 +1,7 @@
 {{#if session.isAuthenticated}}
 	<ul class="nav navbar-nav navbar-right">
-		{{#link-to 'trade' id="trade" tagName="li" }}
-			<button class="btn btn-primary navbar-btn"><strong>Trade</strong></button>
+		{{#link-to 'account' id="trade" tagName="li" }}
+			<button class="btn btn-primary navbar-btn"><strong>Account</strong></button>
 		{{/link-to}}
 		<button {{action 'invalidateSession'}} class="btn btn-secondary navbar-btn" id="logout">Logout</button>
 	</ul>

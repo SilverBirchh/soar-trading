@@ -10,7 +10,7 @@ Router.map(function() {
   this.route('members', function() {
     this.route('login', { path: "/login"});
   });
-  this.route('trade');
+  this.route('account');
 });
 
 export default Router;
