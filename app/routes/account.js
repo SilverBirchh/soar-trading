@@ -6,6 +6,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	beforeModel() {
 		const service = this.get('lsClient');
 		service.connectToLs();
+		this._super(...arguments);
 	},
 	activate: function() {
 		const service = this.get('lsClient');
@@ -32,7 +33,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				var i = info.getItemPos();
 				if (!store.hasRecordForId('account', i)) {
 					// Push an empty record
-					store.push({
+					store.push('account', {
 						id: i
 					});
 				}
@@ -40,7 +41,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				store.find('account', i).then(function(account) {
 					info.forEachChangedField(function(fieldName, fieldPos, value) {
 						// Set field value on the account locally-persisted instance
-						account.set(fieldName, value)
+						account.set(fieldName, value);
 					});
 					// Commit the changes on the local store
 					account.save();

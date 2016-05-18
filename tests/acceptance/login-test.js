@@ -27,7 +27,7 @@ describe('Acceptance: Login - The different login flows', function() {
 		destroyApp(application);
 	});
 
-	it('can login and redirct to trade page', function() {
+	it('can login and redirct to account page', function() {
 		visit('/members/login');
 		authenticateSession(application, {
 			userId: 1,
@@ -35,7 +35,7 @@ describe('Acceptance: Login - The different login flows', function() {
 		});
 
 		andThen(function() {
-			expect(currentPath()).to.equal('trade');
+			expect(currentPath()).to.equal('account');
 			let session = currentSession(application);
 			expect(session.get('data.authenticated.userId')).to.eql(1);
 			expect(session.get('data.authenticated.otherData')).to.eql('some-data');
@@ -54,9 +54,9 @@ describe('Acceptance: Login - The different login flows', function() {
 		});
 	});
 
-	it('can not visit trade section when unauthorized', function() {
+	it('can not visit account section when unauthorized', function() {
 		invalidateSession(application);
-		visit('/trade');
+		visit('/account');
 		andThen(function() {
 			expect(currentPath()).to.equal('index');
 		});

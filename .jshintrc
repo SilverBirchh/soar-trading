@@ -2,7 +2,8 @@
 	"predef": [
 		"document",
 		"window",
-		"-Promise"
+		"-Promise",
+		"Lightstreamer"
 	],
 	"browser": true,
 	"boss": true,
