@@ -1,4 +1,5 @@
 /* jshint expr:true */
+/*jshint unused:false*/
 import {
 	describe,
 	it,
@@ -11,16 +12,34 @@ import {
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
 import {
-	currentSession,
 	authenticateSession,
 	invalidateSession
 } from '../helpers/ember-simple-auth';
+import createLs from '../helpers/create-ls';
+import Ember from 'ember';
+
+let lsMock = Ember.Service.extend({
+	lsClient: {
+		subscribe() {
+			console.log('mock');
+		}
+	},
+	connectToLs: function() {
+		console.log("Acceptance Mock!");
+	},
+	getLsClient: function() {
+		return this.get('lsClient');
+	},
+});
 
 describe('Acceptance: Login - The different login flows', function() {
 	let application;
 
-	beforeEach(function() {
+	beforeEach(() => {
 		application = startApp();
+		application.register('service:mockLs', lsMock);
+		application.inject('route', 'lsClient', 'service:mockLs');
+		let Lightstreamer = createLs();
 	});
 
 	afterEach(function() {
@@ -30,15 +49,16 @@ describe('Acceptance: Login - The different login flows', function() {
 	it('can login and redirct to account page', function() {
 		visit('/members/login');
 		authenticateSession(application, {
-			userId: 1,
-			otherData: 'some-data'
+			authenticated: {
+				userId: 1,
+				lsEndPoint: 'mock',
+				currentAccountId: 'ABCABC',
+				cstToken: '123123',
+				ssoToken: 'ssosso'
+			}
 		});
-
 		andThen(function() {
 			expect(currentPath()).to.equal('account');
-			let session = currentSession(application);
-			expect(session.get('data.authenticated.userId')).to.eql(1);
-			expect(session.get('data.authenticated.otherData')).to.eql('some-data');
 		});
 	});
 

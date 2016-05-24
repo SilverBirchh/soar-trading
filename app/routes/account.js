@@ -3,18 +3,18 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	lsClient: Ember.inject.service('ls-client'),
+	session: Ember.inject.service('session'),
 	beforeModel() {
 		const service = this.get('lsClient');
 		service.connectToLs();
 		this._super(...arguments);
 	},
 	activate: function() {
-		const service = this.get('lsClient');
 		const store = this.store;
-		const session = JSON.parse(localStorage.getItem('ember_simple_auth:session'));
-		const client = service.getLsClient();
+		const clientLs = this.get('lsClient').getLsClient();
+
 		const fields = ['PNL', 'EQUITY', 'FUNDS', 'MARGIN', 'AVAILABLE_TO_DEAL'];
-		const accountID = `ACCOUNT:${session.authenticated.currentAccountId}`;
+		const accountID = `ACCOUNT:${this.get('session').get('data.authenticated.currentAccountId')}`;
 		var subscription = new Lightstreamer.Subscription(
 			"MERGE", accountID, fields
 		);
@@ -48,7 +48,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				});
 			},
 		});
-		client.subscribe(subscription);
+		clientLs.subscribe(subscription);
 	},
 	model: function() {
 		return this.store.findAll('account');
