@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+	// TODO: Write unit tests
 	lsClient: null,
 
 	connectToLs() {
