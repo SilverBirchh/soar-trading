@@ -6,16 +6,17 @@ import {
 } from 'ember-mocha';
 
 describeModule(
-  'route:trade',
-  'TradeRoute',
+  'adapter:application',
+  'ApplicationAdapter',
   {
     // Specify the other units that are required for this test.
-    // needs: ['controller:foo']
+    // needs: ['serializer:foo']
   },
   function() {
+    // Replace this with your real tests.
     it('exists', function() {
-      let route = this.subject();
-      expect(route).to.be.ok;
+      let adapter = this.subject();
+      expect(adapter).to.be.ok;
     });
   }
 );
