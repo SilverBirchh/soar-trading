@@ -1,39 +1,7 @@
 @import "bootstrap";
 body {
   padding-top: 20px;
-}
-.error-template {
-  padding: 40px 15px;
-  text-align: center;
-}
-.error-actions {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-.library-item {
-  min-height: 150px;
-}
-.alert-success {
-  display: flex;
-}
-.ember-text-area {
-  resize: vertical !important;
-}
-.sign-up {
-  background-color: rgba(227, 5, 5, 0.67) !important;
-  border-radius: 5px;
-  color: #ffffff !important;
-}
-.sign-up:active:enabled,
-.sign-up:focus:enabled,
-.sign-up:hover:enabled {
-  background-color: #E30505 !important;
-}
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  min-width:670px;
 }
 .panel-login {
   border-color: #ccc;
@@ -81,14 +49,6 @@ body {
   -moz-transition: all 0.1s linear;
   transition: all 0.1s linear;
 }
-.panel-login input:focus:enabled,
-.panel-login input:hover:enabled {
-  outline: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  border-color: #ccc;
-}
 .btn-login {
   background-color: #59B2E0;
   outline: none;
@@ -99,42 +59,4 @@ body {
   padding: 14px 0;
   text-transform: uppercase;
   border-color: #59B2E6;
-}
-.btn-login:focus:enabled,
-.btn-login:hover:enabled {
-  color: #fff;
-  background-color: #53A3CD;
-  border-color: #53A3CD;
-}
-.forgot-password {
-  text-decoration: underline;
-  color: #888;
-}
-.forgot-password:focus,
-.forgot-password:hover {
-  text-decoration: underline;
-  color: #666;
-}
-.btn-register {
-  background-color: #1CB94E;
-  outline: none;
-  color: #fff;
-  font-size: 14px;
-  height: auto;
-  font-weight: normal;
-  padding: 14px 0;
-  text-transform: uppercase;
-  border-color: #1CB94A;
-}
-.btn-register:focus:enabled,
-.btn-register:hover:enabled {
-  color: #fff;
-  background-color: #1CA347;
-  border-color: #1CA347;
-}
-.updatedValueLower {
-  background-color: red;
-}
-.updatedValueHigher {
-  background-color: green;
 }
