@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export function logger(object/*, hash*/) {
+export function logger(object) {
   console.log(object);
 }
 

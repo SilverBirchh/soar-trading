@@ -58,7 +58,7 @@ describe('Acceptance: Login - The different login flows', function() {
 			}
 		});
 		andThen(function() {
-			expect(currentPath()).to.equal('account');
+			expect(currentPath()).to.equal('account.index');
 		});
 	});
 
