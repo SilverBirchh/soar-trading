@@ -32,14 +32,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			},
 			onItemUpdate: function(info) {
 				var i = info.getItemPos();
-				if (!store.hasRecordForId('account', i)) {
+				if (!store.hasRecordForId('active-account', i)) {
 					// Push an empty record
-					store.push('account', {
+					store.push('active-account', {
 						id: i
 					});
 				}
 
-				store.find('account', i).then(function(account) {
+				store.find('active-account', i).then(function(account) {
 					info.forEachChangedField(function(fieldName, fieldPos, value) {
 						// Set field value on the account locally-persisted instance
 						account.set(fieldName, value);
@@ -52,6 +52,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		clientLs.subscribe(subscription);
 	},
 	model: function() {
-		return this.store.findAll('account');
+		return this.store.findAll('active-account');
 	}
 });

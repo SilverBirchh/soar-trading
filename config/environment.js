@@ -6,7 +6,7 @@ module.exports = function(environment) {
 			'default-src': "'self'",
 			'script-src': "'self' 'unsafe-eval' https://a.c-dn.net/b/0wNpa0.js",
 			'font-src': "'self'",
-		  'connect-src': "'self' ws://localhost:49155 wss://*.marketdatasystems.com/lightstreamer https://demo-api.ig.com/gateway/deal/session https://demo-apd.marketdatasystems.com/lightstreamer/create_session.js wss://demo-apd.marketdatasystems.com/lightstreamer wss://apd219b.marketdatasystems.com/lightstreamer wss://apd219b.marketdatasystems.com/lightstreamer",
+		  'connect-src': "'self' https://demo-api.ig.com/gateway/deal/accounts ws://localhost:49155 wss://*.marketdatasystems.com/lightstreamer https://demo-api.ig.com/gateway/deal/session https://demo-apd.marketdatasystems.com/lightstreamer/create_session.js wss://demo-apd.marketdatasystems.com/lightstreamer wss://apd219b.marketdatasystems.com/lightstreamer wss://apd219b.marketdatasystems.com/lightstreamer",
 			'img-src': "'self'",
 			'style-src': "'self'",
 			'media-src': "'self'"

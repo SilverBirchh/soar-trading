@@ -6,8 +6,8 @@ import {
 } from 'ember-mocha';
 
 describeModel(
-  'account',
-  'Account',
+  'accounts',
+  'Accounts',
   {
     // Specify the other units that are required for this test.
       needs: []
