@@ -49,16 +49,14 @@ describe('Acceptance: Login - The different login flows', function() {
 	it('can login and redirct to account page', function() {
 		visit('/members/login');
 		authenticateSession(application, {
-			authenticated: {
-				userId: 1,
-				lsEndPoint: 'mock',
-				currentAccountId: 'ABCABC',
-				cstToken: '123123',
-				ssoToken: 'ssosso'
-			}
+			userId: 1,
+			lsEndPoint: 'mock',
+			currentAccountId: 'ABCABC',
+			cstToken: '123123',
+			ssoToken: 'ssosso'
 		});
 		andThen(function() {
-			expect(currentPath()).to.equal('account');
+			expect(currentPath()).to.equal('account.index');
 		});
 	});
 

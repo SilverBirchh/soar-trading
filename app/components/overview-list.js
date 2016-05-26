@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+	session: Ember.inject.service('session'),
 	activeAccount: Ember.computed(function() {
-    const session = JSON.parse(localStorage.getItem('ember_simple_auth:session'));
-		return session.authenticated.currentAccountId;
-  })
+		return this.get('session.session.content.authenticated.currentAccountId');
+	})
 });

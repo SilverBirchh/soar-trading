@@ -10,7 +10,12 @@ Router.map(function() {
   this.route('members', function() {
     this.route('login', { path: "/login"});
   });
-  this.route('account');
+  this.route('account', function() {
+    this.route('overview');
+    this.route('positions');
+    this.route('orders');
+    this.route('search');
+  });
 });
 
 export default Router;
