@@ -3,12 +3,20 @@
 		<h3 class="panel-title">{{item.id}}{{#if item.preferred}} - Preferred{{/if}}</h3>
 	</div>
 	<div class="panel-body">
-		<p>Account Type: {{item.accountType}}</p>
-		<p>Account Name: {{item.accountName}}</p>
-		<p>Currency: {{item.currency}}</p>
-		<p>Status: {{item.status}}</p>
-	</div>
-	<div class="panel-footer text-right">
-		{{yield}}
+		<div class="row">
+			<div class="col-xs-6">
+				<p>Account Type: {{item.accountType}}</p>
+				<p>Account Name: {{item.accountName}}</p>
+				<p>Currency: {{item.currency}}</p>
+				<p>Status: {{item.status}}</p>
+			</div>
+			<div class="col-xs-6">
+				<p>Funds: £{{item.balance.FUNDS}}</p>
+				<p>Margin: £{{item.balance.MARGIN}}</p>
+				<p>Equity: £{{item.balance.EQUITY}}</p>
+				<p>Available: £{{item.balance.AVAILABLE_TO_DEAL}}</p>
+				<p>PNL: £{{item.balance.PNL}}</p>
+			</div>
+		</div>
 	</div>
 </div>

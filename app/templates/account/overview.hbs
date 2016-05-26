@@ -6,9 +6,7 @@
 		<div class="row">
 			{{#each model as |account|}}
 				<div class="col-md-6">
-					{{#account-item item=account}}
-						<button class='btn btn-info btn-xs' {{action 'viewFunds' account.id}}>View Funds</button>
-					{{/account-item}}
+					{{account-item item=account}}
 				</div>
 			{{/each}}
 		</div>
