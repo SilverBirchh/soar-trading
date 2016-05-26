@@ -1,30 +1,40 @@
 /* jshint expr:true */
-import { expect } from 'chai';
 import {
-  describeComponent,
-  it
+	expect
+} from 'chai';
+import {
+	describeComponent,
+	it
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'account-item',
-  'Integration: AccountItemComponent',
-  {
-    integration: true
-  },
-  function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#account-item}}
-      //     template content
-      //   {{/account-item}}
-      // `);
+	'account-item',
+	'Integration: AccountItemComponent', {
+		integration: true
+	},
+	function() {
+		it('renders with preferred account', function() {
+			const item = {
+        id: 'ABCABC',
+        preferred: true,
+				accountType: 'CFD',
+				accountName: 'Demo-Spread bet',
+				currency: 'GBP',
+				status: 'ENABLED',
+				balance: {
+          FUNDS: 0,
+          MARGIN: 0,
+          EQUITY: 0,
+          AVAILABLE_TO_DEAL: 0,
+          PNL: 0,
+				}
+			};
 
-      this.render(hbs`{{account-item}}`);
-      expect(this.$()).to.have.length(1);
-    });
-  }
+      this.set('item', item);
+			this.render(hbs `{{account-item item=item}}`);
+			expect(this.$(".panel-title").text().trim()).to.be.equal('ABCABC - Preferred');
+      expect(this.$(".panel-title").text().trim()).to.be.equal('ABCABC - Preferred');
+		});
+	}
 );

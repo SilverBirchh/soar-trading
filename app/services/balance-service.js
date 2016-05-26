@@ -3,14 +3,8 @@ import Ember from 'ember';
 export default Ember.Service.extend({
 	lsClient: Ember.inject.service('ls-client'),
 	session: Ember.inject.service('session'),
-	balances: {
-		'EQUITY': '0',
-		'PNL': '0',
-		'FUNDS': '0',
-		'MARGIN': '0',
-		'AVAILABLE_TO_DEAL': '0'
-	},
 
+// TODO: Unit Tests
 	getBalances(accountId) {
 		const balances = {
 			'EQUITY': '0',
@@ -21,7 +15,6 @@ export default Ember.Service.extend({
 		};
 
 		const clientLs = this.get('lsClient').getLsClient();
-		const that = this;
 		const fields = ['PNL', 'EQUITY', 'FUNDS', 'MARGIN', 'AVAILABLE_TO_DEAL'];
 		const accountID = `ACCOUNT:${accountId}`;
 		var subscription = new Lightstreamer.Subscription(
