@@ -34,5 +34,36 @@ export default Ember.Service.extend({
 		});
 		clientLs.subscribe(subscription);
 		return marketData;
+	},
+
+	getLatest(epic, direction) {
+		const marketData = {
+			'latest': '0',
+		};
+		const latestDirection = (direction === 'BUY') ? ['OFFER'] : ['BID'];
+		const clientLs = this.get('lsClient').getLsClient();
+		const market = [`MARKET:${epic}`];
+		var subscription = new Lightstreamer.Subscription(
+			"MERGE", market, latestDirection
+		);
+		subscription.setRequestedSnapshot("yes");
+		subscription.addListener({
+			onSubscription: function() {
+				console.log('subscribed for pnl service');
+			},
+			onUnsubscription: function() {
+				console.log('unsubscribed for pnl service');
+			},
+			onSubscriptionError: function(code, message) {
+				console.log('subscription failure: ' + code + " message: " + message);
+			},
+			onItemUpdate: function(info) {
+				info.forEachField(function(fieldName, fieldPos, value) {
+					Ember.set(marketData, 'latest', value);
+				});
+			},
+		});
+		clientLs.subscribe(subscription);
+		return marketData;
 	}
 });
