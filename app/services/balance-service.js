@@ -23,10 +23,10 @@ export default Ember.Service.extend({
 		subscription.setRequestedSnapshot("yes");
 		subscription.addListener({
 			onSubscription: function() {
-				console.log('subscribed');
+				console.log('subscribed for balance service');
 			},
 			onUnsubscription: function() {
-				console.log('unsubscribed');
+				console.log('unsubscribed for balance service');
 			},
 			onSubscriptionError: function(code, message) {
 				console.log('subscription failure: ' + code + " message: " + message);
