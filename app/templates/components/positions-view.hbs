@@ -1,0 +1,54 @@
+<div class="col-lg-8">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title"><strong>{{type}}</strong></h3>
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<td>
+							Market
+						</td>
+						<td>
+							Period
+						</td>
+						<td>
+							Size
+						</td>
+						<td>
+							Profit/Loss (GBP)
+						</td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each model as |item|}}
+						<tr>
+							<td>
+								{{item.market.instrumentName}}
+							</td>
+							<td>
+								{{item.market.expiry}}
+							</td>
+							<td>
+								{{item.position.direction}} {{item.position.dealSize}}
+							</td>
+							<td>
+								£{{item.marketData.pnl}}
+							</td>
+							<td class="btn btn-primary" {{action 'close' item}}>
+								Close
+							</td>
+						</tr>
+						{{else}}
+							<td colspan="8" class="alert alert-warning col-sm-8 text-center">
+								You have no {{type}}. Head to
+								{{#link-to 'account.search' tagName="a" }}Search and Deal{{/link-to}} and make some!
+							</td>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

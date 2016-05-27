@@ -22,10 +22,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		subscription.setRequestedSnapshot("yes");
 		subscription.addListener({
 			onSubscription: function() {
-				console.log('subscribed');
+				console.log('subscribed for active account details');
 			},
 			onUnsubscription: function() {
-				console.log('unsubscribed');
+				console.log('unsubscribed  for active account details');
 			},
 			onSubscriptionError: function(code, message) {
 				console.log('subscription failure: ' + code + " message: " + message);

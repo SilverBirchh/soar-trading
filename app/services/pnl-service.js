@@ -4,40 +4,35 @@ export default Ember.Service.extend({
 	lsClient: Ember.inject.service('ls-client'),
 	session: Ember.inject.service('session'),
 
-// TODO: Unit Tests
-	getBalances(accountId) {
-		const balances = {
-			'EQUITY': '0',
-			'PNL': '0',
-			'FUNDS': '0',
-			'MARGIN': '0',
-			'AVAILABLE_TO_DEAL': '0'
+	getPnl(epic, direction, openLevel, dealSize) {
+		// TODO: TEST
+		const marketData = {
+			'pnl': '0',
 		};
-
+		const latestDirection = (direction === 'BUY') ? ['BID'] : ['OFFER'];
 		const clientLs = this.get('lsClient').getLsClient();
-		const fields = ['PNL', 'EQUITY', 'FUNDS', 'MARGIN', 'AVAILABLE_TO_DEAL'];
-		const accountID = `ACCOUNT:${accountId}`;
+		const market = [`MARKET:${epic}`];
 		var subscription = new Lightstreamer.Subscription(
-			"MERGE", accountID, fields
+			"MERGE", market, latestDirection
 		);
 		subscription.setRequestedSnapshot("yes");
 		subscription.addListener({
 			onSubscription: function() {
-				console.log('subscribed for balance service');
+				console.log('subscribed for pnl service');
 			},
 			onUnsubscription: function() {
-				console.log('unsubscribed for balance service');
+				console.log('unsubscribed for pnl service');
 			},
 			onSubscriptionError: function(code, message) {
 				console.log('subscription failure: ' + code + " message: " + message);
 			},
 			onItemUpdate: function(info) {
 				info.forEachField(function(fieldName, fieldPos, value) {
-					Ember.set(balances, fieldName, value);
+					Ember.set(marketData, 'pnl', ((openLevel - value) * dealSize).toFixed(2));
 				});
 			},
 		});
 		clientLs.subscribe(subscription);
-		return balances;
-	},
+		return marketData;
+	}
 });
