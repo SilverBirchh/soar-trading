@@ -17,7 +17,7 @@
 							Size
 						</td>
 						<td>
-							Profit/Loss
+							Profit/Loss (GBP)
 						</td>
 						<td></td>
 					</tr>
@@ -32,10 +32,10 @@
 								{{item.market.expiry}}
 							</td>
 							<td>
-								{{item.position.dealSize}}
+								{{item.position.direction}} {{item.position.dealSize}}
 							</td>
 							<td>
-								{{item.PNL}}
+								£{{item.marketData.pnl}}
 							</td>
 							<td class="btn btn-primary" {{action 'close' item}}>
 								Close

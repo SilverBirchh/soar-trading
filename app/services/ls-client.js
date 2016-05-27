@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-	// TODO: Write unit tests
+	// TODO: Write unit tests and change session retrieve
 	lsClient: null,
 
 	connectToLs() {
