@@ -1,4 +1,4 @@
-<div class="col-lg-8">
+<div class="col-lg-12">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3 class="panel-title"><strong>{{type}}</strong></h3>
@@ -24,7 +24,7 @@
 				</thead>
 				<tbody>
 					{{#each model as |item|}}
-						<tr>
+						<tr id= {{item.position.dealId}}>
 							<td>
 								{{item.market.instrumentName}}
 							</td>
@@ -37,8 +37,19 @@
 							<td>
 								£{{item.marketData.pnl}}
 							</td>
-							<td class="btn btn-primary" {{action 'close' item}}>
-								Close
+							<td>
+								<form class="form-inline hidden">
+									<div class="form-group">
+										{{input type="number" class="form-control" placeholder="Size" autofocus="autofocus"}}
+										<button type="button" class="btn btn-primary">Confirm</button>
+										<button type="button" class="btn btn-primary glyphicon glyphicon-remove" {{action 'toggleClass' item.position}}></button>
+									</div>
+								</form>
+								<form class="form-inline">
+									<div class="form-group">
+										<button type="button" class="btn btn-primary" {{action 'toggleClass' item.position}}>Close</button>
+									</div>
+								</form>
 							</td>
 						</tr>
 						{{else}}
