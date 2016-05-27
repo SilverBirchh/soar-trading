@@ -5,6 +5,7 @@ export default Ember.Service.extend({
 	session: Ember.inject.service('session'),
 
 	getPnl(epic, direction, openLevel, dealSize) {
+		// TODO: TEST
 		const marketData = {
 			'pnl': '0',
 		};
