@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+	tagName: 'tr',
 	isClosing: false,
 	item: null,
-	tagName: 'tr',
 	size: null,
 	isDisabled: Ember.computed('size', function(){
 		const position = this.get('item.position');
@@ -20,7 +20,8 @@ export default Ember.Component.extend({
 			this.toggleProperty('isClosing');
 		},
 		close() {
-			console.log('You shall not close');
+			this.sendAction('close', this.get('item.position'), this.get('size'));
+			this.send('toggleClass', this.get('item.position'));
 		}
 	}
 });

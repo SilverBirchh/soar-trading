@@ -7,7 +7,7 @@ export default DS.Model.extend({
 
 	market: DS.attr(),
 	position: DS.attr(),
-	marketData: Ember.computed(function() {
+	marketData: Ember.computed('position', function() {
 		const market = this.get('market');
 		const position = this.get('position');
 		const epic = market.epic;
@@ -15,6 +15,5 @@ export default DS.Model.extend({
 		const openLevel = position.openLevel;
 		const dealSize = position.dealSize;
 		return this.get('pnlService').getPnl(epic, direction, openLevel, dealSize);
-	})
-
+	}),
 });

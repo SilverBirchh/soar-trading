@@ -28,7 +28,11 @@ export default Ember.Service.extend({
 			},
 			onItemUpdate: function(info) {
 				info.forEachField(function(fieldName, fieldPos, value) {
-					Ember.set(marketData, 'pnl', ((openLevel - value) * dealSize).toFixed(2));
+					if (direction === 'BUY') {
+						Ember.set(marketData, 'pnl', ((value - openLevel) * dealSize).toFixed(2));
+					} else {
+						Ember.set(marketData, 'pnl', ((openLevel - value) * dealSize).toFixed(2));
+					}
 				});
 			},
 		});
