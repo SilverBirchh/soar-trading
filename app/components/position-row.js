@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 	tagName: 'tr',
 	isClosing: false,
+	confirm: null,
 	item: null,
 	size: null,
 	isDisabled: Ember.computed('size', function(){
