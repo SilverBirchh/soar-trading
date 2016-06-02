@@ -24,34 +24,7 @@
 				</thead>
 				<tbody>
 					{{#each model as |item|}}
-						<tr id= {{item.position.dealId}}>
-							<td>
-								{{item.market.instrumentName}}
-							</td>
-							<td>
-								{{item.market.expiry}}
-							</td>
-							<td>
-								{{item.position.direction}} {{item.position.dealSize}}
-							</td>
-							<td>
-								£{{item.marketData.pnl}}
-							</td>
-							<td>
-								<form class="form-inline hidden">
-									<div class="form-group">
-										{{input type="number" class="form-control" placeholder="Size" autofocus="autofocus"}}
-										<button type="button" class="btn btn-primary">Confirm</button>
-										<button type="button" class="btn btn-primary glyphicon glyphicon-remove" {{action 'toggleClass' item.position}}></button>
-									</div>
-								</form>
-								<form class="form-inline">
-									<div class="form-group">
-										<button type="button" class="btn btn-primary" {{action 'toggleClass' item.position}}>Close</button>
-									</div>
-								</form>
-							</td>
-						</tr>
+						{{position-row item=item id=item.position.dealId}}
 						{{else}}
 							<td colspan="8" class="alert alert-warning col-sm-8 text-center">
 								You have no {{type}}. Head to
