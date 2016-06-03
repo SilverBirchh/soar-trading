@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 		close(position, size) {
 			const dealRef = this.get('dealService').closePosition(position, size);
 			const dealPassed = this.get('confirmService').confirm(dealRef.dealRef);
-			if (size == position.dealSize && dealPassed.state === "ACCEPTED") {
+			if (size.toString() === position.dealSize.toString() && dealPassed.state === "ACCEPTED") {
 				this.get('store').unloadAll('position');
 			}
 			this.refresh();
