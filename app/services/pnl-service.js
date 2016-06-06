@@ -8,6 +8,7 @@ export default Ember.Service.extend({
 		// TODO: TEST
 		const marketData = {
 			'pnl': '0',
+			'latest': '0'
 		};
 		const latestDirection = (direction === 'BUY') ? ['BID'] : ['OFFER'];
 		const clientLs = this.get('lsClient').getLsClient();
@@ -28,7 +29,12 @@ export default Ember.Service.extend({
 			},
 			onItemUpdate: function(info) {
 				info.forEachField(function(fieldName, fieldPos, value) {
-					Ember.set(marketData, 'pnl', ((openLevel - value) * dealSize).toFixed(2));
+					Ember.set(marketData, 'latest', value);
+					if (direction === 'BUY') {
+						Ember.set(marketData, 'pnl', ((value - openLevel) * dealSize).toFixed(2));
+					} else {
+						Ember.set(marketData, 'pnl', ((openLevel - value) * dealSize).toFixed(2));
+					}
 				});
 			},
 		});
