@@ -14,16 +14,23 @@ describeComponent(
   },
   function() {
     it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#position-row}}
-      //     template content
-      //   {{/position-row}}
-      // `);
-
-      this.render(hbs`{{position-row}}`);
+      const item = {
+        market: {
+          instrumentName: 'FTSE 100',
+          expiry: 'DFB',
+        },
+        position: {
+          direction: 'BUY',
+          dealSize: '1.0',
+          openLevel: '100',
+        },
+        marketData: {
+          latest: '100',
+          pnl: '0'
+        }
+      }
+      this.set('item', item);
+      this.render(hbs`{{position-row item=item}}`);
       expect(this.$()).to.have.length(1);
     });
   }

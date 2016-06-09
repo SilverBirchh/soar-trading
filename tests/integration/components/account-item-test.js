@@ -34,7 +34,6 @@ describeComponent(
       this.set('item', item);
 			this.render(hbs `{{account-item item=item}}`);
 			expect(this.$(".panel-title").text().trim()).to.be.equal('ABCABC - Preferred');
-      expect(this.$(".panel-title").text().trim()).to.be.equal('ABCABC - Preferred');
 		});
 	}
 );
