@@ -2,6 +2,10 @@
 
 module.exports = function(environment) {
 	var ENV = {
+		pace: {
+			theme: 'minimal',
+    	color: 'blue',
+		},
 		contentSecurityPolicy: {
 			'default-src': "'self'",
 			'script-src': "'self' 'unsafe-eval' https://a.c-dn.net/b/0wNpa0.js",

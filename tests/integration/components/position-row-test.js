@@ -6,10 +6,8 @@ import {
   describeComponent,
   it
 } from 'ember-mocha';
-import {
-  beforeEach
-} from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
 describeComponent(
   'position-row',
@@ -82,7 +80,7 @@ describeComponent(
 
     it('calls close when clicked', function() {
       let wasClalled = false;
-      this.set('close', (actual) => {
+      this.set('close', () => {
         wasClalled = true;
       });
 
