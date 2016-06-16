@@ -5,6 +5,7 @@ import {
   it
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
 describeComponent(
   'working-order-row',
@@ -13,18 +14,41 @@ describeComponent(
     integration: true
   },
   function() {
-    it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#working-order-row}}
-      //     template content
-      //   {{/working-order-row}}
-      // `);
 
-      this.render(hbs`{{working-order-row}}`);
-      expect(this.$()).to.have.length(1);
+    const item = {
+      marketData: {
+        instrumentName: 'FTSE 100',
+        expiry: 'DFB',
+      },
+      workingOrderData: {
+        direction: 'BUY',
+        orderSize: 1,
+        level: '100',
+        goodTill: 'GTC'
+      },
+      liveData: {
+        latest: '100',
+      }
+    };
+
+    it('renders', function() {
+      this.set('item', item);
+      this.render(hbs`{{working-order-row item=item}}`);
+      expect(this.$().text().indexOf('FTSE 100')).to.have.above(0);
+    });
+
+    it('calls the delete service', function() {
+      let wasClalled = false;
+      this.set('delete', () => {
+        wasClalled = true;
+      });
+
+      this.set('item', item);
+      this.render(hbs`{{working-order-row item=item delete=(action delete)}}`);
+      Ember.run.next(() => {
+        $('button:first').click();
+        expect(wasClalled).to.be.true;
+      });
     });
   }
 );
