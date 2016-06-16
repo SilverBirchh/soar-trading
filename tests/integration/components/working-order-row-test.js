@@ -7,8 +7,8 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
-  'orders-view',
-  'Integration: OrdersViewComponent',
+  'working-order-row',
+  'Integration: WorkingOrderRowComponent',
   {
     integration: true
   },
@@ -18,12 +18,12 @@ describeComponent(
       // Handle any actions with this.on('myAction', function(val) { ... });
       // Template block usage:
       // this.render(hbs`
-      //   {{#orders-view}}
+      //   {{#working-order-row}}
       //     template content
-      //   {{/orders-view}}
+      //   {{/working-order-row}}
       // `);
 
-      this.render(hbs`{{orders-view}}`);
+      this.render(hbs`{{working-order-row}}`);
       expect(this.$()).to.have.length(1);
     });
   }
