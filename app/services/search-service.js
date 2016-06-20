@@ -74,7 +74,7 @@ export default Ember.Service.extend({
           var epic = updateInfo.getItemName().split(":")[1];
           var tidyEpic = epic.replace(/\./g, "_");
           updateInfo.forEachField(function(fieldName, fieldPos, value) {
-            console.log(epic);
+
           });
         }
       });
@@ -84,7 +84,9 @@ export default Ember.Service.extend({
   },
 
   unsubscribe() {
-    const clientLs = this.get('lsClient').getLsClient();
-    clientLs.unsubscribe(this.get('subscription'));
+    if (this.get('subscription')) {
+      const clientLs = this.get('lsClient').getLsClient();
+      clientLs.unsubscribe(this.get('subscription'));
+    }
   },
 });
