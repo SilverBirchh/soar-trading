@@ -5,7 +5,7 @@ export default Ember.Service.extend({
 
   search(market) {
     const session = this.get('session');
-    let results = null;
+    let results = [];
     let search = market.replace(/[^\w\s]/gi, '');
 
     var req = {};
@@ -27,7 +27,22 @@ export default Ember.Service.extend({
       async: false,
       mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
     }).then(function(response, status, data) {
-      results = response;
+      for (var i = 0; i < response.markets.length; i++) {
+        var marketsData = response.markets[i];
+        marketsData.tidyEpic = marketsData.epic.replace(/\./g, "_");
+        marketsData.tidyExpiry = marketsData.expiry.replace(/ /g, "");
+        marketsData.state = null;
+        if (marketsData.marketStatus === 'EDITS_ONLY') {
+          marketsData.state = 'assets/images/edit.png';
+        } else if (marketsData.marketStatus === 'TRADEABLE') {
+          marketsData.state = 'assets/images/open.png';
+        } else {
+          marketsData.state = 'assets/images/close.png';
+        }
+
+        if (results.length > 30) { break; }
+        results.push(marketsData);
+      }
     });
     return results;
   },

@@ -1,2 +1,19 @@
 {{search-box search="search"}}
-{{outlet}}
+{{#if results}}
+<table class="table table-hover" id="search_results_list">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Market</th>
+      <th>Expiry</th>
+      <th>Bid</th>
+      <th>Offer</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each results as |result|}}
+      {{result-row result=result}}
+    {{/each}}
+  </tbody>
+</table>
+{{/if}}
