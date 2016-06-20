@@ -7,7 +7,8 @@ export default Ember.Route.extend({
 		return this.store.findAll('workingorder');
 	},
 	deactivate: function() {
-		this.get('store').unloadAll('position');
+		this.get('store').unloadAll('workingorder');
+		this.refresh();
 	},
 	actions: {
 		delete(item) {

@@ -9,6 +9,7 @@ export default Ember.Route.extend({
 	},
 	deactivate: function() {
 		this.get('store').unloadAll('position');
+		this.refresh();
 	},
 
 	actions: {

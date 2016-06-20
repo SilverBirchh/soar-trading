@@ -68,3 +68,42 @@ body {
   word-break: break-word;
   text-align: right;
 }
+.search {
+  background: #E55D87;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #E55D87 , #5FC3E4);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #E55D87 , #5FC3E4);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#custom-search-input {
+  margin: 10px 0 0;
+  padding: 0;
+}
+#custom-search-input .search-query {
+  padding-right: 3px;
+  padding-left: 3px;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  border-radius: 3px;
+}
+#custom-search-input button {
+  border: 0;
+  background: none;
+  /** belows styles are working good */
+  padding: 2px 5px;
+  margin-top: 2px;
+  position: relative;
+  left: -28px;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  border-radius: 3px;
+  color: #D9230F;
+  z-index: 3;
+  outline:0;
+}
+
+.jumbotron {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
