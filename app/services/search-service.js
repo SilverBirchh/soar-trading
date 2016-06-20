@@ -2,10 +2,15 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   session: Ember.inject.service('session'),
+  lsClient: Ember.inject.service('ls-client'),
+  subscription: null,
 
   search(market) {
+    const that = this;
     const session = this.get('session');
+    const clientLs = this.get('lsClient').getLsClient();
     let results = [];
+    var streamingItems = [];
     let search = market.replace(/[^\w\s]/gi, '');
 
     var req = {};
@@ -42,8 +47,39 @@ export default Ember.Service.extend({
 
         if (results.length > 30) { break; }
         results.push(marketsData);
+        if (marketsData.streamingPricesAvailable) {
+          streamingItems.push("L1:" + marketsData.epic);
+        }
       }
+      that.set('subscription', new Lightstreamer.Subscription(
+        "MERGE", streamingItems, ["BID", "OFFER"]
+      ));
+      that.get('subscription').setRequestedSnapshot("yes");
+      that.get('subscription').addListener({
+        onSubscription: function() {
+          console.log('subscribed');
+        },
+        onUnsubscription: function() {
+          console.log('unsubscribed');
+        },
+        onSubscriptionError: function(code, message) {
+          console.log('subscription failure: ' + code + " message: " + message);
+        },
+        onItemUpdate: function(updateInfo) {
+          var epic = updateInfo.getItemName().split(":")[1];
+          var tidyEpic = epic.replace(/\./g, "_");
+          updateInfo.forEachField(function(fieldName, fieldPos, value) {
+            console.log(fieldName);
+          });
+        }
+      });
+      clientLs.subscribe(that.get('subscription'));
     });
     return results;
+  },
+
+  unsubscribe() {
+    const clientLs = this.get('lsClient').getLsClient();
+    clientLs.unsubscribe(this.get('subscription'));
   },
 });

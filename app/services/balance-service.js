@@ -4,7 +4,6 @@ export default Ember.Service.extend({
 	lsClient: Ember.inject.service('ls-client'),
 	session: Ember.inject.service('session'),
 
-// TODO: Unit Tests
 	getBalances(accountId) {
 		const balances = {
 			'EQUITY': '0',
