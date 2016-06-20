@@ -45,11 +45,16 @@ export default Ember.Service.extend({
           marketsData.state = 'assets/images/close.png';
         }
 
-        if (results.length > 30) { break; }
+        if (results.length > 30) {
+          break;
+        }
         results.push(marketsData);
         if (marketsData.streamingPricesAvailable) {
           streamingItems.push("L1:" + marketsData.epic);
         }
+      }
+      if (that.get('subscription')) {
+        clientLs.unsubscribe(that.get('subscription'));
       }
       that.set('subscription', new Lightstreamer.Subscription(
         "MERGE", streamingItems, ["BID", "OFFER"]
@@ -69,7 +74,7 @@ export default Ember.Service.extend({
           var epic = updateInfo.getItemName().split(":")[1];
           var tidyEpic = epic.replace(/\./g, "_");
           updateInfo.forEachField(function(fieldName, fieldPos, value) {
-            console.log(fieldName);
+            console.log(epic);
           });
         }
       });
