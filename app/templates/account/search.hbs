@@ -1,5 +1,5 @@
 {{search-box search="search"}}
-{{#if results}}
+{{#if model}}
 <table class="table table-hover" id="search_results_list">
   <thead>
     <tr>
@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each results as |result|}}
+    {{#each model as |result|}}
       {{result-row result=result}}
     {{/each}}
   </tbody>

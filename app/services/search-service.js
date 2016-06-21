@@ -1,16 +1,15 @@
 import Ember from 'ember';
+import findIndex from '../mixins/find-index';
 
-export default Ember.Service.extend({
+export default Ember.Service.extend(findIndex, {
   session: Ember.inject.service('session'),
-  lsClient: Ember.inject.service('ls-client'),
-  subscription: null,
 
   search(market) {
-    const that = this;
     const session = this.get('session');
-    const clientLs = this.get('lsClient').getLsClient();
-    let results = [];
-    var streamingItems = [];
+    let results = {
+      raw: [],
+      streamingItems: []
+    };
     let search = market.replace(/[^\w\s]/gi, '');
 
     var req = {};
@@ -45,48 +44,15 @@ export default Ember.Service.extend({
           marketsData.state = 'assets/images/close.png';
         }
 
-        if (results.length > 30) {
+        if (results.raw.length > 30) {
           break;
         }
-        results.push(marketsData);
+        results.raw.push(marketsData);
         if (marketsData.streamingPricesAvailable) {
-          streamingItems.push("L1:" + marketsData.epic);
+          results.streamingItems.push("L1:" + marketsData.epic);
         }
       }
-      if (that.get('subscription')) {
-        clientLs.unsubscribe(that.get('subscription'));
-      }
-      that.set('subscription', new Lightstreamer.Subscription(
-        "MERGE", streamingItems, ["BID", "OFFER"]
-      ));
-      that.get('subscription').setRequestedSnapshot("yes");
-      that.get('subscription').addListener({
-        onSubscription: function() {
-          console.log('subscribed');
-        },
-        onUnsubscription: function() {
-          console.log('unsubscribed');
-        },
-        onSubscriptionError: function(code, message) {
-          console.log('subscription failure: ' + code + " message: " + message);
-        },
-        onItemUpdate: function(updateInfo) {
-          var epic = updateInfo.getItemName().split(":")[1];
-          var tidyEpic = epic.replace(/\./g, "_");
-          updateInfo.forEachField(function(fieldName, fieldPos, value) {
-
-          });
-        }
-      });
-      clientLs.subscribe(that.get('subscription'));
     });
     return results;
-  },
-
-  unsubscribe() {
-    if (this.get('subscription')) {
-      const clientLs = this.get('lsClient').getLsClient();
-      clientLs.unsubscribe(this.get('subscription'));
-    }
   },
 });
