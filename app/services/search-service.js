@@ -1,3 +1,5 @@
+/*jshint unused:false*/
+
 import Ember from 'ember';
 import findIndex from '../mixins/find-index';
 

@@ -4,6 +4,6 @@ export default DS.Model.extend({
   state: DS.attr(),
   instrumentName: DS.attr(),
   tidyExpiry: DS.attr(),
-  bid: DS.attr(),
-  offer: DS.attr(),
+  BID: DS.attr(),
+  OFFER: DS.attr(),
 });
