@@ -5,12 +5,12 @@ export default Ember.Route.extend({
   lsClient: Ember.inject.service('ls-client'),
   _timer: null,
   subscription: null,
-  
+
   model: function() {
     return this.store.findAll('search');
   },
   deactivate() {
-    this.get('search').unsubscribe();
+    this.send('unsubscribe');
   },
 
   actions: {
@@ -18,13 +18,13 @@ export default Ember.Route.extend({
       if (this.get('subscription')) {
         const clientLs = this.get('lsClient').getLsClient();
         clientLs.unsubscribe(this.get('subscription'));
+        this.get('store').unloadAll('search');
         this.set('subscription', null);
       }
     },
     search(market) {
       if (market.length <= 2) {
         this.send('unsubscribe');
-        this.get('store').unloadAll('search');
         return;
       }
       if (this._timer) {
@@ -33,7 +33,6 @@ export default Ember.Route.extend({
       this._timer = Ember.run.later(this, function() {
         Ember.run.cancel(this._timer);
         this.send('unsubscribe');
-        this.get('store').unloadAll('search');
         const clientLs = this.get('lsClient').getLsClient();
         const store = this.store;
         let results = this.get('search').search(market);

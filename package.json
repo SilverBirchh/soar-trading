@@ -37,16 +37,14 @@
     "ember-cli-pace": "0.1.0",
     "ember-cli-pretender": "0.6.0",
     "ember-cli-release": "0.2.8",
-    "ember-cli-rename": "0.0.4",
     "ember-cli-sass": "5.3.1",
-    "ember-cli-sri": "^1.2.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "1.13.15",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-localstorage-adapter": "0.5.5",
     "ember-notify": "^5.1.0",
-    "ember-simple-auth": "1.0.1",
+    "ember-simple-auth": "1.1.0",
     "ember-sinon": "0.5.0"
   }
 }
