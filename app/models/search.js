@@ -6,4 +6,6 @@ export default DS.Model.extend({
   tidyExpiry: DS.attr(),
   BID: DS.attr(),
   OFFER: DS.attr(),
+  bidChange: DS.attr(),
+  offerChange: DS.attr(),
 });

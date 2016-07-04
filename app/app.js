@@ -8,8 +8,9 @@ let App;
 const alreadyShownFactory = () => {
   let alreadyShown = [];
   return (msg, test, opt) => {
-    if (test)
+    if (test) {
       return false;
+    }
 
     if( alreadyShown.indexOf(msg) === -1 ) {
       let warning = 'DEPRECATION MATE: ' + msg;

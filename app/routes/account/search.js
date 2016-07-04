@@ -47,6 +47,8 @@ export default Ember.Route.extend({
                 tidyExpiry: results.raw[i].tidyExpiry,
                 BID: results.raw[i].bid,
                 OFFER: results.raw[i].offer,
+                bidChange: null,
+                offerChange: null,
               }
             };
             store.push(store.normalize('search', {
@@ -65,8 +67,15 @@ export default Ember.Route.extend({
           onItemUpdate: function(info) {
             var i = info.getItemPos() - 1;
             store.find('search', i).then(function(search) {
-              info.forEachChangedField(function(fieldName, fieldPos, value) {
-                search.set(fieldName, value);
+              info.forEachChangedField(function(fieldName, fieldPos, newValue) {
+                let oldValue = search.get(fieldName);
+                let change = (newValue > oldValue ? 'rise' : 'fall');
+                search.set(`${fieldName.toLowerCase()}Change`, change);
+                search.set(fieldName, newValue);
+
+                Ember.run.later(this, function() {
+                  search.set(`${fieldName.toLowerCase()}Change`, null);
+                }, 300);
               });
               search.save();
             });

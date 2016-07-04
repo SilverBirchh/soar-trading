@@ -1,23 +1,25 @@
 {{search-box search="search"}}
 {{#if model}}
-<table class="table table-hover" id="search_results_list">
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Market</th>
-      <th>Expiry</th>
-      <th>Bid</th>
-      <th>Offer</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each model as |result|}}
-      {{result-row result=result}}
-    {{/each}}
-  </tbody>
-</table>
+  <div class="col-md-8">
+    <table class="table table-hover" id="search_results_list">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Market</th>
+          <th>Expiry</th>
+          <th class="content">Bid</th>
+          <th class="content">Offer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |result|}}
+          {{result-row result=result}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 {{else}}
-<p class="text-center">
-  Nothing to see here... yet.
-</p>
+  <p class="text-center">
+    Results will appear here.
+  </p>
 {{/if}}
