@@ -1,9 +1,8 @@
 /*jshint unused:false*/
 
 import Ember from 'ember';
-import findIndex from '../mixins/find-index';
 
-export default Ember.Service.extend(findIndex, {
+export default Ember.Service.extend({
   session: Ember.inject.service('session'),
 
   search(market) {
