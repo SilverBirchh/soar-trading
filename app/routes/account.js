@@ -14,7 +14,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		const clientLs = this.get('lsClient').getLsClient();
 
 		const fields = ['PNL', 'EQUITY', 'FUNDS', 'MARGIN', 'AVAILABLE_TO_DEAL'];
-		const accountID = `ACCOUNT:${this.get('session.session.content.authenticated.currentAccountId')}`;
+		let accountID = `ACCOUNT:${this.get('session.session.content.authenticated.currentAccountId')}`;
+
 		var subscription = new Lightstreamer.Subscription(
 			"MERGE", accountID, fields
 		);
@@ -52,5 +53,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	},
 	model: function() {
 		return this.store.findAll('active-account');
-	}
+	},
+
 });

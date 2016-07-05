@@ -12,9 +12,9 @@ const alreadyShownFactory = () => {
       return false;
     }
 
-    if( alreadyShown.indexOf(msg) === -1 ) {
+    if (alreadyShown.indexOf(msg) === -1) {
       let warning = 'DEPRECATION MATE: ' + msg;
-      if(opt && opt.url) {
+      if (opt && opt.url) {
         warning += ' See: ' + opt.url;
       }
       alreadyShown.push(msg);
@@ -28,7 +28,7 @@ Ember.warn = alreadyShownFactory();
 Ember.Debug.registerDeprecationHandler((() => {
   let alreadyShown = [];
   return (message, options, next) => {
-    if(alreadyShown.indexOf(message) === -1) {
+    if (alreadyShown.indexOf(message) === -1) {
       next(message, options);
       alreadyShown.push(message);
     }
