@@ -1,4 +1,5 @@
 /* jshint expr:true */
+/*global Lightstreamer:true */
 import {
   expect
 } from 'chai';
@@ -6,7 +7,7 @@ import {
   describeModule,
   it
 } from 'ember-mocha';
-import sinon from 'sinon';
+import createLs from '../../helpers/create-ls';
 
 describeModule(
   'service:ls-client',
@@ -31,13 +32,13 @@ describeModule(
       expect(service.getLsClient()).to.be.equal('got me');
     });
 
-    it('atempts to make a connection', sinon.test(function() {
+    it('creates a lsClient object', function() {
       let service = this.subject();
       service.session = session;
 
-      var connect = this.spy(lsClient, 'connect');
+      Lightstreamer = createLs();
       service.connectToLs();
-      sinon.assert.calledOnce(connect);
-    }));
+      expect(service.lsClient.id).to.equal(Lightstreamer.LightstreamerClient().id);
+    });
   }
 );

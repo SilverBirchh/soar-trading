@@ -26,10 +26,6 @@ describeModule(
       }
     };
 
-    sinon.config = {
-      useFakeTimers: false
-    };
-
     it('calls confirm endpoint', sinon.test(function() {
       let service = this.subject();
       service.session = session;

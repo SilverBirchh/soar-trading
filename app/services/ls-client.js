@@ -16,7 +16,7 @@ export default Ember.Service.extend({
 
 		// Add connection event listener callback functions
 		// Note: the Lightstreamer library will transparently attempt to reconnect a number of times
-		// in the event of communicationss errors
+		// in the event of communication errors
 		lsClient.addListener({
 			onListenStart: function() {
 				console.log('ListenStart');
