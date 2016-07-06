@@ -8,6 +8,7 @@ import {
   it
 } from 'ember-mocha';
 import createLs from '../../helpers/create-ls';
+import sinon from 'sinon';
 
 describeModule(
   'service:ls-client',
@@ -40,5 +41,26 @@ describeModule(
       service.connectToLs();
       expect(service.lsClient.id).to.equal(Lightstreamer.LightstreamerClient().id);
     });
+
+    it('logs when listener starts', sinon.test(function() {
+      let service = this.subject();
+      sinon.spy(console, 'log');
+      service.session = session;
+
+      service.onListenStart();
+      expect(console.log).to.be.called;
+      console.log.restore();
+    }));
+
+    it('logs a status change', sinon.test(function() {
+      let service = this.subject();
+      sinon.spy(console, 'log');
+      service.session = session;
+
+      Lightstreamer = createLs();
+      service.onStatusChange('Streaming');
+      expect(console.log).to.be.called;
+      console.log.restore();
+    }));
   }
 );

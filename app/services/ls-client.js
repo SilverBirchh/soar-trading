@@ -18,17 +18,21 @@ export default Ember.Service.extend({
 		// Note: the Lightstreamer library will transparently attempt to reconnect a number of times
 		// in the event of communication errors
 		lsClient.addListener({
-			onListenStart: function() {
-				console.log('ListenStart');
-			},
-			onStatusChange: function(status) {
-				console.log('Lightstreamer connection status:' + status);
-			}
+			onListenStart: this.get('onListenStart'),
+			onStatusChange: this.get('onStatusChange'),
 		});
 
 		// Connect to Lightstreamer
 		lsClient.connect();
 		this.set('lsClient', lsClient);
+	},
+
+	onListenStart() {
+		return console.log('ListenStart');
+	},
+
+	onStatusChange(status) {
+		return console.log('Lightstreamer connection status:' + status);
 	},
 
 	getLsClient() {
