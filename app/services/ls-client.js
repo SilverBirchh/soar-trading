@@ -1,17 +1,17 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-	// TODO: Write unit tests and change session retrieve
 	lsClient: null,
+	session: Ember.inject.service('session'),
 
 	connectToLs() {
 		// Retrieve given sesion
-		const session = JSON.parse(localStorage.getItem('ember_simple_auth:session'));
+		const session = this.get('session');
 		// Instantiate Lightstreamer client instance
-		const lsClient = new Lightstreamer.LightstreamerClient(session.authenticated.lsEndPoint);
+		const lsClient = new Lightstreamer.LightstreamerClient(session.session.content.authenticated.lsEndPoint);
 		// Set up login credentials
-		lsClient.connectionDetails.setUser(session.authenticated.currentAccountId);
-		let password = `CST-${session.authenticated.cstToken}|XST-${session.authenticated.ssoToken}`;
+		lsClient.connectionDetails.setUser(session.session.content.authenticated.currentAccountId);
+		let password = `CST-${session.session.content.authenticated.cstToken}|XST-${session.session.content.authenticated.ssoToken}`;
 		lsClient.connectionDetails.setPassword(password);
 
 		// Add connection event listener callback functions

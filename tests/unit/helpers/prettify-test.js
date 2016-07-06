@@ -11,7 +11,7 @@ import {
 describe('PrettifyHelper', function() {
   // Replace this with your real tests.
   it('works', function() {
-    let result = prettify(42);
-    expect(result).to.be.ok;
+    let result = prettify(['GOOD_TILL_CANCELLED']);
+    expect(result).to.be.equal('GTC');
   });
 });
