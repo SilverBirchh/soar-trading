@@ -23,15 +23,15 @@
      };
 
      var bodyParams = {
-       "dealId": position.dealId,
-       "epic": null,
-       "expiry": null,
-       "direction": direction,
-       "size": size,
-       "level": null,
-       "orderType": "MARKET",
-       "timeInForce": null,
-       "quoteId": null
+       dealId: position.dealId,
+       epic: null,
+       expiry: null,
+       direction: direction,
+       size: size,
+       level: null,
+       orderType: "MARKET",
+       timeInForce: null,
+       quoteId: null
      };
      req.body = JSON.stringify(bodyParams);
 
