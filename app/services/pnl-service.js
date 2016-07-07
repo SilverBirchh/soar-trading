@@ -1,75 +1,60 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-	lsClient: Ember.inject.service('ls-client'),
-	session: Ember.inject.service('session'),
+  lsClient: Ember.inject.service('ls-client'),
 
-	getPnl(epic, direction, openLevel, dealSize) {
-		// TODO: TEST
-		const marketData = {
-			'pnl': '0',
-			'latest': '0'
-		};
-		const latestDirection = (direction === 'BUY') ? ['BID'] : ['OFFER'];
-		const clientLs = this.get('lsClient').getLsClient();
-		const market = [`MARKET:${epic}`];
-		var subscription = new Lightstreamer.Subscription(
-			"MERGE", market, latestDirection
-		);
-		subscription.setRequestedSnapshot("yes");
+  subscribe(epic, direction, callback) {
+    const latestDirection = (direction === 'BUY') ? ['BID'] : ['OFFER'];
+    const clientLs = this.get('lsClient').getLsClient();
+    const market = [`MARKET:${epic}`];
+    var subscription = new Lightstreamer.Subscription(
+      "MERGE", market, latestDirection
+    );
+    subscription.setRequestedSnapshot("yes");
 		subscription.addListener({
-			onSubscription: function() {
-				console.log('subscribed for pnl service');
-			},
-			onUnsubscription: function() {
-				console.log('unsubscribed for pnl service');
-			},
-			onSubscriptionError: function(code, message) {
-				console.log('subscription failure: ' + code + " message: " + message);
-			},
-			onItemUpdate: function(info) {
-				info.forEachField(function(fieldName, fieldPos, value) {
-					Ember.set(marketData, 'latest', value);
-					if (direction === 'BUY') {
-						Ember.set(marketData, 'pnl', ((value - openLevel) * dealSize).toFixed(2));
-					} else {
-						Ember.set(marketData, 'pnl', ((openLevel - value) * dealSize).toFixed(2));
-					}
-				});
-			},
+			onItemUpdate: callback
 		});
-		clientLs.subscribe(subscription);
-		return marketData;
-	},
+    clientLs.subscribe(subscription);
+  },
 
-	getLatest(epic, direction) {
-		const marketData = {
-			'latest': '0',
-		};
-		const latestDirection = (direction === 'BUY') ? ['OFFER'] : ['BID'];
-		const clientLs = this.get('lsClient').getLsClient();
-		const market = [`MARKET:${epic}`];
-		var subscription = new Lightstreamer.Subscription(
-			"MERGE", market, latestDirection
-		);
-		subscription.setRequestedSnapshot("yes");
-		subscription.addListener({
-			onSubscription: function() {
-				console.log('subscribed for pnl service');
-			},
-			onUnsubscription: function() {
-				console.log('unsubscribed for pnl service');
-			},
-			onSubscriptionError: function(code, message) {
-				console.log('subscription failure: ' + code + " message: " + message);
-			},
-			onItemUpdate: function(info) {
-				info.forEachField(function(fieldName, fieldPos, value) {
-					Ember.set(marketData, 'latest', value);
-				});
-			},
-		});
-		clientLs.subscribe(subscription);
-		return marketData;
-	}
+  getLatest(epic, direction) {
+    const marketData = {
+      'latest': '0',
+    };
+    const latestDirection = (direction === 'BUY') ? ['OFFER'] : ['BID'];
+    const clientLs = this.get('lsClient').getLsClient();
+    const market = [`MARKET:${epic}`];
+    var subscription = new Lightstreamer.Subscription(
+      "MERGE", market, latestDirection
+    );
+    subscription.setRequestedSnapshot("yes");
+    subscription.addListener({
+      onSubscription: this.get('onSubscription'),
+      onUnsubscription: this.get('onUnsubscription'),
+      onSubscriptionError: this.get('onSubscriptionError'),
+      onItemUpdate: function(info) {
+        info.forEachField(function(fieldName, fieldPos, value) {
+          Ember.set(marketData, 'latest', value);
+        });
+      },
+    });
+    clientLs.subscribe(subscription);
+    return marketData;
+  },
+  onSubscription() {
+    return console.log('pnl service subscription service started.');
+  },
+  onUnsubscription() {
+    return console.log('pnl service unsubscribe');
+  },
+  onSubscriptionError(code, message) {
+    return console.log(`pnl service error: ${message} with code: ${code}.`);
+  },
+  calculatePnl(direction, latest, openLevel, dealSize) {
+    if (direction === 'BUY') {
+      return ((latest - openLevel) * dealSize).toFixed(2);
+    } else {
+      return ((openLevel - latest) * dealSize).toFixed(2);
+    }
+  }
 });

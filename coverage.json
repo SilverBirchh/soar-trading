@@ -1,18 +1,18 @@
 {
   "stats": {
     "suites": 140,
-    "tests": 178,
+    "tests": 183,
     "passes": 0,
     "pending": 0,
-    "failures": 178,
-    "start": "2016-07-07T10:08:22.171Z",
-    "end": "2016-07-07T10:08:25.794Z"
+    "failures": 183,
+    "start": "2016-07-07T10:34:14.490Z",
+    "end": "2016-07-07T10:34:18.135Z"
   },
   "coverage": {
     "total": {
-      "statementsTotal": 468,
-      "statementsCovered": 273,
-      "percentage": 58.33
+      "statementsTotal": 465,
+      "statementsCovered": 294,
+      "percentage": 63.23
     },
     "files": [
       {
@@ -305,9 +305,9 @@
       },
       {
         "name": "soar-trading/services/pnl-service",
-        "statementsTotal": 33,
-        "statementsCovered": 2,
-        "percentage": 6.06
+        "statementsTotal": 30,
+        "statementsCovered": 23,
+        "percentage": 76.67
       },
       {
         "name": "soar-trading/services/search-service",
