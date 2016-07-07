@@ -45,7 +45,6 @@ describeModule(
     it('logs when listener starts', sinon.test(function() {
       let service = this.subject();
       sinon.spy(console, 'log');
-      service.session = session;
 
       service.onListenStart();
       expect(console.log).to.be.called;
@@ -55,9 +54,7 @@ describeModule(
     it('logs a status change', sinon.test(function() {
       let service = this.subject();
       sinon.spy(console, 'log');
-      service.session = session;
 
-      Lightstreamer = createLs();
       service.onStatusChange('Streaming');
       expect(console.log).to.be.called;
       console.log.restore();

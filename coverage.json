@@ -1,18 +1,18 @@
 {
   "stats": {
     "suites": 140,
-    "tests": 169,
+    "tests": 173,
     "passes": 0,
     "pending": 0,
-    "failures": 169,
-    "start": "2016-07-07T07:31:07.609Z",
-    "end": "2016-07-07T07:31:11.045Z"
+    "failures": 173,
+    "start": "2016-07-07T09:21:29.970Z",
+    "end": "2016-07-07T09:21:33.520Z"
   },
   "coverage": {
     "total": {
       "statementsTotal": 468,
-      "statementsCovered": 242,
-      "percentage": 51.71
+      "statementsCovered": 254,
+      "percentage": 54.27
     },
     "files": [
       {
@@ -282,8 +282,8 @@
       {
         "name": "soar-trading/services/balance-service",
         "statementsTotal": 16,
-        "statementsCovered": 2,
-        "percentage": 12.5
+        "statementsCovered": 14,
+        "percentage": 87.5
       },
       {
         "name": "soar-trading/services/confirm-service",
