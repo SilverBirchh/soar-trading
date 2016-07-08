@@ -29,7 +29,7 @@ export default Ember.Component.extend({
         latest,
         this.get('item.position.openLevel'),
         this.get('item.position.dealSize')
-      )
+      );
       this.get('item').setProperties({
         latest,
         pnl

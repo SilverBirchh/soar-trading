@@ -64,7 +64,7 @@
        headers: req.headers,
        async: false,
      }).then(function(response, status, data) {
-       callback(response)
+       callback(response);
      });
    }
  });
