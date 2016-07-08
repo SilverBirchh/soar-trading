@@ -5,14 +5,14 @@
     "passes": 0,
     "pending": 0,
     "failures": 183,
-    "start": "2016-07-07T10:34:14.490Z",
-    "end": "2016-07-07T10:34:18.135Z"
+    "start": "2016-07-08T08:27:46.411Z",
+    "end": "2016-07-08T08:27:50.425Z"
   },
   "coverage": {
     "total": {
-      "statementsTotal": 465,
-      "statementsCovered": 294,
-      "percentage": 63.23
+      "statementsTotal": 464,
+      "statementsCovered": 283,
+      "percentage": 60.99
     },
     "files": [
       {
@@ -185,8 +185,20 @@
       },
       {
         "name": "soar-trading/components/position-row",
-        "statementsTotal": 12,
-        "statementsCovered": 12,
+        "statementsTotal": 22,
+        "statementsCovered": 3,
+        "percentage": 13.64
+      },
+      {
+        "name": "soar-trading/services/pnl-service",
+        "statementsTotal": 26,
+        "statementsCovered": 21,
+        "percentage": 80.77
+      },
+      {
+        "name": "soar-trading/services/ls-client",
+        "statementsTotal": 13,
+        "statementsCovered": 13,
         "percentage": 100
       },
       {
@@ -227,9 +239,9 @@
       },
       {
         "name": "soar-trading/models/position",
-        "statementsTotal": 9,
+        "statementsTotal": 2,
         "statementsCovered": 2,
-        "percentage": 22.22
+        "percentage": 100
       },
       {
         "name": "soar-trading/models/search",
@@ -296,18 +308,6 @@
         "statementsTotal": 21,
         "statementsCovered": 21,
         "percentage": 100
-      },
-      {
-        "name": "soar-trading/services/ls-client",
-        "statementsTotal": 13,
-        "statementsCovered": 13,
-        "percentage": 100
-      },
-      {
-        "name": "soar-trading/services/pnl-service",
-        "statementsTotal": 30,
-        "statementsCovered": 23,
-        "percentage": 76.67
       },
       {
         "name": "soar-trading/services/search-service",

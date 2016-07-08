@@ -9,6 +9,7 @@ import {
   it
 } from 'ember-mocha';
 import createLs from '../../helpers/create-ls';
+import sinon from 'sinon';
 
 describeModule(
   'service:pnl-service',
