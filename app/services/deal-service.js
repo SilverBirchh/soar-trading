@@ -43,10 +43,7 @@
      });
    },
 
-   closeOrder: function(dealId) {
-     const confirm = {
-       'dealRef': null,
-     };
+   closeOrder: function(dealId, callback) {
      const session = this.get('session');
      let req = {};
      req.url = `https://demo-api.ig.com/gateway/deal/workingorders/otc/${dealId}`;
@@ -67,8 +64,7 @@
        headers: req.headers,
        async: false,
      }).then(function(response, status, data) {
-       Ember.set(confirm, 'dealRef', response.dealReference);
+       callback(response)
      });
-     return confirm;
    }
  });

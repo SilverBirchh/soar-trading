@@ -10,12 +10,13 @@ export default Ember.Route.extend({
 		this.get('store').unloadAll('workingorder');
 		this.refresh();
 	},
+	onDelete(response) {
+		this.get('store').unloadAll('workingorder');
+		this.refresh();
+	},
 	actions: {
 		delete(item) {
-			const dealService = this.get('dealService');
-			dealService.closeOrder(item.dealId);
-			this.get('store').unloadAll('workingorder');
-			this.refresh();
+			this.get('dealService').closeOrder(item.dealId, this.onDelete.bind(this));
 		}
 	}
 });
