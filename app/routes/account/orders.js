@@ -10,7 +10,7 @@ export default Ember.Route.extend({
 		this.get('store').unloadAll('workingorder');
 		this.refresh();
 	},
-	onDelete(response) {
+	onDelete(/*response*/) {
 		this.get('store').unloadAll('workingorder');
 		this.refresh();
 	},

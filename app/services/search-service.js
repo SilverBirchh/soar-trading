@@ -5,12 +5,8 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   session: Ember.inject.service('session'),
 
-  search(market) {
+  search(market, callback) {
     const session = this.get('session');
-    let results = {
-      raw: [],
-      streamingItems: []
-    };
     let search = market.replace(/[^\w\s]/gi, '');
 
     var req = {};
@@ -32,28 +28,7 @@ export default Ember.Service.extend({
       async: false,
       mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
     }).then(function(response, status, data) {
-      for (var i = 0; i < response.markets.length; i++) {
-        var marketsData = response.markets[i];
-        marketsData.tidyEpic = marketsData.epic.replace(/\./g, "_");
-        marketsData.tidyExpiry = marketsData.expiry.replace(/ /g, "");
-        marketsData.state = null;
-        if (marketsData.marketStatus === 'EDITS_ONLY') {
-          marketsData.state = 'assets/images/edit.png';
-        } else if (marketsData.marketStatus === 'TRADEABLE') {
-          marketsData.state = 'assets/images/open.png';
-        } else {
-          marketsData.state = 'assets/images/close.png';
-        }
-
-        if (results.raw.length > 30) {
-          break;
-        }
-        results.raw.push(marketsData);
-        if (marketsData.streamingPricesAvailable) {
-          results.streamingItems.push("L1:" + marketsData.epic);
-        }
-      }
+      callback(response);
     });
-    return results;
   },
 });
