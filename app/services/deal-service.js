@@ -4,10 +4,7 @@
  export default Ember.Service.extend({
    session: Ember.inject.service('session'),
 
-   closePosition: function(position, size) {
-     const confirm = {
-       'dealRef': null,
-     };
+   closePosition: function(position, size, callback) {
      const session = this.get('session');
      const direction = (position.direction === 'BUY') ? 'SELL' : 'BUY';
      let req = {};
@@ -42,9 +39,8 @@
        headers: req.headers,
        async: false,
      }).then(function(response, status, data) {
-       Ember.set(confirm, 'dealRef', response.dealReference);
+       callback(response, position, size);
      });
-     return confirm;
    },
 
    closeOrder: function(dealId) {
