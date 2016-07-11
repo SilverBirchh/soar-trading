@@ -10,7 +10,6 @@ export default Ember.Service.extend({
     var subscription = new Lightstreamer.Subscription(
       "MERGE", market, latestDirection
     );
-    subscription.setRequestedSnapshot("yes");
     subscription.addListener({
       onItemUpdate: callback
     });
