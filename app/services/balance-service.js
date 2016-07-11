@@ -11,7 +11,6 @@ export default Ember.Service.extend({
     var subscription = new Lightstreamer.Subscription(
       "MERGE", accountID, fields
     );
-    subscription.setRequestedSnapshot("yes");
     subscription.addListener({
       onItemUpdate: callback
     });

@@ -60,22 +60,6 @@ describeModule(
       expect(JSON.parse(ajax.getCall(0).args[0].data).direction).to.be.equal('BUY');
     }));
 
-    it('returns a dealReference', sinon.test(function() {
-      let service = this.subject();
-      service.session = session;
-
-      this.stub($, 'ajax').returns({
-        then(fn) {
-          fn({
-            dealReference: 'QWEQWE'
-          }, true, true);
-        }
-      });
-      expect(service.closePosition(mockPosition, mockSize)).to.deep.equal({
-        dealRef: 'QWEQWE'
-      });
-    }));
-
     it('calls WO endpoint', sinon.test(function() {
       let service = this.subject();
       service.session = session;
@@ -86,10 +70,9 @@ describeModule(
       sinon.assert.calledOnce(ajax);
     }));
 
-    it('returns a dealReference', sinon.test(function() {
+    it('calls the callback when closing a position', sinon.test(function() {
       let service = this.subject();
       service.session = session;
-
       this.stub($, 'ajax').returns({
         then(fn) {
           fn({
@@ -97,9 +80,26 @@ describeModule(
           }, true, true);
         }
       });
-      expect(service.closeOrder(mockDealId)).to.deep.equal({
-        dealRef: 'QWEQWE'
+      let call = sinon.spy();
+
+      service.closePosition('BUY', 2, call);
+      sinon.assert.calledOnce(call);
+    }));
+
+    it('calls the callback when closing a WO', sinon.test(function() {
+      let service = this.subject();
+      service.session = session;
+      this.stub($, 'ajax').returns({
+        then(fn) {
+          fn({
+            dealReference: 'QWEQWE'
+          }, true, true);
+        }
       });
+      let call = sinon.spy();
+
+      service.closeOrder('BUY', call);
+      sinon.assert.calledOnce(call);
     }));
   }
 );
