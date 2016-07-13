@@ -1,4 +1,6 @@
 /* jshint expr:true */
+/*jshint unused:false*/
+
 import {
   expect
 } from 'chai';
@@ -8,6 +10,16 @@ import {
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import createLs from '../../helpers/create-ls';
+import {
+	beforeEach,
+} from 'mocha';
+
+const mockPnlService = Ember.Service.extend({
+  subscribe: function() {
+    return true;
+  }
+});
 
 describeComponent(
   'position-row',
@@ -31,6 +43,12 @@ describeComponent(
         pnl: '0'
       }
     };
+
+    beforeEach(function() {
+      this.register('service:pnl-service', mockPnlService);
+      this.inject.service('pnl-service', { as: 'pnlService' });
+      let Lightstreamer = createLs();
+    });
 
     it('renders', function() {
       this.set('item', item);

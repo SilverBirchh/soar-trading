@@ -5,14 +5,14 @@
     "passes": 0,
     "pending": 0,
     "failures": 185,
-    "start": "2016-07-11T11:16:30.392Z",
-    "end": "2016-07-11T11:16:34.070Z"
+    "start": "2016-07-13T12:02:51.768Z",
+    "end": "2016-07-13T12:02:55.593Z"
   },
   "coverage": {
     "total": {
       "statementsTotal": 439,
-      "statementsCovered": 292,
-      "percentage": 66.51
+      "statementsCovered": 302,
+      "percentage": 68.79
     },
     "files": [
       {
@@ -184,28 +184,10 @@
         "percentage": 50
       },
       {
-        "name": "soar-trading/services/balance-service",
-        "statementsTotal": 8,
-        "statementsCovered": 8,
-        "percentage": 100
-      },
-      {
-        "name": "soar-trading/services/ls-client",
-        "statementsTotal": 13,
-        "statementsCovered": 13,
-        "percentage": 100
-      },
-      {
         "name": "soar-trading/components/position-row",
         "statementsTotal": 22,
-        "statementsCovered": 3,
-        "percentage": 13.64
-      },
-      {
-        "name": "soar-trading/services/pnl-service",
-        "statementsTotal": 11,
-        "statementsCovered": 11,
-        "percentage": 100
+        "statementsCovered": 13,
+        "percentage": 59.09
       },
       {
         "name": "soar-trading/components/result-row",
@@ -298,6 +280,12 @@
         "percentage": 28.57
       },
       {
+        "name": "soar-trading/services/balance-service",
+        "statementsTotal": 8,
+        "statementsCovered": 8,
+        "percentage": 100
+      },
+      {
         "name": "soar-trading/services/confirm-service",
         "statementsTotal": 8,
         "statementsCovered": 8,
@@ -307,6 +295,18 @@
         "name": "soar-trading/services/deal-service",
         "statementsTotal": 17,
         "statementsCovered": 17,
+        "percentage": 100
+      },
+      {
+        "name": "soar-trading/services/ls-client",
+        "statementsTotal": 13,
+        "statementsCovered": 13,
+        "percentage": 100
+      },
+      {
+        "name": "soar-trading/services/pnl-service",
+        "statementsTotal": 11,
+        "statementsCovered": 11,
         "percentage": 100
       },
       {
