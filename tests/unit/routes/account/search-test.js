@@ -17,5 +17,10 @@ describeModule(
       let route = this.subject();
       expect(route).to.be.ok;
     });
+
+    it('can has a deactivate hook to unsubscribe', function() {
+      let route = this.subject();
+      route.deactivate();
+    });
   }
 );
