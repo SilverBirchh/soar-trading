@@ -12,22 +12,22 @@ export default Ember.Route.extend({
   }),
 
   model: function() {
-    new Egg("s,n,a,c,k", () => {
-      this.set('session.session.content.authenticated.currentAccountId', 'Scooby Doo');
-    }).listen();
-
-    new Egg("b,a,t,m,a,n", () => {
-      Ember.$('body').css("background", "url(assets/images/app.jpg) no-repeat center center fixed");
-      Ember.$('body').css("background-size", "cover");
-      Ember.$('div').css("background", "transparent");
-      Ember.$('h1').css("color", "white");
-      Ember.$('p').css("color", "white");
-    }).listen();
+    // new Egg("s,n,a,c,k", () => {
+    //   this.set('session.session.content.authenticated.currentAccountId', 'Scooby Doo');
+    // }).listen();
+    //
+    // new Egg("b,a,t,m,a,n", () => {
+    //   Ember.$('body').css("background", "url(assets/images/app.jpg) no-repeat center center fixed");
+    //   Ember.$('body').css("background-size", "cover");
+    //   Ember.$('div').css("background", "transparent");
+    //   Ember.$('h1').css("color", "white");
+    //   Ember.$('p').css("color", "white");
+    // }).listen();
 
     return this.store.findAll('search');
   },
   deactivate() {
-    this.send('unsubscribe');
+    this.unsubscribe();
   },
   onSearch(response) {
     for (var i = 0; i < response.markets.length; i++) {
@@ -94,30 +94,30 @@ export default Ember.Route.extend({
       search.save();
     });
   },
-  updateStore(search, fieldName, newValue) {
-    let oldValue = search.get(fieldName);
+  updateStore(store, fieldName, newValue) {
+    let oldValue = store.get(fieldName);
     let change = (newValue > oldValue ? 'rise' : 'fall');
-    search.set(`${fieldName.toLowerCase()}Change`, change);
-    search.set(fieldName, newValue);
+    store.set(`${fieldName.toLowerCase()}Change`, change);
+    store.set(fieldName, newValue);
     Ember.run.later(this, function() {
-      search.set(`${fieldName.toLowerCase()}Change`, null);
+      store.set(`${fieldName.toLowerCase()}Change`, null);
     }, 300);
+  },
+  unsubscribe() {
+    if (this.get('subscription')) {
+      const clientLs = this.get('lsClient').getLsClient();
+      clientLs.unsubscribe(this.get('subscription'));
+      this.get('results.raw').clear();
+      this.get('results.streamingItems').clear();
+      this.get('store').unloadAll('search');
+      this.set('subscription', null);
+    }
   },
 
   actions: {
-    unsubscribe() {
-      if (this.get('subscription')) {
-        const clientLs = this.get('lsClient').getLsClient();
-        clientLs.unsubscribe(this.get('subscription'));
-        this.get('results.raw').clear();
-        this.get('results.streamingItems').clear();
-        this.get('store').unloadAll('search');
-        this.set('subscription', null);
-      }
-    },
     search(market) {
       if (market.length <= 2) {
-        this.send('unsubscribe');
+        this.unsubscribe();
         return;
       }
       if (this._timer) {
@@ -125,7 +125,7 @@ export default Ember.Route.extend({
       }
       this._timer = Ember.run.later(this, function() {
         Ember.run.cancel(this._timer);
-        this.send('unsubscribe');
+        this.unsubscribe();
         this.get('search').search(market, this.onSearch.bind(this));
       }, 300);
     }
