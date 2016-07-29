@@ -4,10 +4,7 @@ import Ember from 'ember';
 export default Ember.Service.extend({
 	session: Ember.inject.service('session'),
 
-	confirm: function(dealRef) {
-		const confirm = {
-			'state': null,
-		};
+	confirm: function(dealRef, position, size, callback) {
 		const session = this.get('session');
 		let req = {};
 		req.url = `https://demo-api.ig.com/gateway/deal/confirms/${dealRef}`;
@@ -26,8 +23,7 @@ export default Ember.Service.extend({
 			headers: req.headers,
 			async: false,
 		}).then(function(response, status, data) {
-			Ember.set(confirm, 'state', response.dealStatus);
+			callback(response, position, size);
 		});
-		return confirm;
 	}
 });

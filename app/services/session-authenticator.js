@@ -2,7 +2,6 @@ import Ember from 'ember';
 import config from '../config/environment';
 
 export default Ember.Service.extend({
-	// TODO: Write unit tests 
 	name: 'sessionAuthenticator',
 	session: Ember.inject.service(),
 

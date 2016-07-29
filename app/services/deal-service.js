@@ -4,10 +4,7 @@
  export default Ember.Service.extend({
    session: Ember.inject.service('session'),
 
-   closePosition: function(position, size) {
-     const confirm = {
-       'dealRef': null,
-     };
+   closePosition: function(position, size, callback) {
      const session = this.get('session');
      const direction = (position.direction === 'BUY') ? 'SELL' : 'BUY';
      let req = {};
@@ -23,15 +20,15 @@
      };
 
      var bodyParams = {
-       "dealId": position.dealId,
-       "epic": null,
-       "expiry": null,
-       "direction": direction,
-       "size": size,
-       "level": null,
-       "orderType": "MARKET",
-       "timeInForce": null,
-       "quoteId": null
+       dealId: position.dealId,
+       epic: null,
+       expiry: null,
+       direction: direction,
+       size: size,
+       level: null,
+       orderType: "MARKET",
+       timeInForce: null,
+       quoteId: null
      };
      req.body = JSON.stringify(bodyParams);
 
@@ -42,15 +39,11 @@
        headers: req.headers,
        async: false,
      }).then(function(response, status, data) {
-       Ember.set(confirm, 'dealRef', response.dealReference);
+       callback(response, position, size);
      });
-     return confirm;
    },
 
-   closeOrder: function(dealId) {
-     const confirm = {
-       'dealRef': null,
-     };
+   closeOrder: function(dealId, callback) {
      const session = this.get('session');
      let req = {};
      req.url = `https://demo-api.ig.com/gateway/deal/workingorders/otc/${dealId}`;
@@ -71,8 +64,7 @@
        headers: req.headers,
        async: false,
      }).then(function(response, status, data) {
-       Ember.set(confirm, 'dealRef', response.dealReference);
+       callback(response);
      });
-     return confirm;
    }
  });

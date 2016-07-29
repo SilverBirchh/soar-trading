@@ -1,29 +1,34 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-	dealService: Ember.inject.service('deal-service'),
-	confirmService: Ember.inject.service('confirm-service'),
-	notify: Ember.inject.service('notify'),
-	model: function() {
-		return this.store.findAll('position');
-	},
-	deactivate: function() {
-		this.get('store').unloadAll('position');
-	},
+  dealService: Ember.inject.service('deal-service'),
+  confirmService: Ember.inject.service('confirm-service'),
+  notify: Ember.inject.service('notify'),
+  model: function() {
+    return this.store.findAll('position');
+  },
+  deactivate: function() {
+    this.get('store').unloadAll('position');
+    this.refresh();
+  },
+  onClose(response, position, size) {
+    this.get('confirmService').confirm(response.dealReference, position, size, this.onConfirm.bind(this));
+  },
+  onConfirm(response, position, size) {
+    if (size.toString() === position.dealSize.toString() && response.dealStatus === "ACCEPTED") {
+      this.get('store').unloadAll('position');
+    }
+    this.refresh();
+    if (response.dealStatus === "ACCEPTED") {
+      this.get('notify').success(response.dealStatus);
+    } else {
+      this.get('notify').error(response.dealStatus);
+    }
+  },
 
-	actions: {
-		close(position, size) {
-			const dealRef = this.get('dealService').closePosition(position, size);
-			const dealPassed = this.get('confirmService').confirm(dealRef.dealRef);
-			if (size.toString() === position.dealSize.toString() && dealPassed.state === "ACCEPTED") {
-				this.get('store').unloadAll('position');
-			}
-			this.refresh();
-			if (dealPassed.state === "ACCEPTED") {
-				this.get('notify').success(dealPassed.state);
-			} else {
-				this.get('notify').error(dealPassed.state);
-			}
-		}
-	}
+  actions: {
+    close(position, size) {
+      this.get('dealService').closePosition(position, size, this.onClose.bind(this));
+    }
+  }
 });

@@ -2,6 +2,7 @@
 
 module.exports = function(environment) {
 	var ENV = {
+		LOG_STACKTRACE_ON_DEPRECATION: false,
 		pace: {
 			theme: 'minimal',
     	color: 'blue',
