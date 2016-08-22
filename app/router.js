@@ -6,15 +6,21 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route("404", { path: "*path"});
+  this.route("404", {
+    path: "*path"
+  });
   this.route('members', function() {
-    this.route('login', { path: "/login"});
+    this.route('login', {
+      path: "/login"
+    });
   });
   this.route('account', function() {
     this.route('overview');
     this.route('positions');
     this.route('orders');
-    this.route('search');
+    this.route('search', function() {
+      this.route('deal');
+    });
   });
 });
 
