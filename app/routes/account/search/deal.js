@@ -10,5 +10,8 @@ export default Ember.Route.extend({
         this.transitionTo('/account/search');
       }
     },
+    changeDirection() {
+      this.set('dealNow', !this.get('dealNow'));
+    },
   }
 });
