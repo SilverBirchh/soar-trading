@@ -68,7 +68,48 @@
      });
   },
 
-   openPosition({ direction, size, stop, stopType, limit }) {
-      console.log('third');
+   openPosition(market, dealParams) {
+     const session = this.get('session');
+     let req = {};
+     req.url = 'https://demo-api.ig.com/gateway/deal/positions/otc';
+     req.headers = {
+       "Content-Type": "application/json; charset=UTF-8",
+       "Accept": "application/json; charset=UTF-8",
+       "X-IG-API-KEY": session.session.content.authenticated.api,
+       "CST": session.session.content.authenticated.cstToken,
+       "X-SECURITY-TOKEN": session.session.content.authenticated.ssoToken,
+       "Version": 1,
+       "_method": "DELETE"
+     };
+
+     var bodyParams = {};
+     bodyParams["epic"] = market.epic;
+     bodyParams["expiry"] = market.expiry;
+     bodyParams["direction"] = direction.toUpperCase();
+     bodyParams["size"] = size;
+     bodyParams["orderType"] = 'MARKET';
+     bodyParams["timeInForce"] = null;
+     bodyParams["level"] = null;
+     bodyParams["guaranteedStop"] = false;
+     bodyParams["stopLevel"] = null;
+     bodyParams["stopDistance"] = null;
+     bodyParams["trailingStop"] = false;
+     bodyParams["trailingStopIncrement"] = null;
+     bodyParams["forceOpen"] = false;
+     bodyParams["limitLevel"] = null;
+     bodyParams["limitDistance"] = null;
+     bodyParams["quoteId"] = null;
+     bodyParams["currencyCode"] = 'GBP';
+     req.body = JSON.stringify(bodyParams);
+
+     Ember.$.ajax({
+       type: 'POST',
+       url: req.url,
+       data: req.body,
+       headers: req.headers,
+       async: false,
+     }).then(function(response, status, data) {
+       callback(response, position, size);
+     });
    }
  });

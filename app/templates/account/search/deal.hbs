@@ -23,7 +23,7 @@
 		{{outlet}}
 	</div>
 	{{#if dealNow}}
-		{{deal-now isBuy=isBuy}}
+		{{deal-now isBuy=isBuy openPosition="openPosition"}}
 	{{else}}
 		{{order-later}}
 	{{/if}}

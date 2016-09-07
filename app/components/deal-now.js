@@ -1,24 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  dealService: Ember.inject.service('deal-service'),
-
   isBuy: null,
   size: null,
   validSize: Ember.computed.gte('size', 0.1),
   stop: null,
-  stopType: null,
+  stopType: 'normal',
   limit: null,
 
   isDisabled: Ember.computed.not('validSize'),
-
-  onDeal() {
-
-  },
-
-  onConfirm() {
-
-  },
 
   actions: {
     changeStop(type) {
@@ -26,12 +16,11 @@ export default Ember.Component.extend({
     },
 
     openPosition() {
-      console.log('I AM CALLED');
-      this.get('dealService').openPosition({
+      this.sendAction('openPosition', {
         direction: this.get('isBuy'),
         size: this.get('size'),
         stop: this.get('stop'),
-        stopType: this.get('sizeType'),
+        stopType: this.get('stopType'),
         limit: this.get('limit'),
       });
     }
