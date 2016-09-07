@@ -66,5 +66,9 @@
      }).then(function(response, status, data) {
        callback(response);
      });
+  },
+
+   openPosition({ direction, size, stop, stopType, limit }) {
+      console.log('third');
    }
  });
