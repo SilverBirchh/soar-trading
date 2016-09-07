@@ -68,7 +68,8 @@
      });
   },
 
-   openPosition(market, dealParams) {
+   openPosition(dealParams, callback) {
+     console.log(dealParams)
      const session = this.get('session');
      let req = {};
      req.url = 'https://demo-api.ig.com/gateway/deal/positions/otc';
@@ -78,15 +79,14 @@
        "X-IG-API-KEY": session.session.content.authenticated.api,
        "CST": session.session.content.authenticated.cstToken,
        "X-SECURITY-TOKEN": session.session.content.authenticated.ssoToken,
-       "Version": 1,
-       "_method": "DELETE"
+       "Version": 2,
      };
 
      var bodyParams = {};
-     bodyParams["epic"] = market.epic;
-     bodyParams["expiry"] = market.expiry;
-     bodyParams["direction"] = direction.toUpperCase();
-     bodyParams["size"] = size;
+     bodyParams["epic"] = dealParams.epic;
+     bodyParams["expiry"] = dealParams.expiry;
+     bodyParams["direction"] = dealParams.direction ? 'BUY' : 'SELL';
+     bodyParams["size"] = dealParams.size;
      bodyParams["orderType"] = 'MARKET';
      bodyParams["timeInForce"] = null;
      bodyParams["level"] = null;
@@ -109,7 +109,7 @@
        headers: req.headers,
        async: false,
      }).then(function(response, status, data) {
-       callback(response, position, size);
+       callback(response, status, data);
      });
    }
  });
