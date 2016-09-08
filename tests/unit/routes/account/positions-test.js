@@ -34,5 +34,22 @@ describeModule(
       sinon.assert.calledOnce(stub);
     });
 
+    it('unloads all on deactivate', function() {
+      let route = this.subject();
+      let stub = sinon.stub(route.store, 'unloadAll');
+      sinon.stub(route, 'refresh');
+      route.deactivate();
+      sinon.assert.calledOnce(stub);
+    });
+
+    it('confirms on close', function() {
+      let route = this.subject();
+      let confirmService = {
+        confirm: sinon.spy()
+      }
+      route.onClose();
+      sinon.assert.calledOnce(confirmService.confirm);
+    });
+
   }
 );
