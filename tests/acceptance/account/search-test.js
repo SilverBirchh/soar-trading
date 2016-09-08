@@ -42,7 +42,7 @@ describe('Acceptance: AccountSearch', function() {
     visit('/account/search');
 
     andThen(function() {
-      expect(currentPath()).to.equal('account.search');
+      expect(currentPath()).to.equal('account.search.index');
     });
   });
 });

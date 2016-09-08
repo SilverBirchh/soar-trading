@@ -11,10 +11,6 @@ export default Ember.Component.extend({
   isDisabled: Ember.computed.not('validSize'),
 
   actions: {
-    changeStop(type) {
-
-    },
-
     openPosition() {
       this.sendAction('openPosition', {
         direction: this.get('isBuy'),

@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
   dealNow: true,
   isBuy: true,
 
-  onDeal(response, status, data) {
+  onDeal(response /*status, data*/) {
     this.get('confirmService').confirm(response.dealReference, null, null, this.onConfirm.bind(this));
   },
 
@@ -33,6 +33,12 @@ export default Ember.Controller.extend({
       dealParams.expiry = this.get('market.expiry');
       dealParams.direction = this.get('isBuy') ? 'buy' : 'sell';
       this.get('dealService').openPosition(dealParams, this.onDeal.bind(this));
+    },
+    workingOrder(dealParams) {
+      dealParams.epic = this.get('market.epic');
+      dealParams.expiry = this.get('market.expiry');
+      dealParams.direction = this.get('isBuy') ? 'buy' : 'sell';
+      this.get('dealService').workingOrder(dealParams, this.onDeal.bind(this));
     }
   }
 });
