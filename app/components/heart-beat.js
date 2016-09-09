@@ -26,6 +26,7 @@ export default Ember.Component.extend({
       },
       onUnsubscription() {
           _this.set('time', 'Heartbeat stopped.');
+          _this.init();
       }
     });
     clientLs.subscribe(subscription);

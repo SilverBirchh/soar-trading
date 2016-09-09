@@ -11,6 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	},
 	activate: function() {
 		const store = this.store;
+    let _this = this;
 		const clientLs = this.get('lsClient').getLsClient();
 
 		const fields = ['PNL', 'EQUITY', 'FUNDS', 'MARGIN', 'AVAILABLE_TO_DEAL'];
@@ -39,6 +40,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 					account.save();
 				});
 			},
+      onUnsubscription() {
+          _this.activate();
+      }
 		});
 		clientLs.subscribe(subscription);
 	},

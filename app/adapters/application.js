@@ -7,7 +7,7 @@ export default DS.RESTAdapter.extend({
   host: Ember.computed('session.authToken', function() {
     return this.get('session.session.content.authenticated.apiHost');
   }),
-  headers: Ember.computed('session.authToken', function() {
+  headers: Ember.computed('session.authToken', 'session.session.content.authenticated.ssoToken', function() {
     const session = this.get('session');
     return {
       "Content-Type": "application/json; charset=UTF-8",

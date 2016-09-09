@@ -20,6 +20,7 @@ export default Ember.Service.extend({
 		lsClient.addListener({
 			onListenStart: this.get('onListenStart'),
 			onStatusChange: this.get('onStatusChange'),
+      onListenEnd: this.get('onStatusChange')
 		});
 
 		// Connect to Lightstreamer
@@ -34,6 +35,11 @@ export default Ember.Service.extend({
 	onStatusChange(status) {
 		return console.log('Lightstreamer connection status:' + status);
 	},
+
+  restart() {
+    this.get('lsClient').disconnect();
+		this.connectToLs();
+  },
 
 	getLsClient() {
 		return this.get('lsClient');

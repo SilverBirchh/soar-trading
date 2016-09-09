@@ -197,7 +197,7 @@ p.info {
 
 .white {
   color: #EFECEA;
-  padding: 5px 5px 0 5px;
+  padding: 5px 5px 0;
 }
 
 .block {
@@ -220,5 +220,9 @@ p.info {
 
 a.blue {
   padding-top: 17px;
-  color: #EFECEA !important;;
+  color: #EFECEA !important;
+}
+
+.inline-block {
+  display: inline-block;
 }

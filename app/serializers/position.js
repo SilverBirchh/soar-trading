@@ -3,6 +3,7 @@ import Ember from 'ember';
 
 export default DS.RESTSerializer.extend({
 	normalizePayload: function(payload) {
+    console.log(payload);
 		const result = [];
 		payload.positions.forEach(function(obj, index) {
 			obj['id'] = index;
