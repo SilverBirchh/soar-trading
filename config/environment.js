@@ -33,7 +33,7 @@ module.exports = function(environment) {
 		}
 	};
 	ENV['ember-simple-auth'] = {
-		authenticationRoute: '/members/login',
+		authenticationRoute: '/',
 		routeAfterAuthentication: '/account',
 		routeIfAlreadyAuthenticated: '/account',
 	};

@@ -9,11 +9,6 @@ Router.map(function() {
   this.route("404", {
     path: "*path"
   });
-  this.route('members', function() {
-    this.route('login', {
-      path: "/login"
-    });
-  });
   this.route('account', function() {
     this.route('overview');
     this.route('positions');
