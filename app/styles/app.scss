@@ -196,7 +196,8 @@ p.info {
 }
 
 .white {
-  color: white;
+  color: #EFECEA;
+  padding: 5px 5px 0 5px;
 }
 
 .block {
@@ -205,9 +206,19 @@ p.info {
 
 .no-pad {
   padding-left: 0;
-padding-right: 0;
+  padding-right: 0;
 }
 
 .no-margin {
   margin: 0;
+}
+
+.navbar-inverse {
+  background-color: #004A55;
+  border-color: #004A55;
+}
+
+a.blue {
+  padding-top: 17px;
+  color: #EFECEA !important;;
 }
