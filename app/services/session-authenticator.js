@@ -50,12 +50,12 @@ export default Ember.Service.extend({
 		let cst = jqXHR.getResponseHeader('CST');
 		let sso = jqXHR.getResponseHeader('X-SECURITY-TOKEN');
 		localStorage.setItem('api', authData.api);
-
 		let responseData = {
 			apiHost: config.APP.api.apiHost,
 			authenticator: 'authenticator:application',
 			clientId: response.clientId,
 			currentAccountId: response.currentAccountId,
+      accounts: response.accounts,
 			lsEndPoint: response.lightstreamerEndpoint,
 			cstToken: cst,
 			ssoToken: sso,

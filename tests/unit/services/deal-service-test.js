@@ -101,5 +101,50 @@ describeModule(
       service.closeOrder('BUY', call);
       sinon.assert.calledOnce(call);
     }));
+
+    it('calls the callback when opening a position', sinon.test(function() {
+      let service = this.subject();
+      service.session = session;
+      this.stub($, 'ajax').returns({
+        then(fn) {
+          fn({
+            dealReference: 'QWEQWE'
+          }, true, true);
+        }
+      });
+      let call = sinon.spy();
+
+      service.openPosition({
+        epic: 'XYZXYZ',
+        expiry: 'DFB',
+        direction: true,
+        size: 1,
+      }, call);
+      sinon.assert.calledOnce(call);
+    }));
+
+    it('calls the callback when opening a WO', sinon.test(function() {
+      let service = this.subject();
+      service.session = session;
+      this.stub($, 'ajax').returns({
+        then(fn) {
+          fn({
+            dealReference: 'QWEQWE'
+          }, true, true);
+        }
+      });
+      let call = sinon.spy();
+
+      service.workingOrder({
+        epic: 'XYZXYZ',
+        expiry: 'DFB',
+        direction: true,
+        size: 1,
+        level: 1000,
+        goodTill: 'Cancelled',
+        goodTillDate: null,
+      }, call);
+      sinon.assert.calledOnce(call);
+    }));
   }
 );

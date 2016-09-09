@@ -61,6 +61,8 @@ export default Ember.Route.extend({
           id: i.toString(),
           type: 'search',
           attributes: {
+            epic: this.get('results.raw')[i].epic,
+            expiry: this.get('results.raw')[i].expiry,
             instrumentName: this.get('results.raw')[i].instrumentName,
             state: this.get('results.raw')[i].state,
             tidyExpiry: this.get('results.raw')[i].tidyExpiry,
@@ -128,6 +130,11 @@ export default Ember.Route.extend({
         this.unsubscribe();
         this.get('search').search(market, this.onSearch.bind(this));
       }, 300);
+    },
+    deal(result) {
+      console.log(result);
+      this.transitionTo('account.search.deal');
+      this.controllerFor('account.search.deal').set('market', result);
     }
   }
 });

@@ -6,8 +6,8 @@ import {
 } from 'ember-mocha';
 
 describeModule(
-  'route:members/login',
-  'MembersLoginRoute',
+  'route:account/search/deal',
+  'AccountSearchDealRoute',
   {
     // Specify the other units that are required for this test.
     // needs: ['controller:foo']
