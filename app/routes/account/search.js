@@ -132,7 +132,6 @@ export default Ember.Route.extend({
       }, 300);
     },
     deal(result) {
-      console.log(result);
       this.transitionTo('account.search.deal');
       this.controllerFor('account.search.deal').set('market', result);
     }

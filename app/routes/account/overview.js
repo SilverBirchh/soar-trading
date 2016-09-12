@@ -10,7 +10,6 @@ export default Ember.Route.extend({
   },
 
   onSwitch(id, response, status, data) {
-    debugger;
     this.set('session.session.content.authenticated.currentAccountId', id);
     this.set('session.session.content.authenticated.ssoToken', data.getResponseHeader('X-SECURITY-TOKEN'));
     this.get('lsClient').restart(true);

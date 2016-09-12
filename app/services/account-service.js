@@ -4,7 +4,6 @@ export default Ember.Service.extend({
   session: Ember.inject.service('session'),
 
   switch (id, callback) {
-    console.log(id);
     const session = this.get('session');
     let req = {};
     req.url = 'https://demo-api.ig.com/gateway/deal/session';
@@ -30,7 +29,6 @@ export default Ember.Service.extend({
       headers: req.headers,
       async: false,
     }).then(function(response, status, data) {
-      debugger;
       callback(id, ...arguments);
     });
   }

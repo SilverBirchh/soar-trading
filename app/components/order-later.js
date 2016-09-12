@@ -25,7 +25,6 @@ export default Ember.Component.extend({
     },
     selectDate(value) {
       this.set('goodTillDate', new Date(value).getTime());
-      console.log(this.get('goodTillDate'));
     },
     workingOrder() {
       this.sendAction('workingOrder', {

@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Service.extend({
 	lsClient: null,
 	session: Ember.inject.service('session'),
+	routing: Ember.inject.service('-routing'),
 
 	connectToLs() {
 		// Retrieve given sesion
@@ -18,9 +19,10 @@ export default Ember.Service.extend({
 		// Note: the Lightstreamer library will transparently attempt to reconnect a number of times
 		// in the event of communication errors
 		lsClient.addListener({
-			onListenStart: this.get('onListenStart'),
-			onStatusChange: this.get('onStatusChange'),
-      onListenEnd: this.get('onStatusChange')
+			onListenStart: this.get('onListenStart').bind(this),
+			onStatusChange: this.get('onStatusChange').bind(this),
+      onListenEnd: this.get('restart').bind(this),
+			onServerError: this.get('serverError').bind(this),
 		});
 
 		// Connect to Lightstreamer
@@ -28,18 +30,24 @@ export default Ember.Service.extend({
 		this.set('lsClient', lsClient);
 	},
 
+	restart() {
+		console.log('Restarting..');
+		this.get('lsClient').disconnect();
+		this.connectToLs();
+	},
+
 	onListenStart() {
 		return console.log('ListenStart');
 	},
 
-	onStatusChange(status) {
-		return console.log('Lightstreamer connection status:' + status);
+	serverError(errorCode, errorMessage) {
+		console.log('Lightstreamer connection status:' + errorMessage);
+		this.restart();
 	},
 
-  restart() {
-    this.get('lsClient').disconnect();
-		this.connectToLs();
-  },
+	onStatusChange(status) {
+		console.log('Lightstreamer connection status:' + status);
+	},
 
 	getLsClient() {
 		return this.get('lsClient');
