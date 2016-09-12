@@ -1,29 +1,32 @@
 /* jshint expr:true */
-import { expect } from 'chai';
+import {
+  expect
+} from 'chai';
 import {
   describeComponent,
   it
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
+import createLs from '../../helpers/create-ls';
 
 describeComponent(
   'heart-beat',
-  'Integration: HeartBeatComponent',
-  {
+  'Integration: HeartBeatComponent', {
     integration: true
   },
   function() {
+    Lightstreamer = createLs();
     it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#heart-beat}}
-      //     template content
-      //   {{/heart-beat}}
-      // `);
-
-      this.render(hbs`{{heart-beat}}`);
+      this.set('clientLs', {
+        getLsClient() {
+          return {
+            subscribe() {
+              console.log('hi');
+            }
+          }
+        }
+      })
+      this.render(hbs `{{heart-beat clientLs=clientLs}}`);
       expect(this.$()).to.have.length(1);
     });
   }

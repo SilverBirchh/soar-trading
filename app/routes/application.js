@@ -22,7 +22,5 @@ export default Ember.Route.extend(ApplicationRouteMixin, App, {
     error() {
       this.get('session').invalidate();
     },
-
-
   }
 });

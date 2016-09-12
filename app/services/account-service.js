@@ -18,7 +18,7 @@ export default Ember.Service.extend({
 
     var bodyParams = {
       "accountId": id,
-      "defaultAccount": "false"
+      "defaultAccount": "true"
     };
     req.body = JSON.stringify(bodyParams);
 
