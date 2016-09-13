@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   search: Ember.inject.service('search-service'),
+  accountService: Ember.inject.service('account-service'),
   lsClient: Ember.inject.service('ls-client'),
   session: Ember.inject.service('session'),
   _timer: null,
@@ -10,6 +11,7 @@ export default Ember.Route.extend({
     raw: [],
     streamingItems: []
   }),
+  viewingWatchlist: false,
 
   model: function() {
     // new Egg("s,n,a,c,k", () => {
@@ -111,9 +113,13 @@ export default Ember.Route.extend({
       clientLs.unsubscribe(this.get('subscription'));
       this.get('results.raw').clear();
       this.get('results.streamingItems').clear();
+      this.set('viewingWatchlist', false);
       this.get('store').unloadAll('search');
       this.set('subscription', null);
     }
+  },
+  onGetWatchlist(response) {
+    this.set('watchlists', response.watchlists);
   },
 
   actions: {
@@ -131,9 +137,17 @@ export default Ember.Route.extend({
         this.get('search').search(market, this.onSearch.bind(this));
       }, 300);
     },
+    viewWatchlist() {
+      this.get('accountService').getWatchLists(null, this.onGetWatchlist.bind(this))
+    },
     deal(result) {
       this.transitionTo('account.search.deal');
       this.controllerFor('account.search.deal').set('market', result);
+    },
+    viewWatchlistMarkets(response) {
+      this.set('viewingWatchlist', true);
+      this.unsubscribe();
+      return this.get('accountService').getWatchLists(response, this.onSearch.bind(this));
     }
   }
 });

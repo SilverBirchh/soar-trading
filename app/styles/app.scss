@@ -106,7 +106,7 @@ body {
   border-radius: 3px;
 }
 
-#custom-search-input button {
+#custom-search-input .search {
   border: 0;
   background: none;
   /** belows styles are working good */
@@ -120,6 +120,17 @@ body {
   color: #D9230F;
   z-index: 3;
   outline: 0;
+}
+
+#custom-search-input .watchlists-button {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+  margin-top: -4px;
+  /* margin-left: 10px; */
+  left: 41px;
+  position: relative;
+  z-index: 4;
 }
 
 .jumbotron {
@@ -225,4 +236,16 @@ a.blue {
 
 .inline-block {
   display: inline-block;
+}
+
+.flex-con{
+  display: inline-flex;
+    flex-wrap: wrap;
+}
+a.flexable {
+  flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 30%;
+    border-radius: 0px !important;
+    cursor: pointer;
 }
