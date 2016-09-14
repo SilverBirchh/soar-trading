@@ -31,13 +31,14 @@ describe('Acceptance: AccountSearch', function() {
   });
 
   it('can visit /account/search', function() {
-    visit('/members/login');
+    visit('/');
     authenticateSession(application, {
       userId: 1,
       lsEndPoint: 'mock',
       currentAccountId: 'ABCABC',
       cstToken: '123123',
-      ssoToken: 'ssosso'
+      ssoToken: 'ssosso',
+      accounts: []
     });
     visit('/account/search');
 

@@ -21,14 +21,14 @@ import Ember from 'ember';
 let lsMock = Ember.Service.extend({
 	lsClient: {
 		subscribe() {
-			console.log('mock');
+			return 1;
 		}
 	},
 	connectToLs: function() {
 		console.log("Acceptance Mock!");
 	},
 	getLsClient: function() {
-		return this.get('lsClient');
+		return 'lsClient';
 	},
 });
 
@@ -46,27 +46,13 @@ describe('Acceptance: Login - The different login flows', function() {
 		destroyApp(application);
 	});
 
-	it('can login and redirct to account page', function() {
-		visit('/members/login');
-		authenticateSession(application, {
-			userId: 1,
-			lsEndPoint: 'mock',
-			currentAccountId: 'ABCABC',
-			cstToken: '123123',
-			ssoToken: 'ssosso'
-		});
-		andThen(function() {
-			expect(currentPath()).to.equal('account.index');
-		});
-	});
-
 	it('can login and then not access login page', function() {
-		visit('/members/login');
+		visit('/');
 		authenticateSession(application, {
 			userId: 1,
 			otherData: 'some-data'
 		});
-		visit('/members/login');
+		visit('');
 		andThen(function() {
 			expect(currentPath()).to.equal('index');
 		});

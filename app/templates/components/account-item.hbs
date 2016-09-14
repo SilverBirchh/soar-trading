@@ -1,6 +1,9 @@
 <div class="panel panel-default feature-item">
 	<div class="panel-heading">
-		<h3 class="panel-title">{{item.id}}{{#if item.preferred}} - Preferred{{/if}}</h3>
+		<h3 class="panel-title inline-block">{{item.id}}{{#if item.preferred}} - Preferred{{/if}} {{#if item.active}} - Active{{/if}}</h3>
+		{{#unless item.active}}
+			<button type="button" class="btn btn-primary btn-xs pull-right" {{action 'switchAccount' item.id}}>Switch</button>
+		{{/unless}}
 	</div>
 	<div class="panel-body">
 		<div class="row">

@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   }),
   setUpSubscription: function() {
     this.get('pnlService')
-      .subscribe(this.get('item.market.epic'), this.get('item.position.direction'), this.onPnlUpdate.bind(this));
+      .subscribe(this.get('item.market.epic'), this.get('item.position.direction'), this.onPnlUpdate.bind(this), this.setUpSubscription.bind(this));
   }.on('init'),
   isDisabled: Ember.computed('size', function() {
     const position = this.get('item.position');

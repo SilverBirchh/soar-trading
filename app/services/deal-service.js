@@ -113,7 +113,6 @@
    },
 
    workingOrder(dealParams, callback) {
-     console.log(dealParams);
      const session = this.get('session');
      let req = {};
      req.url = 'https://demo-api.ig.com/gateway/deal/workingorders/otc';

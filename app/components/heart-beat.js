@@ -8,7 +8,6 @@ export default Ember.Component.extend({
     this._super(...arguments);
     const _this = this;
     const clientLs = this.get('lsClient').getLsClient();
-
     const fields = ['HEARTBEAT'];
 
     var subscription = new Lightstreamer.Subscription(
@@ -26,6 +25,7 @@ export default Ember.Component.extend({
       },
       onUnsubscription() {
           _this.set('time', 'Heartbeat stopped.');
+          _this.init();
       }
     });
     clientLs.subscribe(subscription);
