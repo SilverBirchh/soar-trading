@@ -46,7 +46,7 @@ describeModule(
       let route = this.subject();
       let confirmService = {
         confirm: sinon.spy()
-      }
+      };
       route.onClose();
       sinon.assert.calledOnce(confirmService.confirm);
     });

@@ -138,7 +138,7 @@ export default Ember.Route.extend({
       }, 300);
     },
     viewWatchlist() {
-      this.get('accountService').getWatchLists(null, this.onGetWatchlist.bind(this))
+      this.get('accountService').getWatchLists(null, this.onGetWatchlist.bind(this));
     },
     deal(result) {
       this.transitionTo('account.search.deal');

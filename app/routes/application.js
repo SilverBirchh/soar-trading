@@ -8,7 +8,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, App, {
   activate: function() {
     const _this = this;
 
-    $(window).on('beforeunload', () => {
+    Ember.$(window).on('beforeunload', () => {
       _this.get('session').invalidate();
     });
   },

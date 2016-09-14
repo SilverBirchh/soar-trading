@@ -1,4 +1,5 @@
 /* jshint expr:true */
+/* jshint unused:vars */
 import {
   expect
 } from 'chai';
@@ -7,7 +8,7 @@ import {
   it
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-import createLs from '../../helpers/create-ls';
+// import createLs from '../../helpers/create-ls';
 
 describeComponent(
   'heart-beat',
@@ -15,7 +16,7 @@ describeComponent(
     integration: true
   },
   function() {
-    Lightstreamer = createLs();
+    //let Lightstreamer = createLs();
     it('renders', function() {
       this.set('clientLs', {
         getLsClient() {
@@ -23,9 +24,9 @@ describeComponent(
             subscribe() {
               console.log('hi');
             }
-          }
+          };
         }
-      })
+      });
       this.render(hbs `{{heart-beat clientLs=clientLs}}`);
       expect(this.$()).to.have.length(1);
     });

@@ -6,7 +6,6 @@ export default Ember.Service.extend({
 
   subscribe(accountId, callback, failure) {
     const clientLs = this.get('lsClient').getLsClient();
-    let _this = this;
     const fields = ['PNL', 'EQUITY', 'FUNDS', 'MARGIN', 'AVAILABLE_TO_DEAL'];
     const accountID = `ACCOUNT:${accountId}`;
     var subscription = new Lightstreamer.Subscription(
