@@ -14,18 +14,6 @@ export default Ember.Route.extend({
   viewingWatchlist: false,
 
   model: function() {
-    // new Egg("s,n,a,c,k", () => {
-    //   this.set('session.session.content.authenticated.currentAccountId', 'Scooby Doo');
-    // }).listen();
-    //
-    // new Egg("b,a,t,m,a,n", () => {
-    //   Ember.$('body').css("background", "url(assets/images/app.jpg) no-repeat center center fixed");
-    //   Ember.$('body').css("background-size", "cover");
-    //   Ember.$('div').css("background", "transparent");
-    //   Ember.$('h1').css("color", "white");
-    //   Ember.$('p').css("color", "white");
-    // }).listen();
-
     return this.store.findAll('search');
   },
   deactivate() {

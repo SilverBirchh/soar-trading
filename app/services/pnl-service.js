@@ -16,11 +16,4 @@ export default Ember.Service.extend({
     });
     clientLs.subscribe(subscription);
   },
-  calculatePnl(direction, latest, openLevel, dealSize) {
-    if (direction === 'BUY') {
-      return ((latest - openLevel) * dealSize).toFixed(2);
-    } else {
-      return ((openLevel - latest) * dealSize).toFixed(2);
-    }
-  }
 });
