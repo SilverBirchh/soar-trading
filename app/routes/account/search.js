@@ -70,6 +70,7 @@ export default Ember.Route.extend({
     this.set('subscription', new Lightstreamer.Subscription(
       "MERGE", this.get('results.streamingItems'), ["BID", "OFFER"]
     ));
+    this.get('subscription').setRequestedMaxFrequency(0.5);
     this.get('subscription').setRequestedSnapshot("yes");
     this.get('subscription').addListener({
       onItemUpdate: callback
