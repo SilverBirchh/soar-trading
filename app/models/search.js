@@ -52,16 +52,16 @@ export default DS.Model.extend({
   OFFER: DS.attr(),
 
   /*
-   * Amount change of old bid price and bid price when an update occurs
+   * If the change in old value and new value is a rise or fall
    * @public
-   * @Number
+   * @String
    */
   bidChange: DS.attr(),
 
   /*
-   * Amount change of old offer price and offer price when an update occurs
+   * If the change in old value and new value is a rise or fall
    * @public
-   * @Number
+   * @String
    */
   offerChange: DS.attr(),
 });

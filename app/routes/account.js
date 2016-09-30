@@ -2,13 +2,36 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  /*
+   * LightStreamer service
+   * @public
+   * @{service}
+   */
 	lsClient: Ember.inject.service('ls-client'),
+
+  /*
+   * Session service
+   * @public
+   * @{service}
+   */
 	session: Ember.inject.service('session'),
+
+  /*
+   * before the authenticated root is loaded we connect to LightStreamer so we
+   * can create subscriptions
+   * @public
+   */
 	beforeModel() {
 		const service = this.get('lsClient');
 		service.connectToLs();
 		this._super(...arguments);
 	},
+
+	/*
+   * Occurs after beforeModel. Create a new subscription for account values
+	 * Any updates are pushed to a localStorage store which acts as the database
+   * @public
+   */
 	activate: function() {
 		const store = this.store;
     let _this = this;
@@ -46,6 +69,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		});
 		clientLs.subscribe(subscription);
 	},
+
+  /*
+   * Overrides model hook to return the correct model for the route.
+   * @public
+   * @{active-account}
+   */
 	model: function() {
 		return this.store.findAll('active-account');
 	},
