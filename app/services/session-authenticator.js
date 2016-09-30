@@ -2,9 +2,27 @@ import Ember from 'ember';
 import config from '../config/environment';
 
 export default Ember.Service.extend({
+  /*
+   * Name of the authenticator (Used when this is called)
+   * @public
+   * @{String}
+   */
 	name: 'sessionAuthenticator',
+
+  /*
+   * session service
+   * @public
+   * @{service}
+   */
 	session: Ember.inject.service(),
 
+  /*
+   * AJAX login call
+   * @public
+   * @param {Object} authData
+   * @param {Object} resolve
+	 * @param {Object} reject
+   */
 	authenticate(authData, resolve, reject) {
 		let requestHeaders = this.getRequestHeaders(authData);
 
@@ -16,6 +34,12 @@ export default Ember.Service.extend({
 			});
 		}, this.handleAuthRejection.bind(this, reject));
 	},
+
+  /*
+   * Creates headers for login AJAX call
+   * @public
+   * @param {Object} authData
+   */
 	getRequestHeaders(authData) {
 		let apiHost = config.APP.api.apiHost;
 		let requestHeaders = {
@@ -37,15 +61,35 @@ export default Ember.Service.extend({
 
 		return requestHeaders;
 	},
+
+  /*
+   * rejects the authentication Promise
+   * @public
+   * @param {Object} reject
+   */
 	handleAuthRejection(reject) {
 		let session = this.get('session');
 		session.set('authenticationFailed', true);
 		reject();
 	},
+
+  /*
+   * Resets a authentication
+   * @public
+   */
 	resetInvalidSessionState() {
 		let session = this.get('session');
 		session.set('authenticationFailed', null);
 	},
+
+  /*
+   * Resolves the authentication promise sending back the correct response data
+   * @public
+   * @param {Object} authData
+   * @param {Object} resolve
+   * @param {Object} response
+   * @param {Object} jqXHR
+   */
 	handleAuthSuccess(authData, resolve, response, jqXHR) {
 		let cst = jqXHR.getResponseHeader('CST');
 		let sso = jqXHR.getResponseHeader('X-SECURITY-TOKEN');

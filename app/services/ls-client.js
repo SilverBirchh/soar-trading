@@ -1,10 +1,24 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+  /*
+   * LightStreamer Object...Eventually
+   * @public
+   * @{Obect}
+   */
 	lsClient: null,
-	session: Ember.inject.service('session'),
-	routing: Ember.inject.service('-routing'),
 
+  /*
+   * session service
+   * @public
+   * @{service}
+   */
+	session: Ember.inject.service('session'),
+
+  /*
+   * Makes the initial connection to LightStreamer
+   * @public
+   */
 	connectToLs() {
 		// Retrieve given sesion
 		const session = this.get('session');
@@ -30,25 +44,47 @@ export default Ember.Service.extend({
 		this.set('lsClient', lsClient);
 	},
 
+	/*
+   * Disconnects from LS and then tries to reconnect. Used when there is a LS
+	 * error.
+   * @public
+   */
 	restart() {
 		console.log('Restarting..');
 		this.get('lsClient').disconnect();
 		this.connectToLs();
 	},
 
+	/*
+   * Logs a listener is starting
+   * @public
+   */
 	onListenStart() {
 		return console.log('ListenStart');
 	},
 
+	/*
+   * Logs a LS server error and restarts LS
+   * @public
+   */
 	serverError(errorCode, errorMessage) {
 		console.log('Lightstreamer connection status:' + errorMessage);
 		this.restart();
 	},
 
+	/*
+   * Logs a status chanage
+   * @public
+   */
 	onStatusChange(status) {
 		console.log('Lightstreamer connection status:' + status);
 	},
 
+	/*
+   * Getter for lsClient
+   * @public
+	 * @returns {Object} lsClient
+   */
 	getLsClient() {
 		return this.get('lsClient');
 	}
