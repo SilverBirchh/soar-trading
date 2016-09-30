@@ -7,15 +7,17 @@
         <span class="input-group-btn">
           <button class="btn btn-danger search" type="button">
           <span class="glyphicon glyphicon-search"></span>
-          <button type="button" class="btn btn-success watchlists-button" {{action "viewWatchlist"}}>Watchlists</button>
+        <button type="button" class="btn btn-success watchlists-button" {{action "viewWatchlist"}}>Watchlists</button>
         </button>
         </span>
       </div>
     </div>
   </div>
 </div>
-<div class="list-group flex-con">
-  {{#each watchlists as |list|}}
-    <a class="list-group-item flexable" {{action "viewWatchlistMarkets" list.id}}>{{list.name}}</a>
-  {{/each}}
-</div>
+{{#if showWatchlists}}
+  <div class="list-group flex-con">
+    {{#each watchlists as |list|}}
+      <a class="list-group-item flexable" {{action "viewWatchlistMarkets" list.id}}>{{list.name}}</a>
+    {{/each}}
+  </div>
+{{/if}}

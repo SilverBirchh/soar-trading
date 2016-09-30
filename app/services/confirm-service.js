@@ -2,8 +2,22 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+  /*
+   * session service
+   * @public
+   * @{service}
+   */
 	session: Ember.inject.service('session'),
 
+
+  /*
+   * AJAX call to confirm a trade
+   * @public
+   * @param {String} dealRef - passed through to confirm the trade
+   * @param {Object} postion - passed on to the callback
+   * @param {Nunber} size - passed on to the callback
+   * @param {Object} callback - method to call to deal with a field update
+   */
 	confirm: function(dealRef, position, size, callback) {
 		const session = this.get('session');
 		let req = {};

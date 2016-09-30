@@ -2,8 +2,20 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+
+  /*
+   * session service
+   * @public
+   * @{service}
+   */
   session: Ember.inject.service('session'),
 
+  /*
+   * AJAX call to switch accounts
+   * @public
+   * @param {String} id - Account Id to switch to
+   * @param {Object} callback - method to call when AJAX call returns
+   */
   switch (id, callback) {
     const session = this.get('session');
     let req = {};
@@ -33,7 +45,13 @@ export default Ember.Service.extend({
       callback(id, ...arguments);
     });
   },
-
+  /*
+   * AJAX retrieve watchlists. With no id passed through array of watchlists is
+   * returned. With a watchlist ID the marekts within the list is returned.
+   * @public
+   * @param {String} id - Optional. Watchlist Id
+   * @param {Object} callback - method to call when AJAX call returns
+   */
   getWatchLists(id, callback) {
     const session = this.get('session');
     let req = {};

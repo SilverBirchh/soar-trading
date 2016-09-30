@@ -1,36 +1,91 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  /*
+   * search service
+   * @public
+   * @{service}
+   */
   search: Ember.inject.service('search-service'),
+
+  /*
+   * account service
+   * @public
+   * @{service}
+   */
   accountService: Ember.inject.service('account-service'),
+
+  /*
+   * LightStreamer service
+   * @public
+   * @{service}
+   */
   lsClient: Ember.inject.service('ls-client'),
+
+  /*
+   * session service
+   * @public
+   * @{service}
+   */
   session: Ember.inject.service('session'),
+
+  /*
+   * Timer for search
+   * @public
+   * @Ember.run.later
+   */
   _timer: null,
+
+  /*
+   * session service
+   * @public
+   * @{subscription}
+   */
   subscription: null,
+
+  /*
+   * Stores raw markets and streamable markets
+   * @public
+   * {Object}
+   */
   results: Ember.Object.create({
     raw: [],
     streamingItems: []
   }),
+
+  /*
+   * Flag to toggle view of watchlists
+   * @public
+   * @boolean
+   */
   viewingWatchlist: false,
 
+  /*
+   * Overrides model hook to return the correct model for the route.
+   * @public
+   * @{search}
+   */
   model: function() {
-    // new Egg("s,n,a,c,k", () => {
-    //   this.set('session.session.content.authenticated.currentAccountId', 'Scooby Doo');
-    // }).listen();
-    //
-    // new Egg("b,a,t,m,a,n", () => {
-    //   Ember.$('body').css("background", "url(assets/images/app.jpg) no-repeat center center fixed");
-    //   Ember.$('body').css("background-size", "cover");
-    //   Ember.$('div').css("background", "transparent");
-    //   Ember.$('h1').css("color", "white");
-    //   Ember.$('p').css("color", "white");
-    // }).listen();
-
     return this.store.findAll('search');
   },
+
+  /*
+   * unsubscribes to all streaming items in search when the route is exited
+   * @public
+   * @{search}
+   */
   deactivate() {
     this.unsubscribe();
   },
+
+  /*
+   * Callaback for search. Loops over each market in the response, creating
+   * extra properties and pushing them to raw results cache and streamable
+   * cache.
+   * Calls subscribe method afterwards.
+   * @public
+   * @param {Object} response - OBject from AJAX call
+   */
   onSearch(response) {
     for (var i = 0; i < response.markets.length; i++) {
       var marketsData = response.markets[i];
@@ -45,7 +100,7 @@ export default Ember.Route.extend({
         marketsData.state = 'assets/images/close.png';
       }
 
-      if (this.get('results.raw').length > 30) {
+      if (this.get('results.raw').length > 30) { // 40 item limit on subscrptions
         break;
       }
       this.get('results.raw').pushObject(marketsData);
@@ -55,6 +110,13 @@ export default Ember.Route.extend({
     }
     this.subscribe(this.onUpdate.bind(this));
   },
+
+  /*
+   * Inserts market data in to localStorage store.
+   * Creates a subscription to BID and OFFER on each market.
+   * @public
+   * @param callaback - method to call when there is an item update
+   */
   subscribe(callback) {
     const clientLs = this.get('lsClient').getLsClient();
     for (let i = 0; i < this.get('results.raw').length; i++) {
@@ -82,15 +144,22 @@ export default Ember.Route.extend({
     this.set('subscription', new Lightstreamer.Subscription(
       "MERGE", this.get('results.streamingItems'), ["BID", "OFFER"]
     ));
+    this.get('subscription').setRequestedMaxFrequency(0.5);
     this.get('subscription').setRequestedSnapshot("yes");
     this.get('subscription').addListener({
       onItemUpdate: callback
     });
     clientLs.subscribe(this.get('subscription'));
   },
+
+  /*
+   * Updates the search store when there is a change to s subscription value
+   * @public
+   * @param {Object} info
+   */
   onUpdate(info) {
     const store = this.store;
-    var i = info.getItemPos() - 1;
+    var i = info.getItemPos() - 1; // Store is zero index itemPos is not.
     store.find('search', i).then((search) => {
       info.forEachChangedField((fieldName, fieldPos, newValue) => {
         this.updateStore(search, fieldName, newValue);
@@ -98,6 +167,15 @@ export default Ember.Route.extend({
       search.save();
     });
   },
+
+  /*
+   * Calculates the value change of bid and offer and sets a string on the model
+   * This changes a class in the DOM to indicate the change.
+   * This is reset after 300ms
+   * @public
+   * @param {Object} store
+   * @param {String} fieldName
+   */
   updateStore(store, fieldName, newValue) {
     let oldValue = store.get(fieldName);
     let change = (newValue > oldValue ? 'rise' : 'fall');
@@ -107,6 +185,11 @@ export default Ember.Route.extend({
       store.set(`${fieldName.toLowerCase()}Change`, null);
     }, 300);
   },
+
+  /*
+   * unsubscribes to all streaming items in search and clears all local caches.
+   * @public
+   */
   unsubscribe() {
     if (this.get('subscription')) {
       const clientLs = this.get('lsClient').getLsClient();
@@ -118,11 +201,24 @@ export default Ember.Route.extend({
       this.set('subscription', null);
     }
   },
+
+  /*
+   * Sets the local watchlists array as the response from the AJAX call.
+   * @public
+   */
   onGetWatchlist(response) {
     this.set('watchlists', response.watchlists);
   },
 
   actions: {
+    /*
+     * Calls the search service to search for a market.
+     * If the search term is less than 2 characters the search is reset but nothing
+     * happens. The actual search action occurs 300ms to allow for more a longer
+     * string to be typed as this is triggered by the user typing.
+     * @public
+     * @param {String} Market - search term
+     */
     search(market) {
       if (market.length <= 2) {
         this.unsubscribe();
@@ -137,17 +233,34 @@ export default Ember.Route.extend({
         this.get('search').search(market, this.onSearch.bind(this));
       }, 300);
     },
+
+    /*
+     * Calls the Account service to retrieve all watchlists
+     * @public
+     */
     viewWatchlist() {
       this.get('accountService').getWatchLists(null, this.onGetWatchlist.bind(this));
     },
+
+    /*
+     * Transitons to the account/search/deal route passing to the controller the
+     * correct market object
+     * @public
+     */
     deal(result) {
       this.transitionTo('account.search.deal');
       this.controllerFor('account.search.deal').set('market', result);
     },
-    viewWatchlistMarkets(response) {
+
+    /*
+     * Calls account service with a watchlist id to get watchlist markets
+     * @public
+     * @param String id watchlist Id
+     */
+    viewWatchlistMarkets(id) {
       this.set('viewingWatchlist', true);
       this.unsubscribe();
-      return this.get('accountService').getWatchLists(response, this.onSearch.bind(this));
+      return this.get('accountService').getWatchLists(id, this.onSearch.bind(this));
     }
   }
 });

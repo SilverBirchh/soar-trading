@@ -2,8 +2,21 @@
  import Ember from 'ember';
 
  export default Ember.Service.extend({
+
+   /*
+    * session service
+    * @public
+    * @{service}
+    */
    session: Ember.inject.service('session'),
 
+   /*
+    * AJAX call to close a position
+    * @public
+    * @param {Object} postion - Positon Object you want to close
+    * @param {Number} size - closing size
+    * @param {Object} callback - method to call when AJAX call returns
+    */
    closePosition: function(position, size, callback) {
      const session = this.get('session');
      const direction = (position.direction === 'BUY') ? 'SELL' : 'BUY';
@@ -43,6 +56,12 @@
      });
    },
 
+   /*
+    * AJAX call to close a working order
+    * @public
+    * @param {String} dealId - Id of the working order. (Propert on WO Object)
+    * @param {Object} callback - method to call when AJAX call returns
+    */
    closeOrder: function(dealId, callback) {
      const session = this.get('session');
      let req = {};
@@ -68,6 +87,12 @@
      });
   },
 
+  /*
+   * AJAX call to open a position
+   * @public
+   * @param {Object} dealParams - Variables used to create the position
+   * @param {Object} callback - method to call when AJAX call returns
+   */
    openPosition(dealParams, callback) {
      const session = this.get('session');
      let req = {};
@@ -112,6 +137,12 @@
      });
    },
 
+   /*
+    * AJAX call to creat a working order
+    * @public
+    * @param {Object} dealParams - Variables used to create the position
+    * @param {Object} callback - method to call when AJAX call returns
+    */
    workingOrder(dealParams, callback) {
      const session = this.get('session');
      let req = {};
