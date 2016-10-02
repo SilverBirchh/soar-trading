@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 /*
  * Subscripes to LightStreamer Heartbeat updates to verify connection
- * Updating time for every update
+ * Updating time field for every update
  */
 export default Ember.Component.extend({
   lsClient: Ember.inject.service('ls-client'),
@@ -17,15 +17,11 @@ export default Ember.Component.extend({
     const _this = this;
     const clientLs = this.get('lsClient').getLsClient();
 
-    /*
-    * Field to subscribe to
-    */
+    // Field to subscribe to
     const fields = ['HEARTBEAT'];
 
-    /*
-    * mode, item and fields
-    * http://www.lightstreamer.com/docs/client_javascript_uni_api/Subscription.html
-    */
+    // mode, item and fields
+    // http://www.lightstreamer.com/docs/client_javascript_uni_api/Subscription.html
     const subscription = new Lightstreamer.Subscription(
       "MERGE", 'TRADE:HB.U.HEARTBEAT.IP', fields
     );

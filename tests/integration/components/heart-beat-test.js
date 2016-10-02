@@ -8,7 +8,17 @@ import {
   it
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-// import createLs from '../../helpers/create-ls';
+import Ember from 'ember';
+
+const mockLsService = Ember.Service.extend({
+  getLsClient: function() {
+    return {
+      subscribe: function() {
+        return true;
+      },
+    };
+  }
+});
 
 describeComponent(
   'heart-beat',
@@ -16,8 +26,9 @@ describeComponent(
     integration: true
   },
   function() {
-    //let Lightstreamer = createLs();
     it('renders', function() {
+      this.register('service:ls-client', mockLsService);
+      this.inject.service('ls-client', { as: 'lsClient' });
       this.set('clientLs', {
         getLsClient() {
           return {

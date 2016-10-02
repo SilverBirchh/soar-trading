@@ -32,6 +32,9 @@ export default function createLs() {
 			addListener: function() {
 				return true;
 			},
+			setRequestedMaxFrequency: function() {
+				return true;
+			}
 		};
 	};
 	return Lightstreamer;
