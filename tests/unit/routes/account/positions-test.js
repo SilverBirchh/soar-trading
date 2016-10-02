@@ -43,12 +43,14 @@ describeModule(
     });
 
     it('confirms on close', function() {
-      let route = this.subject();
-      let confirmService = {
-        confirm: sinon.spy()
-      };
-      route.onClose();
-      sinon.assert.calledOnce(confirmService.confirm);
+      let route = this.subject({
+        confirmService: {
+          confirm: sinon.stub(),
+        }
+      });
+      const response = { dealReference: '1234'};
+      route.onClose(response, true, true);
+      sinon.assert.calledOnce(route.confirmService.confirm);
     });
 
   }

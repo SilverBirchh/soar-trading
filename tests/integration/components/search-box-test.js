@@ -5,6 +5,13 @@ import {
   it
 } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
+
+const mockAccountService = Ember.Service.extend({
+  getWatchLists: function() {
+    return true;
+  }
+});
 
 describeComponent(
   'search-box',
@@ -14,15 +21,8 @@ describeComponent(
   },
   function() {
     it('renders', function() {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#search-box}}
-      //     template content
-      //   {{/search-box}}
-      // `);
-
+      this.register('service:account-service', mockAccountService);
+      this.inject.service('account-service', { as: 'accountService' });
       this.render(hbs`{{search-box}}`);
       expect(this.$()).to.have.length(1);
     });

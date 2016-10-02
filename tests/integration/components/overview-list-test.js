@@ -20,15 +20,16 @@ describeComponent(
 				session: {
 					content: {
 						authenticated: {
-							currentAccountId: 'ABCABC'
-						}
+							currentAccountId: 'ABCABC',
+							accounts: []
+						},
 					}
 				}
 			};
 			this.set('session', session);
 			this.render(hbs `{{overview-list session=session}}`);
       Ember.run(() => {
-        expect(this.$().text().trim()).to.be.equal('Trading Hub for ABCABC');
+        expect(this.$().text().trim()).to.be.equal('- ABCABC');
       });
 		});
 	}
