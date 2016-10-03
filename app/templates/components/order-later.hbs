@@ -12,7 +12,7 @@
     {{/each}}
   </select>
   {{#if showDatePicker}}
-  {{pikaday-input class="form-control" format="DD/MM/YYYY hh:mm:ss" onSelection=(action 'selectDate')}}
+  {{pikaday-input id="date-picker" class="form-control" format="DD/MM/YYYY hh:mm:ss" onSelection=(action 'selectDate')}}
   {{/if}}
 </div>
 <div class="input-group input-group-spaced btn-block">

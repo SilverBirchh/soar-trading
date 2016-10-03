@@ -1,9 +1,10 @@
 /* jshint expr:true */
-import { expect } from 'chai';
+//import { expect } from 'chai';
 import {
   describeModule,
   it
 } from 'ember-mocha';
+import sinon from 'sinon';
 
 describeModule(
   'route:account/overview',
@@ -13,9 +14,11 @@ describeModule(
     // needs: ['controller:foo']
   },
   function() {
-    it('exists', function() {
+    it('tries to call model', sinon.test(function() {
       let route = this.subject();
-      expect(route).to.be.ok;
-    });
+      let stub = sinon.stub(route.store, 'findAll');
+      route.model();
+      sinon.assert.calledOnce(stub);
+    }));
   }
 );

@@ -1,18 +1,18 @@
 {
   "stats": {
     "suites": 147,
-    "tests": 208,
+    "tests": 210,
     "passes": 0,
     "pending": 0,
-    "failures": 208,
-    "start": "2016-10-02T14:01:16.814Z",
-    "end": "2016-10-02T14:01:21.503Z"
+    "failures": 210,
+    "start": "2016-10-03T09:34:38.781Z",
+    "end": "2016-10-03T09:34:44.769Z"
   },
   "coverage": {
     "total": {
       "statementsTotal": 661,
-      "statementsCovered": 495,
-      "percentage": 74.89
+      "statementsCovered": 498,
+      "percentage": 75.34
     },
     "files": [
       {
@@ -222,14 +222,20 @@
       {
         "name": "soar-trading/components/order-later",
         "statementsTotal": 8,
-        "statementsCovered": 4,
-        "percentage": 50
+        "statementsCovered": 6,
+        "percentage": 75
       },
       {
         "name": "soar-trading/helpers/eq",
         "statementsTotal": 7,
         "statementsCovered": 5,
         "percentage": 71.43
+      },
+      {
+        "name": "soar-trading/components/pikaday-input",
+        "statementsTotal": 2,
+        "statementsCovered": 2,
+        "percentage": 100
       },
       {
         "name": "soar-trading/components/position-row",
@@ -288,8 +294,8 @@
       {
         "name": "soar-trading/routes/account/overview",
         "statementsTotal": 7,
-        "statementsCovered": 2,
-        "percentage": 28.57
+        "statementsCovered": 3,
+        "percentage": 42.86
       },
       {
         "name": "soar-trading/routes/account/positions",
@@ -379,12 +385,6 @@
         "name": "soar-trading/components/notification-message",
         "statementsTotal": 3,
         "statementsCovered": 3,
-        "percentage": 100
-      },
-      {
-        "name": "soar-trading/components/pikaday-input",
-        "statementsTotal": 2,
-        "statementsCovered": 2,
         "percentage": 100
       },
       {
