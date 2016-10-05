@@ -35,7 +35,7 @@ export default Ember.Component.extend({
 
     /*
      * authenticate initiates authenticator by calling the application authenticator.
-     * If this fails a warning message is shown
+     * @catch invalid user details. Informs user there hasbeen an issue.
      */
 		authenticate() {
 			this.set('hasResponseMessage', null);
