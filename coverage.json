@@ -1,18 +1,18 @@
 {
   "stats": {
-    "suites": 147,
-    "tests": 212,
+    "suites": 150,
+    "tests": 215,
     "passes": 0,
     "pending": 0,
-    "failures": 212,
-    "start": "2016-10-03T09:59:50.102Z",
-    "end": "2016-10-03T09:59:55.409Z"
+    "failures": 215,
+    "start": "2016-10-05T14:16:18.219Z",
+    "end": "2016-10-05T14:16:23.643Z"
   },
   "coverage": {
     "total": {
-      "statementsTotal": 661,
-      "statementsCovered": 503,
-      "percentage": 76.1
+      "statementsTotal": 681,
+      "statementsCovered": 516,
+      "percentage": 75.77
     },
     "files": [
       {
@@ -68,6 +68,12 @@
         "statementsTotal": 5,
         "statementsCovered": 5,
         "percentage": 100
+      },
+      {
+        "name": "soar-trading/mixins/sortable",
+        "statementsTotal": 7,
+        "statementsCovered": 2,
+        "percentage": 28.57
       },
       {
         "name": "soar-trading/router",
@@ -131,9 +137,15 @@
       },
       {
         "name": "soar-trading/components/members/login-panel",
-        "statementsTotal": 11,
-        "statementsCovered": 10,
-        "percentage": 90.91
+        "statementsTotal": 15,
+        "statementsCovered": 12,
+        "percentage": 80
+      },
+      {
+        "name": "soar-trading/helpers/eq",
+        "statementsTotal": 7,
+        "statementsCovered": 5,
+        "percentage": 71.43
       },
       {
         "name": "soar-trading/routes/account",
@@ -173,21 +185,21 @@
       },
       {
         "name": "soar-trading/routes/account/search",
-        "statementsTotal": 67,
+        "statementsTotal": 66,
         "statementsCovered": 48,
-        "percentage": 71.64
+        "percentage": 72.73
       },
       {
         "name": "soar-trading/services/search-service",
-        "statementsTotal": 10,
-        "statementsCovered": 10,
+        "statementsTotal": 11,
+        "statementsCovered": 11,
         "percentage": 100
       },
       {
         "name": "soar-trading/services/account-service",
-        "statementsTotal": 17,
-        "statementsCovered": 15,
-        "percentage": 88.24
+        "statementsTotal": 19,
+        "statementsCovered": 17,
+        "percentage": 89.47
       },
       {
         "name": "soar-trading/models/search",
@@ -203,9 +215,9 @@
       },
       {
         "name": "soar-trading/components/search-box",
-        "statementsTotal": 9,
+        "statementsTotal": 10,
         "statementsCovered": 3,
-        "percentage": 33.33
+        "percentage": 30
       },
       {
         "name": "soar-trading/components/account-item",
@@ -224,12 +236,6 @@
         "statementsTotal": 8,
         "statementsCovered": 6,
         "percentage": 75
-      },
-      {
-        "name": "soar-trading/helpers/eq",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
       },
       {
         "name": "soar-trading/components/pikaday-input",
@@ -329,14 +335,14 @@
       },
       {
         "name": "soar-trading/services/confirm-service",
-        "statementsTotal": 8,
-        "statementsCovered": 8,
+        "statementsTotal": 9,
+        "statementsCovered": 9,
         "percentage": 100
       },
       {
         "name": "soar-trading/services/deal-service",
-        "statementsTotal": 65,
-        "statementsCovered": 65,
+        "statementsTotal": 69,
+        "statementsCovered": 69,
         "percentage": 100
       },
       {
@@ -347,8 +353,8 @@
       },
       {
         "name": "soar-trading/services/session-authenticator",
-        "statementsTotal": 23,
-        "statementsCovered": 23,
+        "statementsTotal": 24,
+        "statementsCovered": 24,
         "percentage": 100
       },
       {

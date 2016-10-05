@@ -76,5 +76,37 @@ export default Ember.Service.extend({
     }).then(function(response, status, data) {
       callback(response);
     });
+  },
+
+  /*
+   * AJAX call to delete a watchlist
+   * @public
+   * @param {String} id - Watchlist to delete
+   * @param {Object} callback - method to call when AJAX call returns
+   */
+  deleteWatchlist(id, callback) {
+    const session = this.get('session');
+    const apiHost = session.session.content.authenticated.apiHost;
+    let req = {};
+    req.url = `${apiHost}/watchlists/${id}`;
+    req.headers = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "Accept": "application/json; charset=UTF-8",
+      "X-IG-API-KEY": session.session.content.authenticated.api,
+      "CST": session.session.content.authenticated.cstToken,
+      "X-SECURITY-TOKEN": session.session.content.authenticated.ssoToken,
+      "Version": 1,
+      "_method": "DELETE",
+    };
+
+    Ember.$.ajax({
+      type: 'GET',
+      url: req.url,
+      data: null,
+      headers: req.headers,
+      async: false,
+    }).then(function(response, status, data) {
+      callback(response);
+    });
   }
 });

@@ -17,7 +17,11 @@
 {{#if showWatchlists}}
   <div class="list-group flex-con">
     {{#each watchlists as |list|}}
-      <a class="list-group-item flexable" {{action "viewWatchlistMarkets" list.id}}>{{list.name}}</a>
+      <a class="list-group-item flexable" {{action "viewWatchlistMarkets" list.id}}>{{list.name}}
+        {{#if list.deleteable}}
+          <button type="button" class="btn btn-danger btn-xs pull-right" {{action 'deleteWatchlist' list.id}}>Delete</button>
+        {{/if}}
+      </a>
     {{/each}}
   </div>
 {{/if}}

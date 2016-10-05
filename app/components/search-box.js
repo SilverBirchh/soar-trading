@@ -3,10 +3,10 @@ import compare from '../mixins/sortable';
 export default Ember.Component.extend(compare, {
 
   /*
-  * Search term
-  * @public
-  * @String
-  */
+   * Search term
+   * @public
+   * @String
+   */
   market: '',
 
   /*
@@ -15,6 +15,13 @@ export default Ember.Component.extend(compare, {
    * @Object
    */
   accountService: Ember.inject.service('account-service'),
+
+  /*
+   * notify service
+   * @public
+   * @{service}
+   */
+  notify: Ember.inject.service('notify'),
 
   /*
    * Array of watchlists
@@ -36,8 +43,21 @@ export default Ember.Component.extend(compare, {
    * @public
    */
   onGetWatchlist(response) {
-    console.log('FHI MATE');
     this.set('watchlists', response.watchlists.sort(this.compare));
+  },
+
+  /*
+   * Sets local Watchlist array to the array from the AJAX response
+   * The response is sorted by name.
+   * @public
+   */
+  onDeleteWatchlist(response) {
+    if (response.status === "SUCCESS") {
+      this.get('notify').success(response.status);
+      this.getWatchlists();
+    } else {
+      this.get('notify').error(response.status);
+    }
   },
 
   /*
@@ -79,6 +99,16 @@ export default Ember.Component.extend(compare, {
      */
     viewWatchlistMarkets(id) {
       this.sendAction('viewWatchlistMarkets', id);
+    },
+
+
+    /*
+     * Sends action to the route to delete a watchlist
+     * (id)
+     * @public
+     */
+    deleteWatchlist(id) {
+      this.get('accountService').deleteWatchlist(id, this.onDeleteWatchlist.bind(this));
     }
   }
 });
