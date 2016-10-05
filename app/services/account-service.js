@@ -18,8 +18,9 @@ export default Ember.Service.extend({
    */
   switch (id, callback) {
     const session = this.get('session');
+    const apiHost = session.session.content.authenticated.apiHost;
     let req = {};
-    req.url = 'https://demo-api.ig.com/gateway/deal/session';
+    req.url = `${apiHost}/session`;
     req.headers = {
       "Content-Type": "application/json; charset=UTF-8",
       "Accept": "application/json; charset=UTF-8",
@@ -54,8 +55,9 @@ export default Ember.Service.extend({
    */
   getWatchLists(id, callback) {
     const session = this.get('session');
+    const apiHost = session.session.content.authenticated.apiHost;
     let req = {};
-    req.url = id ? `https://demo-api.ig.com/gateway/deal/watchlists/${id}` : 'https://demo-api.ig.com/gateway/deal/watchlists';
+    req.url = id ? `${apiHost}/watchlists/${id}` : `${apiHost}/watchlists`;
     req.headers = {
       "Content-Type": "application/json; charset=UTF-8",
       "Accept": "application/json; charset=UTF-8",

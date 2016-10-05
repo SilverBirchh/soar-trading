@@ -18,11 +18,12 @@ export default Ember.Service.extend({
    */
   search(market, callback) {
     const session = this.get('session');
+    const apiHost = session.session.content.authenticated.apiHost;
     let search = market.replace(/[^\w\s]/gi, '');
 
     var req = {};
     req.method = "GET";
-    req.url = "https://demo-api.ig.com/gateway/deal/markets?searchTerm=" + search;
+    req.url = `${apiHost}/markets?searchTerm=${search}`;
     req.headers = {
       "Content-Type": "application/json; charset=UTF-8",
       "Accept": "application/json; charset=UTF-8",

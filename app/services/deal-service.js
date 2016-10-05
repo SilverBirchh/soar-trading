@@ -19,9 +19,10 @@
     */
    closePosition: function(position, size, callback) {
      const session = this.get('session');
+     const apiHost = session.session.content.authenticated.apiHost;
      const direction = (position.direction === 'BUY') ? 'SELL' : 'BUY';
      let req = {};
-     req.url = 'https://demo-api.ig.com/gateway/deal/positions/otc';
+     req.url = `${apiHost}/positions/otc`;
      req.headers = {
        "Content-Type": "application/json; charset=UTF-8",
        "Accept": "application/json; charset=UTF-8",
@@ -64,8 +65,9 @@
     */
    closeOrder: function(dealId, callback) {
      const session = this.get('session');
+     const apiHost = session.session.content.authenticated.apiHost;
      let req = {};
-     req.url = `https://demo-api.ig.com/gateway/deal/workingorders/otc/${dealId}`;
+     req.url = `${apiHost}/workingorders/otc/${dealId}`;
      req.headers = {
        "Content-Type": "application/json; charset=UTF-8",
        "Accept": "application/json; charset=UTF-8",
@@ -95,8 +97,9 @@
    */
    openPosition(dealParams, callback) {
      const session = this.get('session');
+     const apiHost = session.session.content.authenticated.apiHost;
      let req = {};
-     req.url = 'https://demo-api.ig.com/gateway/deal/positions/otc';
+     req.url = `${apiHost}/positions/otc`;
      req.headers = {
        "Content-Type": "application/json; charset=UTF-8",
        "Accept": "application/json; charset=UTF-8",
@@ -145,8 +148,9 @@
     */
    workingOrder(dealParams, callback) {
      const session = this.get('session');
+     const apiHost = session.session.content.authenticated.apiHost;
      let req = {};
-     req.url = 'https://demo-api.ig.com/gateway/deal/workingorders/otc';
+     req.url = `${apiHost}/workingorders/otc`;
      req.headers = {
        "Content-Type": "application/json; charset=UTF-8",
        "Accept": "application/json; charset=UTF-8",
