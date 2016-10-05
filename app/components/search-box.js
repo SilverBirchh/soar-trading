@@ -1,6 +1,6 @@
 import Ember from 'ember';
-
-export default Ember.Component.extend({
+import compare from '../mixins/sortable';
+export default Ember.Component.extend(compare, {
 
   /*
   * Search term
@@ -32,10 +32,12 @@ export default Ember.Component.extend({
 
   /*
    * Sets local Watchlist array to the array from the AJAX response
+   * The response is sorted by name.
    * @public
    */
   onGetWatchlist(response) {
-    this.set('watchlists', response.watchlists);
+    console.log('FHI MATE');
+    this.set('watchlists', response.watchlists.sort(this.compare));
   },
 
   /*

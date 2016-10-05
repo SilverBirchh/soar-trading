@@ -202,14 +202,6 @@ export default Ember.Route.extend({
     }
   },
 
-  /*
-   * Sets the local watchlists array as the response from the AJAX call.
-   * @public
-   */
-  onGetWatchlist(response) {
-    this.set('watchlists', response.watchlists);
-  },
-
   actions: {
     /*
      * Calls the search service to search for a market.
