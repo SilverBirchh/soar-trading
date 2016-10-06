@@ -25,7 +25,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
     const _this = this;
 
     Ember.$(window).on('beforeunload', () => {
-      _this.get('session').invalidate();
+      if (_this.get('session.isAuthenticated')) {
+        _this.get('session').invalidate();
+      }
     });
   },
 

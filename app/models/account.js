@@ -39,7 +39,7 @@ export default DS.Model.extend({
    * @returns boolean
    */
   active: Ember.computed('session.session.content.authenticated.currentAccountId', function() {
-    for (let i = 0; i < this.get('session.session.content.authenticated.accounts').length; i++) {
+    for (let i = 0; i < this.get('session.session.content.authenticated.accounts.length'); i++) {
       if (this.get('id') === this.get('session.session.content.authenticated.currentAccountId')) {
         return true;
       }

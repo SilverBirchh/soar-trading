@@ -25,7 +25,7 @@ export default Ember.Component.extend({
    * @Object
    */
   activeName: Ember.computed('session.session.content.authenticated.currentAccountId', function() {
-		for (let i = 0; i < this.get('session.session.content.authenticated.accounts').length; i++) {
+		for (let i = 0; i < this.get('session.session.content.authenticated.accounts.length'); i++) {
       if (this.get('session.session.content.authenticated.accounts')[i].accountId === this.get('session.session.content.authenticated.currentAccountId')) {
         return this.get('session.session.content.authenticated.accounts')[i].accountName;
       }
