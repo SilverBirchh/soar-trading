@@ -108,5 +108,35 @@ export default Ember.Service.extend({
     }).then(function(response, status, data) {
       callback(response);
     });
-  }
+  },
+
+  createWatchlist (name, callback) {
+    const session = this.get('session');
+    const apiHost = session.session.content.authenticated.apiHost;
+    let req = {};
+    req.url = `${apiHost}/watchlists`;
+    req.headers = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "Accept": "application/json; charset=UTF-8",
+      "X-IG-API-KEY": session.session.content.authenticated.api,
+      "CST": session.session.content.authenticated.cstToken,
+      "X-SECURITY-TOKEN": session.session.content.authenticated.ssoToken,
+      "Version": 1,
+    };
+
+    var bodyParams = {
+      "name": name,
+    };
+    req.body = JSON.stringify(bodyParams);
+
+    Ember.$.ajax({
+      type: 'POST',
+      url: req.url,
+      data: req.body,
+      headers: req.headers,
+      async: false,
+    }).then(function(response, status, data) {
+      callback(response);
+    });
+  },
 });

@@ -253,6 +253,6 @@ export default Ember.Route.extend({
       this.set('viewingWatchlist', true);
       this.unsubscribe();
       return this.get('accountService').getWatchLists(id, this.onSearch.bind(this));
-    }
+    },
   }
 });

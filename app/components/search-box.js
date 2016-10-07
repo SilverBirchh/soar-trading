@@ -10,6 +10,13 @@ export default Ember.Component.extend(compare, {
   market: '',
 
   /*
+   * Name of new Watchlist
+   * @public
+   * {String}
+   */
+  newWatchlistName: null,
+
+  /*
    * accountService
    * @public
    * @Object
@@ -22,6 +29,13 @@ export default Ember.Component.extend(compare, {
    * @{service}
    */
   notify: Ember.inject.service('notify'),
+
+  /*
+   * If the user is creating a new watchlist
+   * @public
+   * @{boolean}
+   */
+  isEditing: false,
 
   /*
    * Array of watchlists
@@ -51,7 +65,7 @@ export default Ember.Component.extend(compare, {
    * The response is sorted by name.
    * @public
    */
-  onDeleteWatchlist(response) {
+  onEditWatchlist(response) {
     if (response.status === "SUCCESS") {
       this.get('notify').success(response.status);
       this.getWatchlists();
@@ -108,7 +122,28 @@ export default Ember.Component.extend(compare, {
      * @public
      */
     deleteWatchlist(id) {
-      this.get('accountService').deleteWatchlist(id, this.onDeleteWatchlist.bind(this));
-    }
+      this.get('accountService').deleteWatchlist(id, this.onEditWatchlist.bind(this));
+    },
+
+    /*
+     * Toggles editting watchlist
+     * @public
+     */
+    toggleEdit() {
+      this.set('isEditing', !this.get('isEditing'));
+    },
+
+    /*
+     * Sends action to the route to delete a watchlist
+     * (id)
+     * @public
+     */
+    createWatchlist() {
+      if (this.get('newWatchlistName')) {
+        this.get('accountService').createWatchlist(this.get('newWatchlistName'), this.onEditWatchlist.bind(this));
+        this.set('newWatchlistName', null);
+        this.set('isEditing', !this.get('isEditing'));
+      }
+    },
   }
 });

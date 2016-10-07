@@ -1,18 +1,18 @@
 {
   "stats": {
-    "suites": 90,
-    "tests": 112,
+    "suites": 150,
+    "tests": 213,
     "passes": 0,
-    "pending": -4,
-    "failures": 116,
-    "start": "2016-10-06T14:56:16.503Z",
-    "end": "2016-10-06T14:59:11.387Z"
+    "pending": -3,
+    "failures": 216,
+    "start": "2016-10-06T15:55:07.635Z",
+    "end": "2016-10-06T16:02:35.417Z"
   },
   "coverage": {
     "total": {
-      "statementsTotal": 692,
-      "statementsCovered": 331,
-      "percentage": 47.83
+      "statementsTotal": 693,
+      "statementsCovered": 526,
+      "percentage": 75.9
     },
     "files": [
       {
@@ -66,14 +66,14 @@
       {
         "name": "soar-trading/helpers/logger",
         "statementsTotal": 5,
-        "statementsCovered": 4,
-        "percentage": 80
+        "statementsCovered": 5,
+        "percentage": 100
       },
       {
         "name": "soar-trading/mixins/sortable",
         "statementsTotal": 7,
-        "statementsCovered": 2,
-        "percentage": 28.57
+        "statementsCovered": 6,
+        "percentage": 85.71
       },
       {
         "name": "soar-trading/router",
@@ -83,9 +83,9 @@
       },
       {
         "name": "soar-trading/routes/application",
-        "statementsTotal": 8,
-        "statementsCovered": 7,
-        "percentage": 87.5
+        "statementsTotal": 9,
+        "statementsCovered": 6,
+        "percentage": 66.67
       },
       {
         "name": "soar-trading/services/session",
@@ -96,8 +96,8 @@
       {
         "name": "soar-trading/services/ls-client",
         "statementsTotal": 18,
-        "statementsCovered": 11,
-        "percentage": 61.11
+        "statementsCovered": 13,
+        "percentage": 72.22
       },
       {
         "name": "soar-trading/routes/404",
@@ -186,20 +186,20 @@
       {
         "name": "soar-trading/routes/account/search",
         "statementsTotal": 66,
-        "statementsCovered": 5,
-        "percentage": 7.58
+        "statementsCovered": 48,
+        "percentage": 72.73
       },
       {
         "name": "soar-trading/services/search-service",
         "statementsTotal": 11,
-        "statementsCovered": 2,
-        "percentage": 18.18
+        "statementsCovered": 11,
+        "percentage": 100
       },
       {
         "name": "soar-trading/services/account-service",
         "statementsTotal": 26,
-        "statementsCovered": 9,
-        "percentage": 34.62
+        "statementsCovered": 23,
+        "percentage": 88.46
       },
       {
         "name": "soar-trading/models/search",
@@ -268,6 +268,96 @@
         "percentage": 40
       },
       {
+        "name": "soar-trading/controllers/account/search/deal",
+        "statementsTotal": 17,
+        "statementsCovered": 7,
+        "percentage": 41.18
+      },
+      {
+        "name": "soar-trading/models/account",
+        "statementsTotal": 6,
+        "statementsCovered": 2,
+        "percentage": 33.33
+      },
+      {
+        "name": "soar-trading/models/position",
+        "statementsTotal": 2,
+        "statementsCovered": 2,
+        "percentage": 100
+      },
+      {
+        "name": "soar-trading/models/workingorder",
+        "statementsTotal": 2,
+        "statementsCovered": 2,
+        "percentage": 100
+      },
+      {
+        "name": "soar-trading/routes/account/orders",
+        "statementsTotal": 8,
+        "statementsCovered": 7,
+        "percentage": 87.5
+      },
+      {
+        "name": "soar-trading/routes/account/overview",
+        "statementsTotal": 7,
+        "statementsCovered": 3,
+        "percentage": 42.86
+      },
+      {
+        "name": "soar-trading/routes/account/positions",
+        "statementsTotal": 13,
+        "statementsCovered": 6,
+        "percentage": 46.15
+      },
+      {
+        "name": "soar-trading/routes/account/search/deal",
+        "statementsTotal": 5,
+        "statementsCovered": 2,
+        "percentage": 40
+      },
+      {
+        "name": "soar-trading/serializers/position",
+        "statementsTotal": 7,
+        "statementsCovered": 2,
+        "percentage": 28.57
+      },
+      {
+        "name": "soar-trading/serializers/workingorder",
+        "statementsTotal": 7,
+        "statementsCovered": 2,
+        "percentage": 28.57
+      },
+      {
+        "name": "soar-trading/services/balance-service",
+        "statementsTotal": 8,
+        "statementsCovered": 8,
+        "percentage": 100
+      },
+      {
+        "name": "soar-trading/services/confirm-service",
+        "statementsTotal": 9,
+        "statementsCovered": 9,
+        "percentage": 100
+      },
+      {
+        "name": "soar-trading/services/deal-service",
+        "statementsTotal": 69,
+        "statementsCovered": 69,
+        "percentage": 100
+      },
+      {
+        "name": "soar-trading/services/pnl-service",
+        "statementsTotal": 8,
+        "statementsCovered": 8,
+        "percentage": 100
+      },
+      {
+        "name": "soar-trading/services/session-authenticator",
+        "statementsTotal": 24,
+        "statementsCovered": 24,
+        "percentage": 100
+      },
+      {
         "name": "soar-trading/authenticators/application",
         "statementsTotal": 9,
         "statementsCovered": 2,
@@ -308,12 +398,6 @@
         "statementsTotal": 3,
         "statementsCovered": 3,
         "percentage": 100
-      },
-      {
-        "name": "soar-trading/controllers/account/search/deal",
-        "statementsTotal": 17,
-        "statementsCovered": 2,
-        "percentage": 11.76
       },
       {
         "name": "soar-trading/controllers/array",
@@ -386,90 +470,6 @@
         "statementsTotal": 7,
         "statementsCovered": 5,
         "percentage": 71.43
-      },
-      {
-        "name": "soar-trading/models/account",
-        "statementsTotal": 6,
-        "statementsCovered": 2,
-        "percentage": 33.33
-      },
-      {
-        "name": "soar-trading/models/position",
-        "statementsTotal": 2,
-        "statementsCovered": 2,
-        "percentage": 100
-      },
-      {
-        "name": "soar-trading/models/workingorder",
-        "statementsTotal": 2,
-        "statementsCovered": 2,
-        "percentage": 100
-      },
-      {
-        "name": "soar-trading/routes/account/orders",
-        "statementsTotal": 8,
-        "statementsCovered": 2,
-        "percentage": 25
-      },
-      {
-        "name": "soar-trading/routes/account/overview",
-        "statementsTotal": 7,
-        "statementsCovered": 2,
-        "percentage": 28.57
-      },
-      {
-        "name": "soar-trading/routes/account/positions",
-        "statementsTotal": 13,
-        "statementsCovered": 2,
-        "percentage": 15.38
-      },
-      {
-        "name": "soar-trading/routes/account/search/deal",
-        "statementsTotal": 5,
-        "statementsCovered": 2,
-        "percentage": 40
-      },
-      {
-        "name": "soar-trading/serializers/position",
-        "statementsTotal": 7,
-        "statementsCovered": 2,
-        "percentage": 28.57
-      },
-      {
-        "name": "soar-trading/serializers/workingorder",
-        "statementsTotal": 7,
-        "statementsCovered": 2,
-        "percentage": 28.57
-      },
-      {
-        "name": "soar-trading/services/balance-service",
-        "statementsTotal": 8,
-        "statementsCovered": 2,
-        "percentage": 25
-      },
-      {
-        "name": "soar-trading/services/confirm-service",
-        "statementsTotal": 9,
-        "statementsCovered": 2,
-        "percentage": 22.22
-      },
-      {
-        "name": "soar-trading/services/deal-service",
-        "statementsTotal": 69,
-        "statementsCovered": 2,
-        "percentage": 2.9
-      },
-      {
-        "name": "soar-trading/services/pnl-service",
-        "statementsTotal": 8,
-        "statementsCovered": 2,
-        "percentage": 25
-      },
-      {
-        "name": "soar-trading/services/session-authenticator",
-        "statementsTotal": 24,
-        "statementsCovered": 2,
-        "percentage": 8.33
       },
       {
         "name": "soar-trading/session-stores/application",
