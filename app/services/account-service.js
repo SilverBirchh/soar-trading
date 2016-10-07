@@ -30,7 +30,7 @@ export default Ember.Service.extend({
       "Version": 1,
     };
 
-    var bodyParams = {
+    const bodyParams = {
       "accountId": id,
       "defaultAccount": "true"
     };
@@ -124,7 +124,7 @@ export default Ember.Service.extend({
       "Version": 1,
     };
 
-    var bodyParams = {
+    const bodyParams = {
       "name": name,
     };
     req.body = JSON.stringify(bodyParams);

@@ -87,8 +87,8 @@ export default Ember.Route.extend({
    * @param {Object} response - OBject from AJAX call
    */
   onSearch(response) {
-    for (var i = 0; i < response.markets.length; i++) {
-      var marketsData = response.markets[i];
+    for (let i = 0; i < response.markets.length; i++) {
+      const marketsData = response.markets[i];
       marketsData.tidyEpic = marketsData.epic.replace(/\./g, "_");
       marketsData.tidyExpiry = marketsData.expiry.replace(/ /g, "");
       marketsData.state = null;
@@ -159,7 +159,7 @@ export default Ember.Route.extend({
    */
   onUpdate(info) {
     const store = this.store;
-    var i = info.getItemPos() - 1; // Store is zero index itemPos is not.
+    let i = info.getItemPos() - 1; // Store is zero index itemPos is not.
     store.find('search', i).then((search) => {
       info.forEachChangedField((fieldName, fieldPos, newValue) => {
         this.updateStore(search, fieldName, newValue);

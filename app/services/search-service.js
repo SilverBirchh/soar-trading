@@ -21,7 +21,7 @@ export default Ember.Service.extend({
     const apiHost = session.session.content.authenticated.apiHost;
     let search = market.replace(/[^\w\s]/gi, '');
 
-    var req = {};
+    const req = {};
     req.method = "GET";
     req.url = `${apiHost}/markets?searchTerm=${search}`;
     req.headers = {

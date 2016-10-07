@@ -33,7 +33,7 @@
        "_method": "DELETE"
      };
 
-     var bodyParams = {
+     const bodyParams = {
        dealId: position.dealId,
        epic: null,
        expiry: null,
@@ -109,7 +109,7 @@
        "Version": 2,
      };
 
-     var bodyParams = {};
+     const bodyParams = {};
      bodyParams["epic"] = dealParams.epic;
      bodyParams["expiry"] = dealParams.expiry;
      bodyParams["direction"] = dealParams.direction ? 'BUY' : 'SELL';
@@ -160,7 +160,7 @@
        "Version": 2,
      };
 
-     var bodyParams = {};
+     const bodyParams = {};
      bodyParams["epic"] = dealParams.epic;
      bodyParams["expiry"] = dealParams.expiry;
      bodyParams["direction"] = dealParams.direction ? 'BUY' : 'SELL';

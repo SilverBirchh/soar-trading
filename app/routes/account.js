@@ -40,14 +40,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		const fields = ['PNL', 'EQUITY', 'FUNDS', 'MARGIN', 'AVAILABLE_TO_DEAL'];
 		let accountID = `ACCOUNT:${this.get('session.session.content.authenticated.currentAccountId')}`;
 
-		var subscription = new Lightstreamer.Subscription(
+		const subscription = new Lightstreamer.Subscription(
 			"MERGE", accountID, fields
 		);
 		subscription.setRequestedSnapshot("yes");
 		subscription.addListener({
 			onItemUpdate: function(info) {
         // Positon of updated values in array
-				var arrayPosition = info.getItemPos();
+				const arrayPosition = info.getItemPos();
 				if (!store.hasRecordForId('active-account', arrayPosition)) {
 					// Push an empty record
 					store.push('active-account', {

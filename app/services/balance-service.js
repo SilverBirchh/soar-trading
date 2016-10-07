@@ -19,7 +19,7 @@ export default Ember.Service.extend({
     const clientLs = this.get('lsClient').getLsClient();
     const fields = ['PNL', 'EQUITY', 'FUNDS', 'MARGIN', 'AVAILABLE_TO_DEAL'];
     const accountID = `ACCOUNT:${accountId}`;
-    var subscription = new Lightstreamer.Subscription(
+    const subscription = new Lightstreamer.Subscription(
       "MERGE", accountID, fields
     );
     subscription.addListener({
