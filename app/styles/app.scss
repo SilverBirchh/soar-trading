@@ -261,3 +261,7 @@ a.flexable {
 .watchlist_buttons {
   height: 34px;
 }
+.pull-right > .dropdown-menu {
+    right: auto;
+    left: 0;
+}

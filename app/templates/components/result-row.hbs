@@ -1,8 +1,4 @@
 <td>
-  <img src= {{result.state}} />
-</td>
-<td>
-  {{result.instrumentName}}
   <div class="dropdown pull-right inline-block">
     <button type="button" class="btn btn-success btn-xs pull-right" data-toggle="dropdown"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
     <ul class="dropdown-menu">
@@ -14,6 +10,10 @@
       {{/each}}
     </ul>
   </div>
+  <img src= {{result.state}} />
+</td>
+<td>
+  {{result.instrumentName}}
 </td>
 <td>
   {{result.tidyExpiry}}
