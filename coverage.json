@@ -1,18 +1,18 @@
 {
   "stats": {
-    "suites": 150,
-    "tests": 214,
+    "suites": 153,
+    "tests": 217,
     "passes": 0,
     "pending": -3,
-    "failures": 217,
-    "start": "2016-10-07T08:10:05.179Z",
-    "end": "2016-10-07T08:17:37.034Z"
+    "failures": 220,
+    "start": "2016-10-07T10:37:22.222Z",
+    "end": "2016-10-07T10:43:09.069Z"
   },
   "coverage": {
     "total": {
-      "statementsTotal": 707,
-      "statementsCovered": 534,
-      "percentage": 75.53
+      "statementsTotal": 710,
+      "statementsCovered": 537,
+      "percentage": 75.63
     },
     "files": [
       {
@@ -185,9 +185,9 @@
       },
       {
         "name": "soar-trading/routes/account/search",
-        "statementsTotal": 66,
+        "statementsTotal": 65,
         "statementsCovered": 48,
-        "percentage": 72.73
+        "percentage": 73.85
       },
       {
         "name": "soar-trading/services/search-service",
@@ -200,6 +200,12 @@
         "statementsTotal": 35,
         "statementsCovered": 31,
         "percentage": 88.57
+      },
+      {
+        "name": "soar-trading/controllers/account/search",
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "soar-trading/models/search",

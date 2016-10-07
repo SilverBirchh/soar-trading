@@ -3,6 +3,17 @@
 </td>
 <td>
   {{result.instrumentName}}
+  <div class="dropdown pull-right inline-block">
+    <button type="button" class="btn btn-success btn-xs pull-right" data-toggle="dropdown"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+    <ul class="dropdown-menu">
+      <li class="dropdown-header">Add to Watchlist</li>
+      {{#each watchlists as |list|}}
+        {{#if list.editable}}
+          <li {{action "addToWatchlist" result.epic list.id}}><a>{{list.name}}</a></li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
 </td>
 <td>
   {{result.tidyExpiry}}

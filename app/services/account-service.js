@@ -110,6 +110,12 @@ export default Ember.Service.extend({
     });
   },
 
+  /*
+   * AJAX call to create a watchlist
+   * @public
+   * @param {String} name - Name of watchlist
+   * @param {Object} callback - method to call when AJAX call returns
+   */
   createWatchlist (name, callback) {
     const session = this.get('session');
     const apiHost = session.session.content.authenticated.apiHost;
@@ -131,6 +137,43 @@ export default Ember.Service.extend({
 
     Ember.$.ajax({
       type: 'POST',
+      url: req.url,
+      data: req.body,
+      headers: req.headers,
+      async: false,
+    }).then(function(response, status, data) {
+      callback(response);
+    });
+  },
+
+  /*
+   * AJAX call to add a market to a watchlist
+   * @public
+   * @param {String} epic - Epic to add to watchlist
+   * @param {String} watchlistId - Watchlist to add to
+   * @param {Object} callback - method to call when AJAX call returns
+   */
+  addToWatchList(epic, watchlistId, callback) {
+    const session = this.get('session');
+    const apiHost = session.session.content.authenticated.apiHost;
+    let req = {};
+    req.url = `${apiHost}/watchlists/${watchlistId}`;
+    req.headers = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "Accept": "application/json; charset=UTF-8",
+      "X-IG-API-KEY": session.session.content.authenticated.api,
+      "CST": session.session.content.authenticated.cstToken,
+      "X-SECURITY-TOKEN": session.session.content.authenticated.ssoToken,
+      "Version": 1,
+    };
+
+    const bodyParams = {
+      "epic": epic,
+    };
+    req.body = JSON.stringify(bodyParams);
+
+    Ember.$.ajax({
+      type: 'PUT',
       url: req.url,
       data: req.body,
       headers: req.headers,

@@ -227,14 +227,6 @@ export default Ember.Route.extend({
     },
 
     /*
-     * Calls the Account service to retrieve all watchlists
-     * @public
-     */
-    viewWatchlist() {
-      this.get('accountService').getWatchLists(null, this.onGetWatchlist.bind(this));
-    },
-
-    /*
      * Transitons to the account/search/deal route passing to the controller the
      * correct market object
      * @public
