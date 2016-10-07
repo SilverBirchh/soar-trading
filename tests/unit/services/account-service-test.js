@@ -56,6 +56,16 @@ describeModule(
       sinon.assert.calledOnce(ajax);
     }));
 
+    it('calls watchlist endpoint for adding', sinon.test(function() {
+      let service = this.subject();
+      service.session = session;
+
+      const ajax = this.spy($, 'ajax');
+
+      service.addToWatchList('null', 'null', true);
+      sinon.assert.calledOnce(ajax);
+    }));
+
     it('calls switch endpoint', sinon.test(function() {
       let service = this.subject();
       service.session = session;

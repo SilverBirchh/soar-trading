@@ -4,18 +4,23 @@ import {
   describeModule,
   it
 } from 'ember-mocha';
+import sinon from 'sinon';
 
 describeModule(
   'controller:account/search',
   'AccountSearchController',
   {
     // Specify the other units that are required for this test.
-    // needs: ['controller:foo']
+    // needs: []
   },
   function() {
     // Replace this with your real tests.
     it('exists', function() {
-      let controller = this.subject();
+      let controller = this.subject({
+        accountService: {
+          getWatchLists: sinon.stub(),
+        }
+      });
       expect(controller).to.be.ok;
     });
   }
