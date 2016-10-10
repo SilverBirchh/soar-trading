@@ -246,5 +246,10 @@ export default Ember.Route.extend({
       this.unsubscribe();
       return this.get('accountService').getWatchLists(id, this.onSearch.bind(this));
     },
+
+    updateWatchlists() {
+      const controller = this.controllerFor('account.search');
+      controller.getWatchlistResults();
+    }
   }
 });

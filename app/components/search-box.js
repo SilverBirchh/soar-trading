@@ -123,6 +123,7 @@ export default Ember.Component.extend(compare, {
      */
     deleteWatchlist(id) {
       this.get('accountService').deleteWatchlist(id, this.onEditWatchlist.bind(this));
+      this.sendAction('updateWatchlists');
     },
 
     /*
@@ -143,6 +144,7 @@ export default Ember.Component.extend(compare, {
         this.get('accountService').createWatchlist(this.get('newWatchlistName'), this.onEditWatchlist.bind(this));
         this.set('newWatchlistName', null);
         this.set('isEditing', !this.get('isEditing'));
+        this.sendAction('updateWatchlists');
       }
     },
   }

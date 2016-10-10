@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
    * @{service}
    */
   accountService: Ember.inject.service('account-service'),
-  
+
   /*
    * Array of watchlists
    * @public
@@ -34,5 +34,4 @@ export default Ember.Controller.extend({
   onGetWatchlistResults(response) {
     this.set('watchlists', response.watchlists.sort(this.compare));
   },
-
 });
