@@ -23,7 +23,7 @@ export default Ember.Service.extend({
     const latestDirection = (direction === 'BUY') ? ['BID'] : ['OFFER'];
     const clientLs = this.get('lsClient').getLsClient();
     const market = [`MARKET:${epic}`];
-    var subscription = new Lightstreamer.Subscription(
+    const subscription = new Lightstreamer.Subscription(
       "MERGE", market, latestDirection
     );
     subscription.addListener({

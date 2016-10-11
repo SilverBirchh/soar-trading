@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import config from '../config/environment';
 
 export default Ember.Service.extend({
   /*
@@ -41,7 +40,7 @@ export default Ember.Service.extend({
    * @param {Object} authData
    */
 	getRequestHeaders(authData) {
-		let apiHost = config.APP.api.apiHost;
+    let apiHost = (authData.selectedEnvironemnt === 'Demo') ? 'https://demo-api.ig.com/gateway/deal' : 'https://api.ig.com/gateway/deal';
 		let requestHeaders = {
 			dataType: 'json',
 			type:  'POST',
@@ -93,9 +92,11 @@ export default Ember.Service.extend({
 	handleAuthSuccess(authData, resolve, response, jqXHR) {
 		let cst = jqXHR.getResponseHeader('CST');
 		let sso = jqXHR.getResponseHeader('X-SECURITY-TOKEN');
+    // Server to retrieve data from
+    let apiHost = (authData.selectedEnvironemnt === 'Demo') ? 'https://demo-api.ig.com/gateway/deal' : 'https://api.ig.com/gateway/deal';
 		localStorage.setItem('api', authData.api);
 		let responseData = {
-			apiHost: config.APP.api.apiHost,
+			apiHost: apiHost,
 			authenticator: 'authenticator:application',
 			clientId: response.clientId,
 			currentAccountId: response.currentAccountId,

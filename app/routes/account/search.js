@@ -87,8 +87,8 @@ export default Ember.Route.extend({
    * @param {Object} response - OBject from AJAX call
    */
   onSearch(response) {
-    for (var i = 0; i < response.markets.length; i++) {
-      var marketsData = response.markets[i];
+    for (let i = 0; i < response.markets.length; i++) {
+      const marketsData = response.markets[i];
       marketsData.tidyEpic = marketsData.epic.replace(/\./g, "_");
       marketsData.tidyExpiry = marketsData.expiry.replace(/ /g, "");
       marketsData.state = null;
@@ -159,7 +159,7 @@ export default Ember.Route.extend({
    */
   onUpdate(info) {
     const store = this.store;
-    var i = info.getItemPos() - 1; // Store is zero index itemPos is not.
+    let i = info.getItemPos() - 1; // Store is zero index itemPos is not.
     store.find('search', i).then((search) => {
       info.forEachChangedField((fieldName, fieldPos, newValue) => {
         this.updateStore(search, fieldName, newValue);
@@ -202,14 +202,6 @@ export default Ember.Route.extend({
     }
   },
 
-  /*
-   * Sets the local watchlists array as the response from the AJAX call.
-   * @public
-   */
-  onGetWatchlist(response) {
-    this.set('watchlists', response.watchlists);
-  },
-
   actions: {
     /*
      * Calls the search service to search for a market.
@@ -235,14 +227,6 @@ export default Ember.Route.extend({
     },
 
     /*
-     * Calls the Account service to retrieve all watchlists
-     * @public
-     */
-    viewWatchlist() {
-      this.get('accountService').getWatchLists(null, this.onGetWatchlist.bind(this));
-    },
-
-    /*
      * Transitons to the account/search/deal route passing to the controller the
      * correct market object
      * @public
@@ -261,6 +245,11 @@ export default Ember.Route.extend({
       this.set('viewingWatchlist', true);
       this.unsubscribe();
       return this.get('accountService').getWatchLists(id, this.onSearch.bind(this));
+    },
+
+    updateWatchlists() {
+      const controller = this.controllerFor('account.search');
+      controller.getWatchlistResults();
     }
   }
 });

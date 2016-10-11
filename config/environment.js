@@ -27,9 +27,6 @@ module.exports = function(environment) {
       }
     },
     APP: {
-      api: {
-        apiHost: 'https://demo-api.ig.com/gateway/deal'
-      },
     }
   };
   ENV['ember-simple-auth'] = {
@@ -58,7 +55,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV['simple-auth'] = {
       store: 'simple-auth-session-store:ephemeral'
-    }
+    };
   }
 
   if (environment === 'production') {

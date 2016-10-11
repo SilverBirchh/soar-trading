@@ -102,6 +102,10 @@ export default Ember.Component.extend({
   /*
    * Calculates pnl based off direction
    * @public
+   * @param {String} direction - position direction
+   * @param {Number} latest - the latest price of the epic
+   * @param {Number} openLevel - the level the epic was opened at
+   * @param {Number} dealSize - The size of the position
    * @returns Number PNL value
    */
   caluculatePnl(direction, latest, openLevel, dealSize) {
@@ -128,7 +132,7 @@ export default Ember.Component.extend({
 
     /*
      * Sends the closing action to the route with the position data and the
-     * closing size. 
+     * closing size.
      * Toggles isClosing to false.
      * @public
      */

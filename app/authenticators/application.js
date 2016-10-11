@@ -27,13 +27,15 @@ export default Base.extend({
    * @param username String
    * @param password String
    * @param api String
+    * @param selectedEnvironemnt String
    */
-  authenticate(username, password, api) {
+  authenticate(username, password, api, selectedEnvironemnt) {
     return new Ember.RSVP.Promise((resolve, reject) => {
       this.get('sessionAuthenticator').authenticate({
         username: username,
         password,
-        api
+        api,
+        selectedEnvironemnt
       }, resolve, reject);
     });
   },

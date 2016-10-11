@@ -20,8 +20,9 @@ export default Ember.Service.extend({
    */
 	confirm: function(dealRef, position, size, callback) {
 		const session = this.get('session');
+    const apiHost = session.session.content.authenticated.apiHost;
 		let req = {};
-		req.url = `https://demo-api.ig.com/gateway/deal/confirms/${dealRef}`;
+		req.url = `${apiHost}/confirms/${dealRef}`;
 		req.headers = {
 			"Content-Type": "application/json; charset=UTF-8",
 			"Accept": "application/json; charset=UTF-8",

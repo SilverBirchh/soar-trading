@@ -131,6 +131,7 @@ body {
   left: 41px;
   position: relative;
   z-index: 4;
+  height: 34px;
 }
 
 .jumbotron {
@@ -238,14 +239,32 @@ a.blue {
   display: inline-block;
 }
 
-.flex-con{
+.flex-con {
   display: inline-flex;
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
+
 a.flexable {
   flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 30%;
-    border-radius: 0px !important;
-    cursor: pointer;
+  flex-shrink: 1;
+  flex-basis: 30%;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+.watchlist {
+  display: inline-block;
+  position: relative;
+  left: -78px;
+  bottom: 5px;
+}
+.watchlist_buttons {
+  height: 34px;
+}
+.pull-right > .dropdown-menu {
+    right: auto;
+    left: 0;
+}
+td {
+  font-size: 13px;
 }

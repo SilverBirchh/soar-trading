@@ -1,6 +1,6 @@
 {{#if hasResponseMessage}}
   <div class="alert alert-danger text-center">
-     {{hasResponseMessage}}
+    {{hasResponseMessage}}
   </div>
 {{/if}}
 
@@ -18,9 +18,16 @@
     {{#if validapi}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
   </div>
   <div class="form-group">
+    <select class="form-control" onchange= {{action "changeEnvironment" value="target.value"}}>
+    {{#each environments as |environment|}}
+      <option value={{environment}} selected={{eq goodTill environment}}>{{environment}}</option>
+    {{/each}}
+  </select>
+  </div>
+  <div class="form-group">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
-        <input type="submit" disabled={{isDisabled}} id="login-submit" class="form-control btn btn-login" value="Log In">
+        <input type="submit" disabled= {{isDisabled}} id="login-submit" class="form-control btn btn-login" value="Log In">
       </div>
     </div>
   </div>

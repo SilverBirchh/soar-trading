@@ -28,7 +28,7 @@ describeComponent(
 				},
 			}));
 			this.on('invalidate', function(val) {
-				var actual = {
+				const actual = {
 					session: {}
 				};
 				Ember.assert.deepEqual(val, actual);

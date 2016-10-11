@@ -1,13 +1,20 @@
 import Ember from 'ember';
-
-export default Ember.Component.extend({
+import compare from '../mixins/sortable';
+export default Ember.Component.extend(compare, {
 
   /*
-  * Search term
-  * @public
-  * @String
-  */
+   * Search term
+   * @public
+   * @String
+   */
   market: '',
+
+  /*
+   * Name of new Watchlist
+   * @public
+   * {String}
+   */
+  newWatchlistName: null,
 
   /*
    * accountService
@@ -15,6 +22,20 @@ export default Ember.Component.extend({
    * @Object
    */
   accountService: Ember.inject.service('account-service'),
+
+  /*
+   * notify service
+   * @public
+   * @{service}
+   */
+  notify: Ember.inject.service('notify'),
+
+  /*
+   * If the user is creating a new watchlist
+   * @public
+   * @{boolean}
+   */
+  isEditing: false,
 
   /*
    * Array of watchlists
@@ -32,10 +53,25 @@ export default Ember.Component.extend({
 
   /*
    * Sets local Watchlist array to the array from the AJAX response
+   * The response is sorted by name.
    * @public
    */
   onGetWatchlist(response) {
-    this.set('watchlists', response.watchlists);
+    this.set('watchlists', response.watchlists.sort(this.compare));
+  },
+
+  /*
+   * Sets local Watchlist array to the array from the AJAX response
+   * The response is sorted by name.
+   * @public
+   */
+  onEditWatchlist(response) {
+    if (response.status === "SUCCESS") {
+      this.get('notify').success(response.status);
+      this.getWatchlists();
+    } else {
+      this.get('notify').error(response.status);
+    }
   },
 
   /*
@@ -77,6 +113,39 @@ export default Ember.Component.extend({
      */
     viewWatchlistMarkets(id) {
       this.sendAction('viewWatchlistMarkets', id);
-    }
+    },
+
+
+    /*
+     * Sends action to the route to delete a watchlist
+     * (id)
+     * @public
+     */
+    deleteWatchlist(id) {
+      this.get('accountService').deleteWatchlist(id, this.onEditWatchlist.bind(this));
+      this.sendAction('updateWatchlists');
+    },
+
+    /*
+     * Toggles editting watchlist
+     * @public
+     */
+    toggleEdit() {
+      this.set('isEditing', !this.get('isEditing'));
+    },
+
+    /*
+     * Sends action to the route to delete a watchlist
+     * (id)
+     * @public
+     */
+    createWatchlist() {
+      if (this.get('newWatchlistName')) {
+        this.get('accountService').createWatchlist(this.get('newWatchlistName'), this.onEditWatchlist.bind(this));
+        this.set('newWatchlistName', null);
+        this.set('isEditing', !this.get('isEditing'));
+        this.sendAction('updateWatchlists');
+      }
+    },
   }
 });
