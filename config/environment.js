@@ -1,5 +1,10 @@
 /* jshint node: true */
 
+
+/**
+ * Ember generated config file used to define Ember environment
+ * variables 
+ */
 module.exports = function(environment) {
   var ENV = {
     LOG_STACKTRACE_ON_DEPRECATION: false,
